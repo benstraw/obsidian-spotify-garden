@@ -7,7 +7,7 @@
     <key>ProgramArguments</key>
     <array>
         <string>/bin/zsh</string>
-        <string>/Users/benstrawbridge/dev/wanderer/solo/obsidian-spotify-garden/run_collect_spotify.sh</string>
+        <string>/path/to/obsidian-spotify-garden/run_collect_spotify.sh</string>
     </array>
     <key>StartCalendarInterval</key>
     <array>

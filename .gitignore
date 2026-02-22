@@ -3,3 +3,6 @@ tokens.json
 data/plays.json
 spotify-garden
 *.sh.log
+
+# Personal launchd plists with local paths — use *.plist.example as a template
+*.plist
