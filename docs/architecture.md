@@ -10,8 +10,8 @@ main.go                         CLI entry, .env loading, subcommand dispatch
 internal/
   auth/auth.go                  OAuth2 flow, token save/load/refresh
   client/client.go              Authenticated HTTP GET, 429 retry/backoff
-  fetch/fetch.go                Spotify API calls → model structs
-  models/models.go              Play, TopTrack, TopArtist structs
+  fetch/fetch.go                Spotify + setlist.fm API calls → model structs
+  models/models.go              Play, TopTrack, TopArtist, Setlist, SetlistSet structs
   plays/plays.go                plays.json load/save/merge/dedup
   render/render.go              Weekly note, artist stubs, persona rendering
 templates/
@@ -107,6 +107,26 @@ main.runPersona()
             → os.WriteFile({vault}/01-ai-brain/context-packs/Music Taste.md)
 ```
 
+### `setlist` command
+
+```
+main.runSetlist(args)
+  │
+  ├─ parse --date flag (default: today)
+  │
+  └─ fetch.GetSetlist(artistName, date)
+       │
+       ├─ setlistGet("/search/setlists", params)
+       │    └─ GET https://api.setlist.fm/rest/1.0/search/setlists
+       │         x-api-key: $SETLISTFM_API_KEY
+       │         params: artistName, date (DD-MM-YYYY), p=1
+       │
+       └─ map first result → models.Setlist
+            → print to stdout
+```
+
+No vault writes. No Spotify auth required.
+
 ## plays.json
 
 The central data store. A JSON array of play objects, sorted descending by
@@ -181,3 +201,14 @@ and metadata to stubs without risking them being clobbered on the next run.
 **catch-up checks file existence before auth** — `runCatchUp` scans for
 missing files before calling `RefreshIfNeeded()`. If everything is up to date,
 it exits without making any API calls.
+
+**setlist uses a standalone HTTP helper, not the Spotify client** — setlist.fm
+has a different base URL, auth scheme (header-based API key vs. Bearer token),
+and no rate-limit retry needs. A thin `setlistGet()` function in `fetch.go`
+handles it without complicating the `client.Client` struct.
+
+**Concert notes are manual, not automatic** — Concert data has no single
+reliable API source (ticketing APIs require approval, email parsing is brittle).
+The `setlist` command provides lookup assistance, but note creation is done
+via the Obsidian Templater template. This keeps the note a personal writing
+artifact rather than a synthetic document.

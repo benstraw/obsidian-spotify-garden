@@ -2,19 +2,19 @@
 
 ## Context
 
-The existing Spotify integration is a loose Python project (`/Volumes/wanderer/dev/solo/spotify-api/`) with two scripts (`collect_music.py`, `weekly_music_note.py`), no proper CLI structure, no catch-up logic, and a once-daily collection schedule that can miss plays when the 50-track API cap is hit or the laptop is asleep.
+The existing Spotify integration is a loose Python project with two scripts (`collect_music.py`, `weekly_music_note.py`), no proper CLI structure, no catch-up logic, and a once-daily collection schedule that can miss plays when the 50-track API cap is hit or the laptop is asleep.
 
 The goal is to build a proper Go CLI — `obsidian-spotify-garden` — that mirrors the architecture of the WHOOP CLI (`obsidian-whoop-garden`). It replaces the Python scripts entirely, gains real auth management, catch-up logic, and gets put on a 5x-daily collection schedule.
 
 ## Project Location
 
-`/Users/benstrawbridge/dev/wanderer/solo/obsidian-spotify-garden/`
+`/path/to/obsidian-spotify-garden/`
 
 ## Architecture (mirrors obsidian-whoop-garden)
 
 ```
 obsidian-spotify-garden/
-├── go.mod                                  # module github.com/benstraw/spotify-garden
+├── go.mod                                  # module github.com/yourname/spotify-garden
 ├── main.go                                 # command dispatch
 ├── internal/
 │   ├── auth/auth.go                        # OAuth2 flow + token refresh
@@ -27,7 +27,7 @@ obsidian-spotify-garden/
 │   ├── weekly.md.tmpl
 │   └── persona.md.tmpl
 ├── data/
-│   └── plays.json                          # git-ignored, copied from Python project
+│   └── plays.json                          # git-ignored
 ├── tokens.json                             # git-ignored, 0600 perms
 ├── .env                                    # git-ignored (CLIENT_ID, CLIENT_SECRET, VAULT_PATH)
 ├── .env.example
@@ -162,18 +162,20 @@ Same dispatch pattern as whoop-garden:
 **run_collect_spotify.sh:**
 ```bash
 #!/bin/zsh
-source /Users/benstrawbridge/.zprofile 2>/dev/null || true
-source /Users/benstrawbridge/.zshrc 2>/dev/null || true
-cd /Users/benstrawbridge/dev/wanderer/solo/obsidian-spotify-garden
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$HOME/.zprofile" 2>/dev/null || true
+source "$HOME/.zshrc" 2>/dev/null || true
+cd "$SCRIPT_DIR"
 exec ./spotify-garden collect
 ```
 
 **run_weekly_spotify.sh:**
 ```bash
 #!/bin/zsh
-source /Users/benstrawbridge/.zprofile 2>/dev/null || true
-source /Users/benstrawbridge/.zshrc 2>/dev/null || true
-cd /Users/benstrawbridge/dev/wanderer/solo/obsidian-spotify-garden
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$HOME/.zprofile" 2>/dev/null || true
+source "$HOME/.zshrc" 2>/dev/null || true
+cd "$SCRIPT_DIR"
 ./spotify-garden catch-up --weeks 8
 ./spotify-garden weekly
 ./spotify-garden persona
@@ -181,7 +183,9 @@ cd /Users/benstrawbridge/dev/wanderer/solo/obsidian-spotify-garden
 
 ### launchd plists
 
-**com.benstrawbridge.spotify-collect.plist** — 5x daily (7, 11, 15, 19, 23 AM/PM):
+Distribute as `*.plist.example`. Users copy, rename, edit the path and label:
+
+**spotify-collect.plist.example** — 5x daily (7, 11, 15, 19, 23):
 ```xml
 <key>StartCalendarInterval</key>
 <array>
@@ -193,28 +197,21 @@ cd /Users/benstrawbridge/dev/wanderer/solo/obsidian-spotify-garden
 </array>
 ```
 
-**com.benstrawbridge.spotify-weekly.plist** — Sunday at 11 PM.
+**spotify-weekly.plist.example** — Sunday at 11 PM.
 
 ## Data Migration
 
+If migrating from an existing plays.json:
+
 ```bash
-cp /Volumes/wanderer/dev/solo/spotify-api/data/plays.json \
-   /Users/benstrawbridge/dev/wanderer/solo/obsidian-spotify-garden/data/plays.json
+cp /path/to/old/plays.json /path/to/obsidian-spotify-garden/data/plays.json
 ```
 
 First `collect` run will merge + deduplicate with any new plays.
 
 ## One Setup Requirement
 
-The Spotify developer dashboard app needs `http://localhost:8888/callback` added as a valid redirect URI. The Python project used `https://www.benstrawbridge.com/callback`. After updating, run `spotify-garden auth` for initial token exchange.
-
-## Reference Files
-
-- `/Volumes/wanderer/dev/solo/obsidian-whoop-garden/internal/auth/auth.go` — auth pattern
-- `/Volumes/wanderer/dev/solo/obsidian-whoop-garden/internal/client/client.go` — HTTP client pattern
-- `/Volumes/wanderer/dev/solo/obsidian-whoop-garden/main.go` — command dispatch pattern
-- `/Volumes/wanderer/dev/solo/spotify-api/scripts/collect_music.py` — dedup logic + Play struct
-- `/Volumes/wanderer/dev/solo/spotify-api/scripts/weekly_music_note.py` — full weekly note structure
+The Spotify developer dashboard app needs `http://localhost:8888/callback` added as a valid redirect URI. After updating, run `spotify-garden auth` for initial token exchange.
 
 ## Build Order
 
@@ -230,8 +227,6 @@ The Spotify developer dashboard app needs `http://localhost:8888/callback` added
 10. Shell wrappers + `.env` + `.gitignore`
 11. Build + smoke test
 12. launchd plists + load
-13. Unload old Python plists
-14. Update vault setup log
 
 ## Verification Checklist
 
@@ -242,4 +237,3 @@ The Spotify developer dashboard app needs `http://localhost:8888/callback` added
 - [ ] Delete a weekly note, run `./spotify-garden catch-up --weeks 4` — regenerates missing note
 - [ ] `./spotify-garden persona` — `01-ai-brain/context-packs/Music Taste.md` overwritten
 - [ ] Load plists, `launchctl list | grep spotify` — both jobs visible
-- [ ] Unload old Python plists (`com.benstrawbridge.daily-music-collect`, `com.benstrawbridge.weekly-music-note`)

@@ -40,6 +40,8 @@ func main() {
 		runCatchUp(args)
 	case "persona":
 		runPersona()
+	case "setlist":
+		runSetlist(args)
 	default:
 		fmt.Fprintf(os.Stderr, "unknown command: %s\n\n", cmd)
 		printUsage()
@@ -51,11 +53,12 @@ func printUsage() {
 	fmt.Print(`spotify-garden — Spotify listening data → Obsidian markdown
 
 Usage:
-  spotify-garden auth                       Authenticate with Spotify via OAuth
-  spotify-garden collect                    Fetch last 50 recently-played, dedup, append to plays.json
-  spotify-garden weekly [--date YYYY-MM-DD] Generate weekly note for date's ISO week (default: current)
-  spotify-garden catch-up [--weeks N]       Generate missing weekly notes (default: 8 weeks back)
-  spotify-garden persona                    Regenerate Music Taste context pack
+  spotify-garden auth                           Authenticate with Spotify via OAuth
+  spotify-garden collect                        Fetch last 50 recently-played, dedup, append to plays.json
+  spotify-garden weekly [--date YYYY-MM-DD]     Generate weekly note for date's ISO week (default: current)
+  spotify-garden catch-up [--weeks N]           Generate missing weekly notes (default: 8 weeks back)
+  spotify-garden persona                        Regenerate Music Taste context pack
+  spotify-garden setlist <artist> [--date DATE] Look up setlist on setlist.fm (default: today)
 
 Flags:
   --date   Date in YYYY-MM-DD format (default: today)
@@ -290,6 +293,50 @@ func runCatchUp(args []string) {
 	}
 
 	fmt.Println("Done.")
+}
+
+func runSetlist(args []string) {
+	fs := flag.NewFlagSet("setlist", flag.ExitOnError)
+	dateStr := fs.String("date", "", "date in YYYY-MM-DD format (default: today)")
+	_ = fs.Parse(args)
+
+	if fs.NArg() < 1 {
+		fmt.Fprintln(os.Stderr, "usage: spotify-garden setlist <artist> [--date YYYY-MM-DD]")
+		os.Exit(1)
+	}
+	artist := fs.Arg(0)
+
+	date, err := parseDate(*dateStr)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	dateFormatted := date.Format("2006-01-02")
+
+	setlist, err := fetch.GetSetlist(artist, dateFormatted)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "setlist.fm error:", err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("%s — %s — %s\n", setlist.ArtistName, setlist.VenueName, setlist.CityName)
+	fmt.Printf("%s\n\n", dateFormatted)
+
+	for _, s := range setlist.Sets {
+		if s.Name != "" {
+			fmt.Printf("%s:\n", s.Name)
+		} else {
+			fmt.Printf("Set 1:\n")
+		}
+		for i, song := range s.Songs {
+			fmt.Printf("%d. %s\n", i+1, song)
+		}
+		fmt.Println()
+	}
+
+	if setlist.URL != "" {
+		fmt.Printf("Setlist.fm: %s\n", setlist.URL)
+	}
 }
 
 func runPersona() {

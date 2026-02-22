@@ -150,3 +150,44 @@ Regenerates the Music Taste context pack at
 
 Intended to be read by AI assistants when creating playlists, recommending
 music, or discussing musical taste.
+
+---
+
+## setlist
+
+```bash
+./spotify-garden setlist <artist> [--date YYYY-MM-DD]
+```
+
+Looks up a setlist on setlist.fm and prints it to stdout. No vault files are written.
+
+**Flags:**
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--date` | today | Date of the concert in YYYY-MM-DD format |
+
+**Requires:** `SETLISTFM_API_KEY` in `.env`.
+Get a key at [setlist.fm/settings/apps](https://www.setlist.fm/settings/apps).
+
+**Output format:**
+
+```
+Artist Name — Venue Name — City, ST
+2026-02-21
+
+Set 1:
+1. Song Title
+2. Song Title
+...
+
+Encore:
+1. Song Title
+
+Setlist.fm: https://www.setlist.fm/setlist/...
+```
+
+**Concert note workflow:**
+1. During or after a show, open the Templater template `Concert Note` in Obsidian — it prompts for artist and venue, then renames the file to `YYYY-MM-DD - Artist - Venue.md` and places it in `music/concerts/`
+2. Run `spotify-garden setlist "<Artist>" --date YYYY-MM-DD`, copy the output, and paste it into the Set List section of the note
+3. The artist stub's Concerts Dataview block will automatically pick up the new note via the `music/live-artist/<Artist Name>` tag

@@ -3,7 +3,11 @@ package fetch
 import (
 	"encoding/json"
 	"fmt"
+	"io"
+	"net/http"
 	"net/url"
+	"os"
+	"time"
 
 	"github.com/benstraw/spotify-garden/internal/client"
 	"github.com/benstraw/spotify-garden/internal/models"
@@ -143,6 +147,151 @@ func GetTopTracks(c *client.Client, timeRange string) ([]models.TopTrack, error)
 		})
 	}
 	return tracks, nil
+}
+
+// --- Setlist.fm ---
+
+// setlist.fm API response types (internal use only).
+type setlistfmResponse struct {
+	Setlist []setlistfmSetlist `json:"setlist"`
+}
+
+type setlistfmSetlist struct {
+	EventDate string            `json:"eventDate"` // "DD-MM-YYYY"
+	Artist    setlistfmArtist   `json:"artist"`
+	Venue     setlistfmVenue    `json:"venue"`
+	URL       string            `json:"url"`
+	Sets      setlistfmSetsCont `json:"sets"`
+}
+
+type setlistfmArtist struct {
+	Name string `json:"name"`
+}
+
+type setlistfmVenue struct {
+	Name string          `json:"name"`
+	City setlistfmCity   `json:"city"`
+}
+
+type setlistfmCity struct {
+	Name        string            `json:"name"`
+	StateCode   string            `json:"stateCode"`
+	Country     setlistfmCountry  `json:"country"`
+}
+
+type setlistfmCountry struct {
+	Code string `json:"code"`
+}
+
+type setlistfmSetsCont struct {
+	Set []setlistfmSet `json:"set"`
+}
+
+type setlistfmSet struct {
+	Name string          `json:"name"` // "" for main set, "Encore" etc.
+	Song []setlistfmSong `json:"song"`
+}
+
+type setlistfmSong struct {
+	Name string `json:"name"`
+}
+
+// setlistGet performs a GET request to the setlist.fm REST API.
+func setlistGet(path string, params url.Values) ([]byte, error) {
+	apiKey := os.Getenv("SETLISTFM_API_KEY")
+	if apiKey == "" {
+		return nil, fmt.Errorf("SETLISTFM_API_KEY not set")
+	}
+
+	reqURL := "https://api.setlist.fm/rest/1.0" + path
+	if len(params) > 0 {
+		reqURL += "?" + params.Encode()
+	}
+
+	req, err := http.NewRequest(http.MethodGet, reqURL, nil)
+	if err != nil {
+		return nil, fmt.Errorf("setlist.fm build request: %w", err)
+	}
+	req.Header.Set("x-api-key", apiKey)
+	req.Header.Set("Accept", "application/json")
+
+	httpClient := &http.Client{Timeout: 15 * time.Second}
+	resp, err := httpClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("setlist.fm request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("setlist.fm read body: %w", err)
+	}
+
+	if resp.StatusCode == http.StatusNotFound {
+		return nil, fmt.Errorf("no setlist found")
+	}
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return nil, fmt.Errorf("setlist.fm returned %d", resp.StatusCode)
+	}
+	return body, nil
+}
+
+// GetSetlist fetches the most recent setlist for artistName on date (YYYY-MM-DD).
+// Returns the first matching result from setlist.fm.
+func GetSetlist(artistName, date string) (models.Setlist, error) {
+	// Convert YYYY-MM-DD to DD-MM-YYYY for setlist.fm
+	t, err := time.Parse("2006-01-02", date)
+	if err != nil {
+		return models.Setlist{}, fmt.Errorf("invalid date %q: %w", date, err)
+	}
+	apiDate := t.Format("02-01-2006")
+
+	params := url.Values{}
+	params.Set("artistName", artistName)
+	params.Set("date", apiDate)
+	params.Set("p", "1")
+
+	body, err := setlistGet("/search/setlists", params)
+	if err != nil {
+		return models.Setlist{}, err
+	}
+
+	var resp setlistfmResponse
+	if err := json.Unmarshal(body, &resp); err != nil {
+		return models.Setlist{}, fmt.Errorf("setlist.fm decode: %w", err)
+	}
+
+	if len(resp.Setlist) == 0 {
+		return models.Setlist{}, fmt.Errorf("no setlist found for %q on %s", artistName, date)
+	}
+
+	raw := resp.Setlist[0]
+
+	city := raw.Venue.City.Name
+	if raw.Venue.City.StateCode != "" {
+		city += ", " + raw.Venue.City.StateCode
+	}
+
+	var sets []models.SetlistSet
+	for _, s := range raw.Sets.Set {
+		var songs []string
+		for _, song := range s.Song {
+			songs = append(songs, song.Name)
+		}
+		sets = append(sets, models.SetlistSet{
+			Name:  s.Name,
+			Songs: songs,
+		})
+	}
+
+	return models.Setlist{
+		EventDate:  raw.EventDate,
+		ArtistName: raw.Artist.Name,
+		VenueName:  raw.Venue.Name,
+		CityName:   city,
+		URL:        raw.URL,
+		Sets:       sets,
+	}, nil
 }
 
 // GetTopArtists fetches the user's top 50 artists for the given time range.

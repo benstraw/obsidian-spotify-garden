@@ -27,3 +27,19 @@ type TopArtist struct {
 	Genres     []string
 	SpotifyURL string
 }
+
+// Setlist represents a setlist.fm setlist result.
+type Setlist struct {
+	EventDate  string // "DD-MM-YYYY" from API
+	ArtistName string
+	VenueName  string
+	CityName   string
+	URL        string // setlist.fm URL
+	Sets       []SetlistSet
+}
+
+// SetlistSet represents one set (main set or encore) within a setlist.
+type SetlistSet struct {
+	Name  string // "Encore", "" for main set
+	Songs []string
+}
