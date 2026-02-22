@@ -16,6 +16,9 @@ import (
 	"github.com/benstraw/spotify-garden/internal/render"
 )
 
+// version is set at build time via -ldflags "-X main.version=vX.Y.Z"
+var version = "dev"
+
 const playsFile = "data/plays.json"
 
 func main() {
@@ -40,6 +43,11 @@ func main() {
 		runCatchUp(args)
 	case "persona":
 		runPersona()
+	case "version", "--version":
+		fmt.Println("spotify-garden", version)
+	case "help", "--help", "-h":
+		printUsage()
+		os.Exit(0)
 	default:
 		fmt.Fprintf(os.Stderr, "unknown command: %s\n\n", cmd)
 		printUsage()
@@ -48,7 +56,7 @@ func main() {
 }
 
 func printUsage() {
-	fmt.Print(`spotify-garden — Spotify listening data → Obsidian markdown
+	fmt.Printf(`spotify-garden %s — Spotify listening data → Obsidian markdown
 
 Usage:
   spotify-garden auth                       Authenticate with Spotify via OAuth
@@ -56,11 +64,12 @@ Usage:
   spotify-garden weekly [--date YYYY-MM-DD] Generate weekly note for date's ISO week (default: current)
   spotify-garden catch-up [--weeks N]       Generate missing weekly notes (default: 8 weeks back)
   spotify-garden persona                    Regenerate Music Taste context pack
+  spotify-garden version                    Print version
 
 Flags:
   --date   Date in YYYY-MM-DD format (default: today)
   --weeks  Number of weeks to check (default: 8)
-`)
+`, version)
 }
 
 // loadDotEnv reads a .env file and sets environment variables.
