@@ -1,0 +1,43 @@
+{{/*
+Weekly music note template — structure reference.
+The actual rendering is done in internal/render/render.go (RenderWeekly).
+This file documents the expected output format.
+
+---
+type: note
+tags: [music, weekly-music]
+created: YYYY-MM-DD
+week: YYYY-Www
+---
+
+# Week in Music: YYYY-Www
+
+## Stats
+- Plays tracked: N  |  Unique tracks: N  |  Unique artists: N  |  Unique albums: N
+- Estimated listening time: Xh Ymin
+
+## Play Log
+### Monday, Jan 2
+- 9:30  Track Name — [[Artist Name]]  _(Album Name)_
+
+## Repeated Tracks  (played ≥2×)
+- Track Name — [[Artist Name]]  ×3
+
+## Albums This Week
+- Album Name — [[Artist Name]]  (5 plays)
+
+## Artists in Rotation
+[[Artist A]], [[Artist B]]
+
+## New Artists  (first appearance in vault)
+- [[New Artist]]
+
+## Top Tracks — Last ~4 Weeks  (50)
+1. Track — [[Artist]]
+
+## Top Artists — Last ~4 Weeks  (50)
+1. [[Artist]]  · _genre1, genre2_
+
+## Notes
+
+*/}}

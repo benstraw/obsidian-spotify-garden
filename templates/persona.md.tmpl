@@ -1,0 +1,28 @@
+---
+type: context
+tags: [ai-brain/context, music]
+created: {{.DateStr}}
+updated: {{.DateStr}}
+---
+
+# Ben Strawbridge — Music Taste
+
+Use this context when: creating playlists, recommending music, or discussing taste.
+
+## Current Top Artists (last ~4 weeks)
+{{.TopArtistsShort}}
+
+## Top Artists (last ~6 months)
+{{.TopArtistsMedium}}
+
+## All-Time Top Artists
+{{.TopArtistsLong}}
+
+## Top Genres (derived from ~4-week top artists)
+{{.TopGenres}}
+
+## Recent Rotation
+Artists heard this week: {{.RecentArtists}}
+
+## Notes
+

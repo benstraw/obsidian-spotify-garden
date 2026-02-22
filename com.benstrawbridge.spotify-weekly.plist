@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.benstrawbridge.spotify-weekly</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>/Users/benstrawbridge/dev/wanderer/solo/obsidian-spotify-garden/run_weekly_spotify.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Weekday</key><integer>0</integer>
+            <key>Hour</key><integer>23</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+    </array>
+    <key>StandardOutPath</key>
+    <string>/tmp/spotify-weekly.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/spotify-weekly.log</string>
+</dict>
+</plist>
