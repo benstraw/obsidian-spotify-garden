@@ -51,6 +51,7 @@ cat > "${COLLECT_WRAPPER}" <<EOF
 set -euo pipefail
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
 export SPOTIFY_TEMPLATES_DIR="${TEMPLATES_DIR}"
+export SPOTIFY_AUTO_DAILY_ON_COLLECT=1
 cd "${STATE_DIR}"
 exec "${BIN_PATH}" collect
 EOF

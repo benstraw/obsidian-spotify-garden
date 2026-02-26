@@ -93,7 +93,7 @@ func fmtDuration(totalMS int) string {
 
 // RenderWeekly builds the weekly note for the ISO week containing date.
 // It also creates artist stubs for new artists.
-func RenderWeekly(plays []models.Play, topTracksShort []models.TopTrack, topArtistsShort []models.TopArtist, date time.Time, vaultPath string) (string, error) {
+func RenderWeekly(plays []models.Play, date time.Time, vaultPath string) (string, error) {
 	weekPlays := PlaysForWeek(plays, date)
 	monday, _ := WeekBounds(date)
 	weekStr := WeekStr(monday)
@@ -176,26 +176,14 @@ func RenderWeekly(plays []models.Play, topTracksShort []models.TopTrack, topArti
 		}
 	}
 
-	// Create artist stubs for weekly plays + short_term top artists
+	// Create artist stubs for weekly plays.
 	allArtistNames := map[string]bool{}
 	for _, a := range artistsSorted {
 		allArtistNames[a] = true
 	}
-	for _, a := range topArtistsShort {
-		allArtistNames[a.Name] = true
-	}
 
-	// Build genre/url maps from top artists
-	artistGenres := map[string][]string{}
+	// Build url map from weekly plays.
 	artistURLs := map[string]string{}
-	for _, a := range topArtistsShort {
-		if _, ok := artistGenres[a.Name]; !ok {
-			artistGenres[a.Name] = a.Genres
-		}
-		if _, ok := artistURLs[a.Name]; !ok {
-			artistURLs[a.Name] = a.SpotifyURL
-		}
-	}
 	for _, p := range weekPlays {
 		if _, ok := artistURLs[p.ArtistName]; !ok {
 			artistURLs[p.ArtistName] = p.ArtistSpotifyURL
@@ -209,7 +197,7 @@ func RenderWeekly(plays []models.Play, topTracksShort []models.TopTrack, topArti
 	sort.Strings(sortedAllArtists)
 
 	for _, name := range sortedAllArtists {
-		if err := EnsureArtistStub(name, artistURLs[name], artistGenres[name], dateStr, vaultPath); err != nil {
+		if err := EnsureArtistStub(name, artistURLs[name], nil, dateStr, vaultPath); err != nil {
 			fmt.Fprintf(os.Stderr, "warning: could not create artist stub for %s: %v\n", name, err)
 		}
 	}
@@ -280,36 +268,6 @@ func RenderWeekly(plays []models.Play, topTracksShort []models.TopTrack, topArti
 		sb.WriteString("\n")
 	}
 
-	// Top tracks
-	sb.WriteString("## Top Tracks \u2014 Last ~4 Weeks  (50)\n")
-	if len(topTracksShort) > 0 {
-		for i, t := range topTracksShort {
-			fmt.Fprintf(&sb, "%d. %s \u2014 [[%s]]\n", i+1, t.Name, t.ArtistName)
-		}
-	} else {
-		sb.WriteString("_No data_\n")
-	}
-	sb.WriteString("\n")
-
-	// Top artists
-	sb.WriteString("## Top Artists \u2014 Last ~4 Weeks  (50)\n")
-	if len(topArtistsShort) > 0 {
-		for i, a := range topArtistsShort {
-			genrePart := ""
-			if len(a.Genres) > 0 {
-				limit := 3
-				if len(a.Genres) < limit {
-					limit = len(a.Genres)
-				}
-				genrePart = fmt.Sprintf("  \u00b7 _%s_", strings.Join(a.Genres[:limit], ", "))
-			}
-			fmt.Fprintf(&sb, "%d. [[%s]]%s\n", i+1, a.Name, genrePart)
-		}
-	} else {
-		sb.WriteString("_No data_\n")
-	}
-	sb.WriteString("\n")
-
 	sb.WriteString("## Notes\n\n\n")
 
 	return sb.String(), nil
@@ -374,6 +332,128 @@ func RenderDaily(plays []models.Play, date time.Time, vaultPath string) (string,
 			albumPart = fmt.Sprintf("  _(%s)_", p.AlbumName)
 		}
 		fmt.Fprintf(&sb, "- %s  %s — [[%s]]%s\n", timeStr, p.TrackName, p.ArtistName, albumPart)
+	}
+	sb.WriteString("\n")
+
+	type songEntry struct {
+		trackName  string
+		artistName string
+		albumName  string
+		count      int
+	}
+	songCounts := map[string]*songEntry{}
+	for _, p := range dayPlays {
+		key := p.TrackName + "||" + p.ArtistName + "||" + p.AlbumName
+		if songCounts[key] == nil {
+			songCounts[key] = &songEntry{
+				trackName:  p.TrackName,
+				artistName: p.ArtistName,
+				albumName:  p.AlbumName,
+			}
+		}
+		songCounts[key].count++
+	}
+	songs := make([]songEntry, 0, len(songCounts))
+	for _, e := range songCounts {
+		songs = append(songs, *e)
+	}
+	sort.Slice(songs, func(i, j int) bool {
+		if songs[i].count != songs[j].count {
+			return songs[i].count > songs[j].count
+		}
+		if songs[i].trackName != songs[j].trackName {
+			return songs[i].trackName < songs[j].trackName
+		}
+		if songs[i].artistName != songs[j].artistName {
+			return songs[i].artistName < songs[j].artistName
+		}
+		return songs[i].albumName < songs[j].albumName
+	})
+
+	type artistEntry struct {
+		name  string
+		count int
+	}
+	artistCounts := map[string]int{}
+	for _, p := range dayPlays {
+		artistCounts[p.ArtistName]++
+	}
+	artists := make([]artistEntry, 0, len(artistCounts))
+	for name, count := range artistCounts {
+		artists = append(artists, artistEntry{name: name, count: count})
+	}
+	sort.Slice(artists, func(i, j int) bool {
+		if artists[i].count != artists[j].count {
+			return artists[i].count > artists[j].count
+		}
+		return artists[i].name < artists[j].name
+	})
+
+	type albumEntry struct {
+		albumName  string
+		artistName string
+		count      int
+	}
+	albumCounts := map[string]*albumEntry{}
+	for _, p := range dayPlays {
+		albumName := p.AlbumName
+		if albumName == "" {
+			albumName = "(No Album)"
+		}
+		key := albumName + "||" + p.ArtistName
+		if albumCounts[key] == nil {
+			albumCounts[key] = &albumEntry{
+				albumName:  albumName,
+				artistName: p.ArtistName,
+			}
+		}
+		albumCounts[key].count++
+	}
+	albums := make([]albumEntry, 0, len(albumCounts))
+	for _, e := range albumCounts {
+		albums = append(albums, *e)
+	}
+	sort.Slice(albums, func(i, j int) bool {
+		if albums[i].count != albums[j].count {
+			return albums[i].count > albums[j].count
+		}
+		if albums[i].albumName != albums[j].albumName {
+			return albums[i].albumName < albums[j].albumName
+		}
+		return albums[i].artistName < albums[j].artistName
+	})
+
+	sb.WriteString("## Songs Played\n")
+	for _, s := range songs {
+		albumPart := ""
+		if s.albumName != "" {
+			albumPart = fmt.Sprintf("  _(%s)_", s.albumName)
+		}
+		fmt.Fprintf(&sb, "- %s \u2014 [[%s]]%s  \u00d7%d\n", s.trackName, s.artistName, albumPart, s.count)
+	}
+	sb.WriteString("\n")
+
+	sb.WriteString("## Artists Played\n")
+	for _, a := range artists {
+		playWord := "plays"
+		if a.count == 1 {
+			playWord = "play"
+		}
+		fmt.Fprintf(&sb, "- [[%s]]  (%d %s)\n", a.name, a.count, playWord)
+	}
+	sb.WriteString("\n")
+
+	sb.WriteString("## Albums Played\n")
+	for _, a := range albums {
+		artistPart := ""
+		if a.artistName != "" {
+			artistPart = fmt.Sprintf(" \u2014 [[%s]]", a.artistName)
+		}
+		playWord := "plays"
+		if a.count == 1 {
+			playWord = "play"
+		}
+		fmt.Fprintf(&sb, "- %s%s  (%d %s)\n", a.albumName, artistPart, a.count, playWord)
 	}
 	sb.WriteString("\n")
 

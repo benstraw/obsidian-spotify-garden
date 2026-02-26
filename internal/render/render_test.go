@@ -205,7 +205,7 @@ func TestRenderWeekly_noPlays(t *testing.T) {
 	dir := t.TempDir()
 	date := time.Date(2026, 2, 18, 0, 0, 0, 0, time.UTC)
 
-	content, err := RenderWeekly(nil, nil, nil, date, dir)
+	content, err := RenderWeekly(nil, date, dir)
 	if err != nil {
 		t.Fatalf("RenderWeekly: %v", err)
 	}
@@ -215,8 +215,6 @@ func TestRenderWeekly_noPlays(t *testing.T) {
 		"tags: [music, weekly-music]",
 		"# Week in Music:",
 		"## Stats",
-		"## Top Tracks",
-		"_No data_",
 		"## Notes",
 	}
 	for _, s := range checks {
@@ -229,7 +227,7 @@ func TestRenderWeekly_noPlays(t *testing.T) {
 func TestRenderWeekly_noPlayLog(t *testing.T) {
 	dir := t.TempDir()
 	date := time.Date(2026, 2, 18, 0, 0, 0, 0, time.UTC)
-	content, err := RenderWeekly(nil, nil, nil, date, dir)
+	content, err := RenderWeekly(nil, date, dir)
 	if err != nil {
 		t.Fatalf("RenderWeekly: %v", err)
 	}
@@ -258,14 +256,7 @@ func TestRenderWeekly_withPlays(t *testing.T) {
 			DurationMS: 200000,
 		},
 	}
-	topTracks := []models.TopTrack{
-		{Name: "Top Track", ArtistName: "Top Artist"},
-	}
-	topArtists := []models.TopArtist{
-		{Name: "Top Artist", Genres: []string{"indie", "pop"}},
-	}
-
-	content, err := RenderWeekly(plays, topTracks, topArtists, date, dir)
+	content, err := RenderWeekly(plays, date, dir)
 	if err != nil {
 		t.Fatalf("RenderWeekly: %v", err)
 	}
@@ -277,9 +268,6 @@ func TestRenderWeekly_withPlays(t *testing.T) {
 		"## Repeated Tracks",
 		"## Albums This Week",
 		"## Artists in Rotation",
-		"Top Track",
-		"[[Top Artist]]",
-		"indie",
 	}
 	for _, s := range checks {
 		if !strings.Contains(content, s) {
@@ -375,6 +363,9 @@ func TestRenderDaily_withPlays(t *testing.T) {
 		"# Daily Listening: 2026-02-22",
 		"## Stats",
 		"## Play Log",
+		"## Songs Played",
+		"## Artists Played",
+		"## Albums Played",
 		"Souvenirs",
 		"[[Orla Gartland]]",
 		"_(Woman on the Internet)_",
