@@ -30,6 +30,7 @@ SPOTIFY_CLIENT_ID=your_client_id
 SPOTIFY_CLIENT_SECRET=your_client_secret
 SPOTIFY_REDIRECT_URI=http://localhost:8888/callback
 OBSIDIAN_VAULT_PATH=/path/to/your/vault
+SPOTIFY_TEMPLATES_DIR=/absolute/path/to/templates
 SETLISTFM_API_KEY=your_setlistfm_api_key    # optional — only needed for setlist command
 ```
 
