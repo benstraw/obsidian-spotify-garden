@@ -84,7 +84,7 @@ func StartAuthFlow(tokensPath string) error {
 	_ = exec.Command("open", fullAuthURL).Start()
 
 	var code string
-	if strings.HasPrefix(redir, "http://localhost") {
+	if strings.HasPrefix(redir, "http://localhost") || strings.HasPrefix(redir, "http://127.0.0.1") {
 		code, err = captureLocalCallback(state, redir)
 	} else {
 		code, err = captureManualCallback(state)

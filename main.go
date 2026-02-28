@@ -116,6 +116,16 @@ func resolveRuntimePaths() runtimePaths {
 
 	stateDir := strings.TrimSpace(os.Getenv("SPOTIFY_STATE_DIR"))
 	if stateDir == "" {
+		// Auto-discover the well-known installed state dir if it exists.
+		home, err := os.UserHomeDir()
+		if err == nil {
+			candidate := filepath.Join(home, "Library", "Application Support", "spotify-garden", "state")
+			if info, err := os.Stat(candidate); err == nil && info.IsDir() {
+				stateDir = candidate
+			}
+		}
+	}
+	if stateDir == "" {
 		return p
 	}
 
