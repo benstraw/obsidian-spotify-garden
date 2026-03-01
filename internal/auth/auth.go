@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -21,6 +22,75 @@ const (
 	tokenURL = "https://accounts.spotify.com/api/token"
 	scopes   = "user-read-recently-played user-top-read"
 )
+
+const successPage = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spotify Garden - Authorized</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    overflow:hidden;
+  }
+  /* wild SVG background via inline data URI */
+  body{
+    background-color:#0d1117;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231DB954'/%3E%3Cstop offset='1' stop-color='%2300d4ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='120' fill='%230d1117'/%3E%3Ccircle cx='10' cy='10' r='8' fill='%231DB954' opacity='.7'/%3E%3Ccircle cx='60' cy='5' r='4' fill='%23ff6ec7' opacity='.8'/%3E%3Ccircle cx='110' cy='15' r='6' fill='%23ffd700' opacity='.6'/%3E%3Cpath d='M0 60 Q30 40 60 60 T120 60' stroke='%23ff4500' stroke-width='1.5' fill='none' opacity='.5'/%3E%3Cpath d='M0 65 Q30 85 60 65 T120 65' stroke='%238b5cf6' stroke-width='1.5' fill='none' opacity='.5'/%3E%3Crect x='25' y='80' width='10' height='25' rx='2' fill='%2300d4ff' opacity='.5'/%3E%3Crect x='40' y='85' width='10' height='20' rx='2' fill='%231DB954' opacity='.5'/%3E%3Crect x='55' y='75' width='10' height='30' rx='2' fill='%23ff6ec7' opacity='.4'/%3E%3Crect x='70' y='82' width='10' height='23' rx='2' fill='%23ffd700' opacity='.5'/%3E%3Crect x='85' y='78' width='10' height='27' rx='2' fill='%23ff4500' opacity='.4'/%3E%3Ccircle cx='30' cy='40' r='3' fill='%2300ffc8' opacity='.6'/%3E%3Ccircle cx='90' cy='45' r='5' fill='%23ff85a2' opacity='.5'/%3E%3Cpolygon points='105,35 110,45 100,45' fill='%238b5cf6' opacity='.6'/%3E%3Ccircle cx='50' cy='30' r='2' fill='%23fff' opacity='.4'/%3E%3Cpath d='M15 110 Q20 95 30 110' stroke='%2300ffc8' stroke-width='1.2' fill='none' opacity='.5'/%3E%3Ccircle cx='100' cy='100' r='3' fill='%23ff85a2' opacity='.5'/%3E%3C/svg%3E");
+    background-size:120px 120px;
+    animation:bgScroll 12s linear infinite;
+  }
+  @keyframes bgScroll{to{background-position:120px 120px}}
+  .card{
+    background:rgba(13,17,23,.85);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(29,185,84,.3);
+    border-radius:24px;
+    padding:3rem 3.5rem;
+    text-align:center;
+    box-shadow:
+      0 0 40px rgba(29,185,84,.15),
+      0 0 80px rgba(0,212,255,.08),
+      0 25px 50px rgba(0,0,0,.4);
+    animation:cardIn .6s cubic-bezier(.16,1,.3,1) both;
+    max-width:460px;
+  }
+  @keyframes cardIn{from{opacity:0;transform:translateY(30px) scale(.95)}to{opacity:1;transform:none}}
+  .icon{
+    width:72px;height:72px;margin:0 auto 1.5rem;
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+  .icon svg{width:100%;height:100%}
+  h1{
+    font-size:1.75rem;font-weight:700;
+    background:linear-gradient(135deg,#1DB954,#00d4ff,#ff6ec7);
+    background-size:200% 200%;
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;
+    animation:gradShift 4s ease infinite;
+    margin-bottom:.75rem;
+  }
+  @keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  p{color:rgba(255,255,255,.55);font-size:1rem;line-height:1.5}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">
+      <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="36" cy="36" r="34" fill="#1DB954"/>
+        <path d="M26 48 L33 40 L40 46 L52 28" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    <h1>Authorization successful!</h1>
+    <p>You may close this tab.</p>
+  </div>
+</body>
+</html>`
 
 func getRedirectURI() string {
 	if r := os.Getenv("SPOTIFY_REDIRECT_URI"); r != "" {
@@ -136,7 +206,8 @@ func captureLocalCallback(state, redir string) (string, error) {
 			fmt.Fprintln(w, "Authorization failed. You may close this tab.")
 			return
 		}
-		fmt.Fprintln(w, "Authorization successful! You may close this tab.")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		io.WriteString(w, successPage) //nolint: errcheck
 		codeCh <- code
 	})
 
