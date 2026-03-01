@@ -1,12 +1,42 @@
 package render
 
 import (
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/benstraw/spotify-garden/internal/models"
 )
+
+// --- TagSlug ---
+
+func TestTagSlug(t *testing.T) {
+	cases := []struct {
+		input string
+		want  string
+	}{
+		{"The Beatles", "the-beatles"},
+		{"Guns N' Roses", "guns-n-roses"},
+		{"Madison Square Garden", "madison-square-garden"},
+		{"AC/DC", "ac-dc"},
+		{"Orla Gartland", "orla-gartland"},
+		{"Madison Square Garden", "madison-square-garden"},
+		{"St. Vincent", "st-vincent"},
+		{"P!nk", "p-nk"},
+		{"Smashing Pumpkins", "smashing-pumpkins"},
+		{"simple", "simple"},
+		{"already-slug", "already-slug"},
+		{"  extra spaces  ", "extra-spaces"},
+	}
+	for _, c := range cases {
+		got := TagSlug(c.input)
+		if got != c.want {
+			t.Errorf("TagSlug(%q) = %q, want %q", c.input, got, c.want)
+		}
+	}
+}
 
 // --- WeekStr ---
 
@@ -375,5 +405,37 @@ func TestRenderDaily_withPlays(t *testing.T) {
 		if !strings.Contains(content, s) {
 			t.Errorf("output missing %q", s)
 		}
+	}
+}
+
+// --- EnsureArtistStub tag slug ---
+
+func TestEnsureArtistStub_tagSlugInFrontmatter(t *testing.T) {
+	dir := t.TempDir()
+
+	// Artist with spaces and apostrophe
+	err := EnsureArtistStub("Guns N' Roses", "https://open.spotify.com/artist/123", nil, "2026-03-01", dir)
+	if err != nil {
+		t.Fatalf("EnsureArtistStub: %v", err)
+	}
+
+	data, readErr := os.ReadFile(filepath.Join(dir, "music", "artists", "Guns N' Roses.md"))
+	if readErr != nil {
+		t.Fatalf("ReadFile: %v", readErr)
+	}
+	content := string(data)
+
+	checks := []string{
+		"live_artist_tag: music/live-artist/guns-n-roses",
+		"WHERE contains(tags, this.live_artist_tag)",
+	}
+	for _, s := range checks {
+		if !strings.Contains(content, s) {
+			t.Errorf("artist stub missing %q", s)
+		}
+	}
+	// The old broken pattern must not be present
+	if strings.Contains(content, `"music/live-artist/" + this.file.name`) {
+		t.Error("artist stub still contains old broken tag pattern")
 	}
 }

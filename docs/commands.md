@@ -217,6 +217,10 @@ Get a key at [setlist.fm/settings/apps](https://www.setlist.fm/settings/apps).
 Artist Name — Venue Name — City, ST
 2026-02-21
 
+Suggested tags:
+  music/live-artist/artist-name
+  music/live-venue/venue-name
+
 Set 1:
 1. Song Title
 2. Song Title
@@ -231,7 +235,8 @@ Setlist.fm: https://www.setlist.fm/setlist/...
 **Concert note workflow:**
 1. During or after a show, open the Templater template `Concert Note` in Obsidian — it prompts for artist and venue, then renames the file to `YYYY-MM-DD - Artist - Venue.md` and places it in `music/concerts/`
 2. Run `spotify-garden setlist "<Artist>" --date YYYY-MM-DD`, copy the output, and paste it into the Set List section of the note
-3. The artist stub's Concerts Dataview block will automatically pick up the new note via the `music/live-artist/<Artist Name>` tag
+3. Add the suggested tag slugs (e.g. `music/live-artist/the-beatles`, `music/live-venue/madison-square-garden`) to the concert note's frontmatter — tag slugs use lowercase with hyphens instead of spaces or apostrophes to satisfy Obsidian's tag rules
+4. The artist stub's Concerts Dataview block will automatically pick up the new note via the `live_artist_tag` frontmatter field
 
 ---
 

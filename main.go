@@ -549,6 +549,8 @@ func runSetlist(args []string) {
 
 	fmt.Printf("%s — %s — %s\n", setlist.ArtistName, setlist.VenueName, setlist.CityName)
 	fmt.Printf("%s\n\n", dateFormatted)
+	fmt.Printf("Suggested tags:\n  music/live-artist/%s\n  music/live-venue/%s\n\n",
+		render.TagSlug(setlist.ArtistName), render.TagSlug(setlist.VenueName))
 
 	for _, s := range setlist.Sets {
 		if s.Name != "" {

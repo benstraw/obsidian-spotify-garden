@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 	"text/template"
@@ -11,6 +12,32 @@ import (
 
 	"github.com/benstraw/spotify-garden/internal/models"
 )
+
+// --- Tag utilities ---
+
+var (
+	tagInvalidRe  = regexp.MustCompile(`[^a-z0-9_-]`)
+	tagMultiHypRe = regexp.MustCompile(`-{2,}`)
+)
+
+// TagSlug converts a name into a valid Obsidian tag component.
+// Apostrophes are removed; spaces and any remaining invalid characters are
+// replaced with hyphens; consecutive hyphens are collapsed; the result is
+// lowercased and trimmed of leading/trailing hyphens.
+//
+// Examples:
+//
+//	"The Beatles"   → "the-beatles"
+//	"Guns N' Roses" → "guns-n-roses"
+//	"Madison Square Garden" → "madison-square-garden"
+func TagSlug(s string) string {
+	s = strings.ToLower(s)
+	s = strings.ReplaceAll(s, "'", "")
+	s = strings.ReplaceAll(s, " ", "-")
+	s = tagInvalidRe.ReplaceAllString(s, "-")
+	s = tagMultiHypRe.ReplaceAllString(s, "-")
+	return strings.Trim(s, "-")
+}
 
 // --- Weekly note ---
 
@@ -485,9 +512,12 @@ func EnsureArtistStub(name, spotifyURL string, genres []string, dateStr, vaultPa
 		genresYAML = "[" + strings.Join(quoted, ", ") + "]"
 	}
 
+	slug := TagSlug(name)
+
 	content := fmt.Sprintf(`---
 type: resource
 tags: [music/artist]
+live_artist_tag: music/live-artist/%s
 created: %s
 spotify_url: %s
 genres: %s
@@ -509,13 +539,13 @@ SORT file.name DESC
 
 `+"```dataview"+`
 LIST FROM "music/concerts"
-WHERE contains(tags, "music/live-artist/" + this.file.name)
+WHERE contains(tags, this.live_artist_tag)
 SORT date DESC
 `+"```"+`
 
 ## Notes
 
-`, dateStr, spotifyURL, genresYAML, name, spotifyURL)
+`, slug, dateStr, spotifyURL, genresYAML, name, spotifyURL)
 
 	if err := os.WriteFile(stubPath, []byte(content), 0644); err != nil {
 		return err
