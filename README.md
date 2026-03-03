@@ -172,6 +172,14 @@ servers, so collection keeps working even when the Mac is off.
 - Subsequent runs restore `tokens.json` from the GitHub Actions cache (the token refreshes automatically).
 - If the Spotify refresh token expires (rare), re-run `./spotify-garden auth` locally and update the `SPOTIFY_TOKENS_JSON` secret with a fresh `base64 < tokens.json`.
 
+> **TODO — plays.json sync strategy.**
+> Cloud collect commits `data/plays.json` to the repo; local launchd writes to
+> `~/Library/Application Support/spotify-garden/state/data/plays.json`. These two
+> files will diverge. Options under consideration:
+> 1. **Cloud only** — disable launchd collect, single source of truth in the repo.
+> 2. **Add a `sync` command** — merge repo and local `plays.json` on demand.
+> 3. **Both with auto-merge** — wrapper does `git pull` / merge / `git push` around collect.
+
 ### Manual trigger
 
 Go to **Actions → Collect → Run workflow** in the GitHub UI.
