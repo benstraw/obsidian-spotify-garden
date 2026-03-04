@@ -1,6 +1,7 @@
 package render
 
 import (
+	"os"
 	"strings"
 	"testing"
 	"time"
@@ -205,7 +206,7 @@ func TestRenderWeekly_noPlays(t *testing.T) {
 	dir := t.TempDir()
 	date := time.Date(2026, 2, 18, 0, 0, 0, 0, time.UTC)
 
-	content, err := RenderWeekly(nil, date, dir)
+	content, err := RenderWeekly(nil, date, dir, nil)
 	if err != nil {
 		t.Fatalf("RenderWeekly: %v", err)
 	}
@@ -227,7 +228,7 @@ func TestRenderWeekly_noPlays(t *testing.T) {
 func TestRenderWeekly_noPlayLog(t *testing.T) {
 	dir := t.TempDir()
 	date := time.Date(2026, 2, 18, 0, 0, 0, 0, time.UTC)
-	content, err := RenderWeekly(nil, date, dir)
+	content, err := RenderWeekly(nil, date, dir, nil)
 	if err != nil {
 		t.Fatalf("RenderWeekly: %v", err)
 	}
@@ -256,7 +257,7 @@ func TestRenderWeekly_withPlays(t *testing.T) {
 			DurationMS: 200000,
 		},
 	}
-	content, err := RenderWeekly(plays, date, dir)
+	content, err := RenderWeekly(plays, date, dir, nil)
 	if err != nil {
 		t.Fatalf("RenderWeekly: %v", err)
 	}
@@ -323,7 +324,7 @@ func TestPlaysForDay_sortedAscending(t *testing.T) {
 func TestRenderDaily_noPlays(t *testing.T) {
 	dir := t.TempDir()
 	date := time.Date(2026, 2, 22, 12, 0, 0, 0, time.Local)
-	content, err := RenderDaily(nil, date, dir)
+	content, err := RenderDaily(nil, date, dir, nil)
 	if err != nil {
 		t.Fatalf("RenderDaily: %v", err)
 	}
@@ -352,7 +353,7 @@ func TestRenderDaily_withPlays(t *testing.T) {
 			DurationMS: 180000,
 		},
 	}
-	content, err := RenderDaily(plays, date, dir)
+	content, err := RenderDaily(plays, date, dir, nil)
 	if err != nil {
 		t.Fatalf("RenderDaily: %v", err)
 	}
@@ -375,5 +376,138 @@ func TestRenderDaily_withPlays(t *testing.T) {
 		if !strings.Contains(content, s) {
 			t.Errorf("output missing %q", s)
 		}
+	}
+}
+
+// --- Genre sections ---
+
+func TestRenderWeekly_withGenres(t *testing.T) {
+	dir := t.TempDir()
+	date := time.Date(2026, 2, 18, 0, 0, 0, 0, time.UTC)
+
+	plays := []models.Play{
+		{PlayedAt: "2026-02-18T12:00:00Z", TrackName: "A", ArtistName: "Artist1", DurationMS: 100000},
+		{PlayedAt: "2026-02-18T12:05:00Z", TrackName: "B", ArtistName: "Artist2", DurationMS: 100000},
+		{PlayedAt: "2026-02-18T12:10:00Z", TrackName: "C", ArtistName: "Artist1", DurationMS: 100000},
+	}
+	genres := map[string][]string{
+		"Artist1": {"indie rock", "folk rock"},
+		"Artist2": {"indie rock"},
+	}
+	content, err := RenderWeekly(plays, date, dir, genres)
+	if err != nil {
+		t.Fatalf("RenderWeekly: %v", err)
+	}
+
+	checks := []string{
+		"## Genres This Week",
+		"[[indie rock]]",
+		"[[folk rock]]",
+	}
+	for _, s := range checks {
+		if !strings.Contains(content, s) {
+			t.Errorf("output missing %q", s)
+		}
+	}
+}
+
+func TestRenderWeekly_nilGenres_noSection(t *testing.T) {
+	dir := t.TempDir()
+	date := time.Date(2026, 2, 18, 0, 0, 0, 0, time.UTC)
+	plays := []models.Play{
+		{PlayedAt: "2026-02-18T12:00:00Z", TrackName: "A", ArtistName: "X", DurationMS: 100000},
+	}
+	content, err := RenderWeekly(plays, date, dir, nil)
+	if err != nil {
+		t.Fatalf("RenderWeekly: %v", err)
+	}
+	if strings.Contains(content, "## Genres This Week") {
+		t.Error("genres section should not appear when artistGenres is nil")
+	}
+}
+
+func TestRenderDaily_withGenres(t *testing.T) {
+	dir := t.TempDir()
+	loc := time.Local
+	date := time.Date(2026, 2, 22, 12, 0, 0, 0, loc)
+	plays := []models.Play{
+		{
+			PlayedAt:   time.Date(2026, 2, 22, 9, 0, 0, 0, loc).UTC().Format(time.RFC3339),
+			TrackName:  "Song", ArtistName: "Art", AlbumName: "Alb", DurationMS: 200000,
+		},
+	}
+	genres := map[string][]string{
+		"Art": {"dream pop", "ambient"},
+	}
+	content, err := RenderDaily(plays, date, dir, genres)
+	if err != nil {
+		t.Fatalf("RenderDaily: %v", err)
+	}
+
+	checks := []string{"## Genres", "[[ambient]]", "[[dream pop]]"}
+	for _, s := range checks {
+		if !strings.Contains(content, s) {
+			t.Errorf("output missing %q", s)
+		}
+	}
+}
+
+func TestRenderDaily_nilGenres_noSection(t *testing.T) {
+	dir := t.TempDir()
+	loc := time.Local
+	date := time.Date(2026, 2, 22, 12, 0, 0, 0, loc)
+	plays := []models.Play{
+		{
+			PlayedAt:   time.Date(2026, 2, 22, 9, 0, 0, 0, loc).UTC().Format(time.RFC3339),
+			TrackName:  "Song", ArtistName: "Art", AlbumName: "Alb", DurationMS: 200000,
+		},
+	}
+	content, err := RenderDaily(plays, date, dir, nil)
+	if err != nil {
+		t.Fatalf("RenderDaily: %v", err)
+	}
+	if strings.Contains(content, "## Genres") {
+		t.Error("genres section should not appear when artistGenres is nil")
+	}
+}
+
+// --- UpdateArtistGenres ---
+
+func TestUpdateArtistGenres_updatesExisting(t *testing.T) {
+	dir := t.TempDir()
+	artistsDir := dir + "/music/artists"
+	if err := os.MkdirAll(artistsDir, 0755); err != nil {
+		t.Fatal(err)
+	}
+	stubContent := "---\ntype: resource\ntags: [music/artist]\ncreated: 2026-01-01\nspotify_url: https://open.spotify.com\ngenres: []\n---\n\n# Test Artist\n"
+	if err := os.WriteFile(artistsDir+"/Test Artist.md", []byte(stubContent), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := UpdateArtistGenres("Test Artist", []string{"indie rock", "folk"}, dir); err != nil {
+		t.Fatalf("UpdateArtistGenres: %v", err)
+	}
+
+	data, _ := os.ReadFile(artistsDir + "/Test Artist.md")
+	content := string(data)
+	if !strings.Contains(content, `genres: ["indie rock", "folk"]`) {
+		t.Errorf("genres not updated, got:\n%s", content)
+	}
+	if !strings.Contains(content, "# Test Artist") {
+		t.Error("other content was lost")
+	}
+}
+
+func TestUpdateArtistGenres_noopMissingFile(t *testing.T) {
+	err := UpdateArtistGenres("Nonexistent", []string{"rock"}, t.TempDir())
+	if err != nil {
+		t.Errorf("expected nil error for missing file, got %v", err)
+	}
+}
+
+func TestUpdateArtistGenres_noopEmptyGenres(t *testing.T) {
+	err := UpdateArtistGenres("Test", nil, t.TempDir())
+	if err != nil {
+		t.Errorf("expected nil error for empty genres, got %v", err)
 	}
 }

@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/benstraw/spotify-garden/internal/client"
@@ -147,6 +148,65 @@ func GetTopTracks(c *client.Client, timeRange string) ([]models.TopTrack, error)
 		})
 	}
 	return tracks, nil
+}
+
+// --- Batch artist lookup ---
+
+type artistsResponse struct {
+	Artists []topArtistItem `json:"artists"`
+}
+
+// GetArtists fetches artist details for up to 50 IDs in a single request.
+func GetArtists(c *client.Client, ids []string) ([]models.TopArtist, error) {
+	if len(ids) == 0 {
+		return nil, nil
+	}
+	if len(ids) > 50 {
+		return nil, fmt.Errorf("GetArtists: max 50 IDs per request, got %d", len(ids))
+	}
+
+	params := url.Values{}
+	params.Set("ids", joinIDs(ids))
+
+	body, err := c.Get("/artists", params)
+	if err != nil {
+		return nil, fmt.Errorf("artists: %w", err)
+	}
+
+	var resp artistsResponse
+	if err := json.Unmarshal(body, &resp); err != nil {
+		return nil, fmt.Errorf("artists decode: %w", err)
+	}
+
+	artists := make([]models.TopArtist, 0, len(resp.Artists))
+	for _, item := range resp.Artists {
+		artists = append(artists, models.TopArtist{
+			ID:         item.ID,
+			Name:       item.Name,
+			Genres:     item.Genres,
+			SpotifyURL: item.ExternalURLs["spotify"],
+		})
+	}
+	return artists, nil
+}
+
+// GetArtistsBatch fetches artist details for any number of IDs, chunking into batches of 50.
+func GetArtistsBatch(c *client.Client, ids []string) ([]models.TopArtist, error) {
+	var all []models.TopArtist
+	for i := 0; i < len(ids); i += 50 {
+		end := min(i+50, len(ids))
+		batch, err := GetArtists(c, ids[i:end])
+		if err != nil {
+			return nil, err
+		}
+		all = append(all, batch...)
+	}
+	return all, nil
+}
+
+// joinIDs joins IDs with commas.
+func joinIDs(ids []string) string {
+	return strings.Join(ids, ",")
 }
 
 // --- Setlist.fm ---

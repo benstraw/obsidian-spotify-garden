@@ -76,7 +76,7 @@ func TestGenerateDailyNote_CreatesArtistStub(t *testing.T) {
 		},
 	}
 
-	generateDailyNote(plays, date, false)
+	generateDailyNote(plays, date, false, nil)
 
 	dailyPath := filepath.Join(vault, "music", "listening", "spotify-2026-02-22.md")
 	if _, err := os.Stat(dailyPath); err != nil {
@@ -115,7 +115,7 @@ func TestGenerateDailyNote_SkipExistingNoteStillCreatesStub(t *testing.T) {
 		},
 	}
 
-	generateDailyNote(plays, date, false)
+	generateDailyNote(plays, date, false, nil)
 
 	stubPath := filepath.Join(vault, "music", "artists", "Artist Two.md")
 	if _, err := os.Stat(stubPath); err != nil {
@@ -134,6 +134,7 @@ func TestResolveRuntimePaths_StateDirPreferred(t *testing.T) {
 	mustWriteFile(t, filepath.Join(stateDir, ".env"), "SPOTIFY_CLIENT_ID=state\n")
 	mustWriteFile(t, filepath.Join(stateDir, "tokens.json"), `{"access_token":"state","refresh_token":"state","expires_at":"2026-01-01T00:00:00Z"}`)
 	mustWriteFile(t, filepath.Join(stateDir, "data", "plays.json"), "[]")
+	mustWriteFile(t, filepath.Join(stateDir, "data", "genres.json"), "{}")
 
 	origWD, err := os.Getwd()
 	if err != nil {
@@ -157,7 +158,10 @@ func TestResolveRuntimePaths_StateDirPreferred(t *testing.T) {
 	if canonicalPath(t, paths.playsPath) != canonicalPath(t, filepath.Join(stateDir, "data", "plays.json")) {
 		t.Fatalf("playsPath = %s, want %s", paths.playsPath, filepath.Join(stateDir, "data", "plays.json"))
 	}
-	if paths.dotEnvFallback || paths.tokensFallback || paths.playsFallback {
+	if canonicalPath(t, paths.genresPath) != canonicalPath(t, filepath.Join(stateDir, "data", "genres.json")) {
+		t.Fatalf("genresPath = %s, want %s", paths.genresPath, filepath.Join(stateDir, "data", "genres.json"))
+	}
+	if paths.dotEnvFallback || paths.tokensFallback || paths.playsFallback || paths.genresFallback {
 		t.Fatalf("unexpected fallback flags: %+v", paths)
 	}
 }

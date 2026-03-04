@@ -93,7 +93,8 @@ func fmtDuration(totalMS int) string {
 
 // RenderWeekly builds the weekly note for the ISO week containing date.
 // It also creates artist stubs for new artists.
-func RenderWeekly(plays []models.Play, date time.Time, vaultPath string) (string, error) {
+// artistGenres maps artist names to their genres; if nil, genre section is omitted.
+func RenderWeekly(plays []models.Play, date time.Time, vaultPath string, artistGenres map[string][]string) (string, error) {
 	weekPlays := PlaysForWeek(plays, date)
 	monday, _ := WeekBounds(date)
 	weekStr := WeekStr(monday)
@@ -197,7 +198,11 @@ func RenderWeekly(plays []models.Play, date time.Time, vaultPath string) (string
 	sort.Strings(sortedAllArtists)
 
 	for _, name := range sortedAllArtists {
-		if err := EnsureArtistStub(name, artistURLs[name], nil, dateStr, vaultPath); err != nil {
+		var g []string
+		if artistGenres != nil {
+			g = artistGenres[name]
+		}
+		if err := EnsureArtistStub(name, artistURLs[name], g, dateStr, vaultPath); err != nil {
 			fmt.Fprintf(os.Stderr, "warning: could not create artist stub for %s: %v\n", name, err)
 		}
 	}
@@ -259,6 +264,46 @@ func RenderWeekly(plays []models.Play, date time.Time, vaultPath string) (string
 		sb.WriteString("\n\n")
 	}
 
+	// Genres this week
+	if len(artistGenres) > 0 {
+		genreCounts := map[string]int{}
+		for _, p := range weekPlays {
+			if gs, ok := artistGenres[p.ArtistName]; ok {
+				for _, g := range gs {
+					genreCounts[g]++
+				}
+			}
+		}
+		if len(genreCounts) > 0 {
+			type genreCount struct {
+				genre string
+				count int
+			}
+			sorted := make([]genreCount, 0, len(genreCounts))
+			for g, c := range genreCounts {
+				sorted = append(sorted, genreCount{g, c})
+			}
+			sort.Slice(sorted, func(i, j int) bool {
+				if sorted[i].count != sorted[j].count {
+					return sorted[i].count > sorted[j].count
+				}
+				return sorted[i].genre < sorted[j].genre
+			})
+
+			sb.WriteString("## Genres This Week\n")
+			parts := make([]string, len(sorted))
+			for i, gc := range sorted {
+				playWord := "plays"
+				if gc.count == 1 {
+					playWord = "play"
+				}
+				parts[i] = fmt.Sprintf("[[%s]] (%d %s)", gc.genre, gc.count, playWord)
+			}
+			sb.WriteString(strings.Join(parts, ", "))
+			sb.WriteString("\n\n")
+		}
+	}
+
 	// New artists
 	if len(newArtists) > 0 {
 		sb.WriteString("## New Artists  (first appearance in vault)\n")
@@ -275,7 +320,8 @@ func RenderWeekly(plays []models.Play, date time.Time, vaultPath string) (string
 
 // RenderDaily builds the daily note for the calendar day containing date.
 // Returns ("", nil) when there are no plays for that day (caller skips writing).
-func RenderDaily(plays []models.Play, date time.Time, vaultPath string) (string, error) {
+// artistGenres maps artist names to their genres; if nil, genre section is omitted.
+func RenderDaily(plays []models.Play, date time.Time, vaultPath string, artistGenres map[string][]string) (string, error) {
 	dayPlays := PlaysForDay(plays, date)
 	if len(dayPlays) == 0 {
 		return "", nil
@@ -457,6 +503,33 @@ func RenderDaily(plays []models.Play, date time.Time, vaultPath string) (string,
 	}
 	sb.WriteString("\n")
 
+	// Genres
+	if len(artistGenres) > 0 {
+		genreSet := map[string]bool{}
+		for _, p := range dayPlays {
+			if gs, ok := artistGenres[p.ArtistName]; ok {
+				for _, g := range gs {
+					genreSet[g] = true
+				}
+			}
+		}
+		if len(genreSet) > 0 {
+			sorted := make([]string, 0, len(genreSet))
+			for g := range genreSet {
+				sorted = append(sorted, g)
+			}
+			sort.Strings(sorted)
+
+			sb.WriteString("## Genres\n")
+			links := make([]string, len(sorted))
+			for i, g := range sorted {
+				links[i] = "[[" + g + "]]"
+			}
+			sb.WriteString(strings.Join(links, ", "))
+			sb.WriteString("\n\n")
+		}
+	}
+
 	sb.WriteString("## Notes\n\n\n")
 
 	return sb.String(), nil
@@ -522,6 +595,38 @@ SORT date DESC
 	}
 	fmt.Printf("  Created artist stub: %s.md\n", name)
 	return nil
+}
+
+// UpdateArtistGenres updates the genres frontmatter line in an existing artist stub.
+// No-op if the file doesn't exist or doesn't contain a genres line.
+func UpdateArtistGenres(name string, genres []string, vaultPath string) error {
+	if len(genres) == 0 {
+		return nil
+	}
+	stubPath := filepath.Join(vaultPath, "music", "artists", name+".md")
+	data, err := os.ReadFile(stubPath)
+	if err != nil {
+		return nil // file doesn't exist — no-op
+	}
+
+	lines := strings.Split(string(data), "\n")
+	found := false
+	for i, line := range lines {
+		if strings.HasPrefix(line, "genres:") {
+			quoted := make([]string, len(genres))
+			for j, g := range genres {
+				quoted[j] = fmt.Sprintf("%q", g)
+			}
+			lines[i] = "genres: [" + strings.Join(quoted, ", ") + "]"
+			found = true
+			break
+		}
+	}
+	if !found {
+		return nil
+	}
+
+	return os.WriteFile(stubPath, []byte(strings.Join(lines, "\n")), 0644)
 }
 
 // --- Persona context pack ---
