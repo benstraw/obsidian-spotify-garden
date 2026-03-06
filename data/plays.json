@@ -1,5 +1,137 @@
 [
   {
+    "played_at": "2026-03-06T21:06:05.645Z",
+    "track_id": "6SI4JD7iyQ0rrudhCNtMv0",
+    "track_name": "Ice Cream (feat. Ghostface Killah, Method Man \u0026 Cappadonna)",
+    "artist_id": "2yQf6b8hxahZaT5dHlWaB1",
+    "artist_name": "Raekwon",
+    "artist_spotify_url": "https://open.spotify.com/artist/2yQf6b8hxahZaT5dHlWaB1",
+    "album_name": "Only Built 4 Cuban Linx...",
+    "duration_ms": 253226,
+    "track_spotify_url": "https://open.spotify.com/track/6SI4JD7iyQ0rrudhCNtMv0"
+  },
+  {
+    "played_at": "2026-03-06T18:12:07.127Z",
+    "track_id": "3p50PUgtBHM6rwUuD3RfFV",
+    "track_name": "One Time 4 Your Mind",
+    "artist_id": "20qISvAhX20dpIbOOzGK3q",
+    "artist_name": "Nas",
+    "artist_spotify_url": "https://open.spotify.com/artist/20qISvAhX20dpIbOOzGK3q",
+    "album_name": "Illmatic",
+    "duration_ms": 198793,
+    "track_spotify_url": "https://open.spotify.com/track/3p50PUgtBHM6rwUuD3RfFV"
+  },
+  {
+    "played_at": "2026-03-06T18:08:36.546Z",
+    "track_id": "074v54tSEWLbq3Hu5wf6uh",
+    "track_name": "The Whole World (feat. Killer Mike)",
+    "artist_id": "1G9G7WwrXka3Z1r7aIDjI7",
+    "artist_name": "Outkast",
+    "artist_spotify_url": "https://open.spotify.com/artist/1G9G7WwrXka3Z1r7aIDjI7",
+    "album_name": "Big Boi \u0026 Dre Present...OutKast",
+    "duration_ms": 295346,
+    "track_spotify_url": "https://open.spotify.com/track/074v54tSEWLbq3Hu5wf6uh"
+  },
+  {
+    "played_at": "2026-03-06T18:03:36.746Z",
+    "track_id": "6FI3RJ58Ztl0X1VtA6pVs9",
+    "track_name": "Oh My God (feat. Busta Rhymes)",
+    "artist_id": "09hVIj6vWgoCDtT03h8ZCa",
+    "artist_name": "A Tribe Called Quest",
+    "artist_spotify_url": "https://open.spotify.com/artist/09hVIj6vWgoCDtT03h8ZCa",
+    "album_name": "Midnight Marauders",
+    "duration_ms": 208840,
+    "track_spotify_url": "https://open.spotify.com/track/6FI3RJ58Ztl0X1VtA6pVs9"
+  },
+  {
+    "played_at": "2026-03-06T18:00:06.672Z",
+    "track_id": "4xOTVtbCPcfxMs2hSt9D6i",
+    "track_name": "Da Mystery of Chessboxin'",
+    "artist_id": "34EP7KEpOjXcM2TCat1ISk",
+    "artist_name": "Wu-Tang Clan",
+    "artist_spotify_url": "https://open.spotify.com/artist/34EP7KEpOjXcM2TCat1ISk",
+    "album_name": "Enter The Wu-Tang (36 Chambers) [Expanded Edition]",
+    "duration_ms": 287493,
+    "track_spotify_url": "https://open.spotify.com/track/4xOTVtbCPcfxMs2hSt9D6i"
+  },
+  {
+    "played_at": "2026-03-06T17:52:37.052Z",
+    "track_id": "0eEXcw3JLVXcRxYrVYMy68",
+    "track_name": "Electric Relaxation",
+    "artist_id": "09hVIj6vWgoCDtT03h8ZCa",
+    "artist_name": "A Tribe Called Quest",
+    "artist_spotify_url": "https://open.spotify.com/artist/09hVIj6vWgoCDtT03h8ZCa",
+    "album_name": "The Anthology",
+    "duration_ms": 226133,
+    "track_spotify_url": "https://open.spotify.com/track/0eEXcw3JLVXcRxYrVYMy68"
+  },
+  {
+    "played_at": "2026-03-06T17:48:36.611Z",
+    "track_id": "0oz9leJwzlmmRKWe3Pgjh4",
+    "track_name": "Iron Lion Zion",
+    "artist_id": "2QsynagSdAqZj3U9HgDzjD",
+    "artist_name": "Bob Marley \u0026 The Wailers",
+    "artist_spotify_url": "https://open.spotify.com/artist/2QsynagSdAqZj3U9HgDzjD",
+    "album_name": "Songs Of Freedom Rarities",
+    "duration_ms": 177000,
+    "track_spotify_url": "https://open.spotify.com/track/0oz9leJwzlmmRKWe3Pgjh4"
+  },
+  {
+    "played_at": "2026-03-06T17:45:37.111Z",
+    "track_id": "5L0UCjQ31BQ5vRNwvUeJ1x",
+    "track_name": "Creation",
+    "artist_id": "6lkOq7qccqrCLBwJgXWfRn",
+    "artist_name": "Simran \u0026 GuruPrem",
+    "artist_spotify_url": "https://open.spotify.com/artist/6lkOq7qccqrCLBwJgXWfRn",
+    "album_name": "Heal Me",
+    "duration_ms": 109873,
+    "track_spotify_url": "https://open.spotify.com/track/5L0UCjQ31BQ5vRNwvUeJ1x"
+  },
+  {
+    "played_at": "2026-03-06T17:42:06.449Z",
+    "track_id": "5aBo35KynwE90mboBMWKQI",
+    "track_name": "Clear Blue Skies",
+    "artist_id": "1CYsQCypByMVgnv17qsSbQ",
+    "artist_name": "Crosby, Stills, Nash \u0026 Young",
+    "artist_spotify_url": "https://open.spotify.com/artist/1CYsQCypByMVgnv17qsSbQ",
+    "album_name": "American Dream",
+    "duration_ms": 187293,
+    "track_spotify_url": "https://open.spotify.com/track/5aBo35KynwE90mboBMWKQI"
+  },
+  {
+    "played_at": "2026-03-06T17:39:06.647Z",
+    "track_id": "2bXI4Rbw1D7aVeHWLjn1Lb",
+    "track_name": "Machine Gun Funk - 2005 Remaster",
+    "artist_id": "5me0Irg2ANcsgc93uaYrpb",
+    "artist_name": "The Notorious B.I.G.",
+    "artist_spotify_url": "https://open.spotify.com/artist/5me0Irg2ANcsgc93uaYrpb",
+    "album_name": "Ready to Die (The Remaster)",
+    "duration_ms": 255893,
+    "track_spotify_url": "https://open.spotify.com/track/2bXI4Rbw1D7aVeHWLjn1Lb"
+  },
+  {
+    "played_at": "2026-03-06T17:34:36.557Z",
+    "track_id": "6GAemDMWAXa8wZOBkO1gar",
+    "track_name": "Buggin' Out",
+    "artist_id": "09hVIj6vWgoCDtT03h8ZCa",
+    "artist_name": "A Tribe Called Quest",
+    "artist_spotify_url": "https://open.spotify.com/artist/09hVIj6vWgoCDtT03h8ZCa",
+    "album_name": "The Low End Theory",
+    "duration_ms": 217466,
+    "track_spotify_url": "https://open.spotify.com/track/6GAemDMWAXa8wZOBkO1gar"
+  },
+  {
+    "played_at": "2026-03-06T17:31:06.580Z",
+    "track_id": "5By7Pzgl6TMuVJG168VWzS",
+    "track_name": "Michelle - Remastered 2009",
+    "artist_id": "3WrFJ7ztbogyGnTHbHJFl2",
+    "artist_name": "The Beatles",
+    "artist_spotify_url": "https://open.spotify.com/artist/3WrFJ7ztbogyGnTHbHJFl2",
+    "album_name": "Rubber Soul (Remastered 2009)",
+    "duration_ms": 162373,
+    "track_spotify_url": "https://open.spotify.com/track/5By7Pzgl6TMuVJG168VWzS"
+  },
+  {
     "played_at": "2026-03-06T16:47:28.828Z",
     "track_id": "0f388trqcZyqGbPJUqGWpx",
     "track_name": "Keep 'Em on They Toes",
