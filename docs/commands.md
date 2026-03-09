@@ -3,7 +3,7 @@
 All commands use this runtime path precedence:
 1. CLI flags (where applicable)
 2. Environment variables
-3. `SPOTIFY_STATE_DIR` files (`.env`, `tokens.json`, `data/plays.json`)
+3. `SPOTIFY_STATE_DIR` files (`.env`, `tokens.json`, `data/plays/`, `data/genres.json`)
 4. Current working directory fallback (with warning)
 
 OAuth tokens auto-refresh if they are expiring within 5 minutes.
@@ -44,18 +44,19 @@ once, unless `tokens.json` is deleted or the refresh token expires.
 ```
 
 Fetches the last 50 recently-played tracks from the Spotify API and merges
-them into the effective plays path (`SPOTIFY_STATE_DIR/data/plays.json` when configured).
+them into the weekly shard file for the current ISO week under the effective
+plays directory (`SPOTIFY_STATE_DIR/data/plays/` when configured).
 
 **Behaviour:**
 1. Calls `GET /me/player/recently-played?limit=50`
 2. Filters out podcast episodes (items with no `track` key)
-3. Loads existing plays file (empty slice if it doesn't exist)
-4. Merges using `played_at` as the dedup key — existing plays are never duplicated
-5. Saves sorted descending by `played_at`
+3. On first run after upgrade: migrates `data/plays.json` → sharded layout and renames the legacy file to `data/plays.json.bak`
+4. Routes each new play to its ISO week file (`data/plays/YYYY/YYYY-WNN.json`), merging with the existing file
+5. Deduplicates by `played_at` — existing plays are never duplicated
 6. If `SPOTIFY_AUTO_DAILY_ON_COLLECT=1`, regenerates today's daily note
    (`spotify-YYYY-MM-DD.md`) so it stays up to date as new plays arrive
 
-**Output:** effective plays path (`SPOTIFY_STATE_DIR/data/plays.json` or `./data/plays.json`)
+**Output:** `{playsDir}/YYYY/YYYY-WNN.json` (e.g. `data/plays/2026/2026-W11.json`)
 
 Since Spotify only returns the last 50 plays, running `collect` 5× daily
 ensures no plays are lost to the 50-track API cap.
@@ -244,7 +245,7 @@ Setlist.fm: https://www.setlist.fm/setlist/...
 Prints effective runtime configuration and diagnostics in one place:
 
 1. Working directory and executable path
-2. Effective `.env`, `tokens.json`, `data/plays.json`, templates, vault/listening paths
+2. Effective `.env`, `tokens.json`, `data/plays/` (plays dir), `data/plays.json` (legacy, if present), templates, vault/listening paths
 3. State-dir fallback warnings
 4. Launchd labels and expected log paths
 5. Best-effort loaded/not-loaded launchd job status

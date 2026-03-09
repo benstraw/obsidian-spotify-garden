@@ -85,7 +85,7 @@ Files are written to `$OBSIDIAN_VAULT_PATH/music/` when the vault path is set.
 
 | Command | Output path |
 |---|---|
-| `collect` | `{state}/data/plays.json` or `./data/plays.json` |
+| `collect` | `{state}/data/plays/YYYY/YYYY-WNN.json` (sharded weekly files) |
 | `weekly` | `{vault}/music/listening/spotify-YYYY-Www.md` |
 | `daily` | `{vault}/music/listening/spotify-YYYY-MM-DD.md` |
 | `daily`/`weekly` (artist stubs) | `{vault}/music/artists/{Artist Name}.md` |
@@ -104,7 +104,7 @@ Recommended (stable local install, avoids symlinked/external-drive path issues):
 
 This installs/updates:
 - binary: `~/.local/bin/spotify-garden`
-- state: `~/Library/Application Support/spotify-garden/state` (`.env`, `tokens.json`, `data/plays.json`)
+- state: `~/Library/Application Support/spotify-garden/state` (`.env`, `tokens.json`, `data/plays/`, `data/genres.json`)
 - templates: `~/Library/Application Support/spotify-garden/templates`
 - logs: `~/Library/Application Support/spotify-garden/logs`
 - launch agents: `~/Library/LaunchAgents/com.$USER.spotify-collect.plist` and `...spotify-weekly.plist`
@@ -164,7 +164,7 @@ servers, so collection keeps working even when the Mac is off.
    | `SPOTIFY_CLIENT_SECRET` | from your `.env` |
    | `SPOTIFY_TOKENS_JSON` | `base64 < tokens.json` (copy the output) |
 
-3. The workflow commits `data/plays.json` directly to `main` after each run.
+3. The workflow commits `data/plays/` (sharded weekly files) and `data/genres.json` directly to `main` after each run.
 
 ### How it works
 
@@ -172,12 +172,12 @@ servers, so collection keeps working even when the Mac is off.
 - Subsequent runs restore `tokens.json` from the GitHub Actions cache (the token refreshes automatically).
 - If the Spotify refresh token expires (rare), re-run `./spotify-garden auth` locally and update the `SPOTIFY_TOKENS_JSON` secret with a fresh `base64 < tokens.json`.
 
-> **TODO — plays.json sync strategy.**
-> Cloud collect commits `data/plays.json` to the repo; local launchd writes to
-> `~/Library/Application Support/spotify-garden/state/data/plays.json`. These two
-> files will diverge. Options under consideration:
+> **TODO — plays sync strategy.**
+> Cloud collect commits `data/plays/` to the repo; local launchd writes to
+> `~/Library/Application Support/spotify-garden/state/data/plays/`. These two
+> directories will diverge. Options under consideration:
 > 1. **Cloud only** — disable launchd collect, single source of truth in the repo.
-> 2. **Add a `sync` command** — merge repo and local `plays.json` on demand.
+> 2. **Add a `sync` command** — merge repo and local `data/plays/` on demand.
 > 3. **Both with auto-merge** — wrapper does `git pull` / merge / `git push` around collect.
 
 ### Manual trigger
@@ -199,7 +199,7 @@ Go to **Actions → Collect → Run workflow** in the GitHub UI.
 ## Notes
 
 - `tokens.json` and `.env` are gitignored — never commit them
-- `data/plays.json` is committed to the repo (the GitHub Actions workflow updates it automatically)
+- `data/plays/` (sharded weekly files) is committed to the repo by the GitHub Actions workflow; `data/plays.json.bak` is created locally on first collect after upgrade (safe to delete)
 - if `SPOTIFY_STATE_DIR` is set and files are missing there, the CLI falls back to CWD and prints warnings
 - `catch-up` only writes missing notes (weekly + daily); `weekly` always writes (overwrites if exists)
 - `daily` only writes when that date has play data and never overwrites an existing daily note

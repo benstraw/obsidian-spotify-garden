@@ -49,9 +49,9 @@ jobs:
           path: tokens.json
           key: spotify-tokens-${{ github.run_id }}
 
-      - name: Commit plays.json
+      - name: Commit plays data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/plays.json data/genres.json
-          git diff --cached --quiet && echo "No changes to commit" || (git commit -m "collect: update plays.json" && git push)
+          git add data/plays/ data/genres.json
+          git diff --cached --quiet && echo "No changes to commit" || (git commit -m "collect: update plays data" && git push)

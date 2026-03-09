@@ -158,6 +158,10 @@ func TestResolveRuntimePaths_StateDirPreferred(t *testing.T) {
 	if canonicalPath(t, paths.playsPath) != canonicalPath(t, filepath.Join(stateDir, "data", "plays.json")) {
 		t.Fatalf("playsPath = %s, want %s", paths.playsPath, filepath.Join(stateDir, "data", "plays.json"))
 	}
+	wantPlaysDir := canonicalPath(t, filepath.Join(stateDir, "data", "plays"))
+	if canonicalPath(t, paths.playsDir) != wantPlaysDir {
+		t.Fatalf("playsDir = %s, want %s", paths.playsDir, wantPlaysDir)
+	}
 	if canonicalPath(t, paths.genresPath) != canonicalPath(t, filepath.Join(stateDir, "data", "genres.json")) {
 		t.Fatalf("genresPath = %s, want %s", paths.genresPath, filepath.Join(stateDir, "data", "genres.json"))
 	}
@@ -195,6 +199,10 @@ func TestResolveRuntimePaths_StateDirFallbackToCWD(t *testing.T) {
 	}
 	if canonicalPath(t, paths.playsPath) != canonicalPath(t, filepath.Join(cwd, "data", "plays.json")) {
 		t.Fatalf("playsPath = %s, want %s", paths.playsPath, filepath.Join(cwd, "data", "plays.json"))
+	}
+	wantPlaysDirCWD := canonicalPath(t, filepath.Join(cwd, "data", "plays"))
+	if canonicalPath(t, paths.playsDir) != wantPlaysDirCWD {
+		t.Fatalf("playsDir = %s, want %s", paths.playsDir, wantPlaysDirCWD)
 	}
 	if !paths.dotEnvFallback || !paths.tokensFallback || !paths.playsFallback {
 		t.Fatalf("expected fallback flags to be true: %+v", paths)

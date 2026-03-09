@@ -12,13 +12,15 @@ internal/
   client/client.go              Authenticated HTTP GET, 429 retry/backoff
   fetch/fetch.go                Spotify + setlist.fm API calls → model structs
   models/models.go              Play, TopTrack, TopArtist, Setlist, SetlistSet structs
-  plays/plays.go                plays.json load/save/merge/dedup
+  plays/plays.go                plays load/save/merge/dedup + sharded storage
   render/render.go              Weekly note, artist stubs, persona rendering
 templates/
   persona.md.tmpl               Go template for Music Taste context pack
   weekly.md.tmpl                Structure reference (rendering is in Go code)
 data/
-  plays.json                    Local play history (git-ignored)
+  plays/                        Sharded play history — YYYY/YYYY-WNN.json (git-committed via Actions)
+  plays.json.bak                Legacy file renamed on first post-upgrade collect (can be deleted)
+  genres.json                   Artist genre cache
 ```
 
 ## Data Flow
@@ -38,15 +40,15 @@ main.runCollect()
   │         filters podcast episodes (no track key)
   │         maps to []models.Play (primary artist only)
   │
-  ├─ plays.Load(effective plays path)
+  ├─ plays.MigrateToSharded(legacyPlaysPath, playsDir)   ← one-shot; no-op after first run
+  │    └─ reads data/plays.json, writes to data/plays/YYYY/YYYY-WNN.json,
+  │       renames plays.json → plays.json.bak
   │
-  ├─ plays.Merge(existing, incoming)
-  │    └─ union by played_at key, sorted descending
-  │
-  ├─ plays.Save(effective plays path)
+  ├─ plays.SaveSharded(playsDir, incoming)
+  │    └─ routes each play to its ISO week file, merge+dedup per file
   │
   └─ if SPOTIFY_AUTO_DAILY_ON_COLLECT=1:
-       generateDailyNote(merged, now, overwrite=true)
+       generateDailyNote(allPlays, now, overwrite=true)
 ```
 
 ### `weekly` command
@@ -54,7 +56,7 @@ main.runCollect()
 ```
 main.runWeekly()  /  main.generateWeeklyNote(date)
   │
-  ├─ plays.Load(effective plays path)
+  ├─ plays.LoadSharded(playsDir)
   │
   └─ render.RenderWeekly(allPlays, date, vaultPath)
        │
@@ -71,7 +73,7 @@ main.runWeekly()  /  main.generateWeeklyNote(date)
 ```
 main.runDaily()
   │
-  ├─ plays.Load(effective plays path)
+  ├─ plays.LoadSharded(playsDir)
   │
   └─ main.generateDailyNote(allPlays, date, overwrite=false)
        │
@@ -95,7 +97,7 @@ main.runCatchUp()
   │    generate missing weeks (oldest first)
   │
   └─ daily pass:
-       plays.Load(effective plays path) once
+       plays.LoadSharded(playsDir) once
        for each of last N*7 days:
          check {vault}/music/listening/spotify-YYYY-MM-DD.md exists
          generate missing daily notes (skips no-play days)
@@ -113,7 +115,7 @@ main.runPersona()
   ├─ fetch.GetTopArtists(c, "medium_term")
   ├─ fetch.GetTopArtists(c, "long_term")
   │
-  ├─ plays.Load(effective plays path)
+  ├─ plays.LoadSharded(playsDir)
   ├─ render.PlaysForWeek(allPlays, now)   ← this week's plays for Recent Rotation
   │
   └─ render.RenderPersona(...)
@@ -141,10 +143,22 @@ main.runSetlist(args)
 
 No vault writes. No Spotify auth required.
 
-## plays.json
+## Play Data Storage
 
-The central data store. A JSON array of play objects, sorted descending by
-`played_at`. Written by `collect`, read by `weekly` and `persona`.
+Plays are stored in a sharded annual/weekly structure. Each ISO week gets its
+own JSON file; no file is created for weeks with no plays.
+
+```
+data/plays/
+  2025/
+    2025-W01.json
+    2025-W52.json
+  2026/
+    2026-W10.json
+    2026-W11.json
+```
+
+Each file is a JSON array of play objects, sorted descending by `played_at`:
 
 ```json
 [
@@ -164,6 +178,17 @@ The central data store. A JSON array of play objects, sorted descending by
 
 Only the primary artist is recorded (index 0 of the `artists` array).
 
+**Shard key timezone:** UTC — Spotify timestamps are UTC, so routing is
+deterministic regardless of where the binary runs. Display and filtering for
+notes continues to use local time (existing behaviour).
+
+**Legacy migration:** On the first `collect` run after upgrading from a version
+that stored a flat `data/plays.json`, `plays.MigrateToSharded` automatically
+reads the legacy file, writes it into the sharded layout, and renames the
+original to `data/plays.json.bak`. Subsequent runs skip migration because
+`.bak` already exists. The `.bak` file is kept as a safety net and can be
+deleted once migration is confirmed.
+
 ## ISO Week Handling
 
 All week calculations use `time.ISOWeek()` — not `time.Year()`. This ensures
@@ -179,8 +204,11 @@ log displays in the user's timezone.
 Runtime file locations are resolved with this precedence:
 1. CLI flags (where applicable)
 2. Environment variables
-3. `SPOTIFY_STATE_DIR` files (`.env`, `tokens.json`, `data/plays.json`)
+3. `SPOTIFY_STATE_DIR` files (`.env`, `tokens.json`, `data/plays/`, `data/genres.json`)
 4. CWD fallback with warning
+
+`playsDir` (`data/plays/`) is derived from `filepath.Dir(playsPath)` — it inherits
+the same `SPOTIFY_STATE_DIR` override logic automatically without a separate env var.
 
 `spotify-garden doctor` prints all effective runtime paths and launchd-derived diagnostics.
 
@@ -207,10 +235,20 @@ output structure but is not executed.
 **Zero external dependencies** — pure stdlib. No module cache issues, no
 supply chain risk, no version drift.
 
-**plays.json as local cache** — Spotify's recently-played endpoint returns
-only the last 50 tracks and has no historical pagination. Running `collect`
-5× daily ensures the local cache captures all plays before they fall out of
-the 50-track window.
+**Sharded play storage (`data/plays/YYYY/YYYY-WNN.json`)** — The old flat
+`data/plays.json` grows without bound. Plays are now written directly into
+annual/weekly shard files at collection time. Each ISO week has its own file;
+empty weeks create no file. Shard keys use UTC so routing is deterministic.
+On the first `collect` run after upgrade, `plays.MigrateToSharded` moves the
+legacy file to `data/plays.json.bak` automatically. See
+[`docs/plans/2026-03-09-sharded-plays-storage.md`](plans/2026-03-09-sharded-plays-storage.md)
+for the full design rationale.
+
+**Sharded play cache** — Spotify's recently-played endpoint returns only the
+last 50 tracks and has no historical pagination. Running `collect` 5× daily
+ensures no plays are lost to the 50-track API cap. With sharding, each
+`collect` run only appends to the current week's file rather than rewriting
+the full history.
 
 **Weekly note rendered in Go, persona via template** — The weekly note has
 many conditional sections with complex formatting logic. Building it with
@@ -223,7 +261,7 @@ has simple structure well-suited to `text/template`.
 and metadata to stubs without risking them being clobbered on the next run.
 
 **catch-up minimizes API calls** — Weekly generation may need Spotify API calls
-(top tracks/artists), but daily generation is local-only from `plays.json`.
+(top tracks/artists), but daily generation is local-only from `data/plays/`.
 
 **setlist uses a standalone HTTP helper, not the Spotify client** — setlist.fm
 has a different base URL, auth scheme (header-based API key vs. Bearer token),
