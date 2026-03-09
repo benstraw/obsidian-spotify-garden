@@ -29,6 +29,7 @@ type runtimePaths struct {
 	dotEnvPath      string
 	tokensPath      string
 	playsPath       string
+	playsDir        string
 	genresPath      string
 	dotEnvFallback  bool
 	tokensFallback  bool
@@ -118,6 +119,7 @@ func resolveRuntimePaths() runtimePaths {
 		dotEnvPath: filepath.Join(cwd, ".env"),
 		tokensPath: filepath.Join(cwd, "tokens.json"),
 		playsPath:  filepath.Join(cwd, "data", "plays.json"),
+		playsDir:   filepath.Join(cwd, "data", "plays"),
 		genresPath: filepath.Join(cwd, "data", "genres.json"),
 	}
 
@@ -146,6 +148,7 @@ func resolveRuntimePaths() runtimePaths {
 	p.tokensPath, p.tokensFallback = chooseStatePath(absState, "tokens.json", p.tokensPath)
 	p.playsPath, p.playsFallback = chooseStatePath(absState, filepath.Join("data", "plays.json"), p.playsPath)
 	p.genresPath, p.genresFallback = chooseStatePath(absState, filepath.Join("data", "genres.json"), p.genresPath)
+	p.playsDir = filepath.Join(filepath.Dir(p.playsPath), "plays")
 
 	return p
 }
@@ -181,7 +184,7 @@ func emitFallbackWarnings(paths runtimePaths, cmd string) {
 
 	playsUsed := cmd == "collect" || cmd == "weekly" || cmd == "daily" || cmd == "catch-up" || cmd == "persona" || cmd == "genre-backfill" || cmd == "doctor"
 	if playsUsed && paths.playsFallback {
-		fmt.Fprintf(os.Stderr, "warning: SPOTIFY_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, "data", "plays.json"), paths.playsPath)
+		fmt.Fprintf(os.Stderr, "warning: SPOTIFY_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, "data", "plays"), paths.playsDir)
 	}
 
 	genresUsed := cmd == "collect" || cmd == "weekly" || cmd == "daily" || cmd == "catch-up" || cmd == "persona" || cmd == "genre-backfill"
@@ -305,26 +308,26 @@ func runCollect(paths runtimePaths) {
 		os.Exit(1)
 	}
 
-	if err := ensurePlaysDir(paths.playsPath); err != nil {
-		fmt.Fprintln(os.Stderr, "data dir error:", err)
+	// Migrate legacy plays.json to sharded structure on first use.
+	if err := plays.MigrateToSharded(paths.playsPath, paths.playsDir); err != nil {
+		fmt.Fprintln(os.Stderr, "migration error:", err)
 		os.Exit(1)
 	}
 
-	existing, err := plays.Load(paths.playsPath)
+	newCount, err := plays.SaveSharded(paths.playsDir, incoming)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "load error:", err)
-		os.Exit(1)
-	}
-
-	merged := plays.Merge(existing, incoming)
-	newCount := len(merged) - len(existing)
-
-	if err := plays.Save(paths.playsPath, merged); err != nil {
 		fmt.Fprintln(os.Stderr, "save error:", err)
 		os.Exit(1)
 	}
 
-	fmt.Printf("Added %d new plays (%d total).\n", newCount, len(merged))
+	fmt.Printf("Added %d new plays.\n", newCount)
+
+	// Load all plays for genre cache update and optional daily note.
+	allPlays, err := plays.LoadSharded(paths.playsDir)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "warning: load plays: %v\n", err)
+		allPlays = incoming
+	}
 
 	// Update genre cache for any new artists
 	genreCache, err := genres.Load(paths.genresPath)
@@ -353,8 +356,8 @@ func runCollect(paths runtimePaths) {
 			fmt.Fprintln(os.Stderr, "warning: SPOTIFY_AUTO_DAILY_ON_COLLECT is enabled but OBSIDIAN_VAULT_PATH is not set")
 			return
 		}
-		ag := genres.GenresForPlays(genreCache, merged)
-		generateDailyNote(merged, time.Now(), true, ag)
+		ag := genres.GenresForPlays(genreCache, allPlays)
+		generateDailyNote(allPlays, time.Now(), true, ag)
 	}
 }
 
@@ -381,7 +384,7 @@ func generateWeeklyNote(date time.Time, paths runtimePaths) {
 	outDir := filepath.Join(vault, "music", "listening")
 	outPath := filepath.Join(outDir, fmt.Sprintf("spotify-%s.md", weekStr))
 
-	allPlays, err := plays.Load(paths.playsPath)
+	allPlays, err := plays.LoadSharded(paths.playsDir)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "load plays error:", err)
 		os.Exit(1)
@@ -499,7 +502,7 @@ func runDaily(args []string, paths runtimePaths) {
 		os.Exit(1)
 	}
 
-	allPlays, err := plays.Load(paths.playsPath)
+	allPlays, err := plays.LoadSharded(paths.playsDir)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "load plays error:", err)
 		os.Exit(1)
@@ -580,7 +583,7 @@ func runCatchUp(args []string, paths runtimePaths) {
 	missingWeeks := missingWeeklyDates(listeningDir, now, *weeks)
 	generateMissingWeeklyNotes(paths, missingWeeks)
 
-	allPlays, err := plays.Load(paths.playsPath)
+	allPlays, err := plays.LoadSharded(paths.playsDir)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "load plays error:", err)
 		os.Exit(1)
@@ -605,7 +608,7 @@ func runGenreBackfill(paths runtimePaths) {
 		os.Exit(1)
 	}
 
-	allPlays, err := plays.Load(paths.playsPath)
+	allPlays, err := plays.LoadSharded(paths.playsDir)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "load plays error:", err)
 		os.Exit(1)
@@ -728,7 +731,7 @@ func runPersona(paths runtimePaths) {
 		fmt.Fprintf(os.Stderr, "warning: top artists long_term: %v\n", err)
 	}
 
-	allPlays, err := plays.Load(paths.playsPath)
+	allPlays, err := plays.LoadSharded(paths.playsDir)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "load plays error:", err)
 		os.Exit(1)
@@ -796,7 +799,8 @@ func runDoctor(paths runtimePaths) int {
 
 	printPathStatus("Dotenv path", paths.dotEnvPath, true)
 	printPathStatus("Tokens path", paths.tokensPath, false)
-	printPathStatus("Plays path", paths.playsPath, false)
+	printPathStatus("Plays dir", paths.playsDir, false)
+	printPathStatus("Plays legacy", paths.playsPath, true)
 
 	templates := templatesDir()
 	printPathStatus("Templates dir", templates, false)
@@ -821,7 +825,7 @@ func runDoctor(paths runtimePaths) int {
 	}
 	if paths.playsFallback {
 		issues++
-		fmt.Printf("Warning: using CWD fallback for plays.json (%s) because %s is missing\n", paths.playsPath, filepath.Join(paths.stateDir, "data", "plays.json"))
+		fmt.Printf("Warning: using CWD fallback for plays dir (%s) because %s is missing\n", paths.playsDir, filepath.Join(paths.stateDir, "data", "plays"))
 	}
 
 	if strings.TrimSpace(os.Getenv("SPOTIFY_CLIENT_ID")) == "" {
