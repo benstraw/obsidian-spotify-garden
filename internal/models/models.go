@@ -20,12 +20,20 @@ type TopTrack struct {
 	ArtistName string
 }
 
+// ArtistImage represents one size of a Spotify artist profile image.
+type ArtistImage struct {
+	URL    string `json:"url"`
+	Height int    `json:"height"`
+	Width  int    `json:"width"`
+}
+
 // TopArtist represents an artist from the user's top artists.
 type TopArtist struct {
 	ID         string
 	Name       string
 	Genres     []string
 	SpotifyURL string
+	Images     []ArtistImage
 }
 
 // Setlist represents a setlist.fm setlist result.

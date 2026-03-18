@@ -68,7 +68,7 @@ func TestSave_indented(t *testing.T) {
 
 func TestUpdate(t *testing.T) {
 	cache := map[string]Entry{}
-	Update(cache, "id1", "Artist One", []string{"pop", "dance"})
+	Update(cache, "id1", "Artist One", []string{"pop", "dance"}, nil)
 
 	entry, ok := cache["id1"]
 	if !ok {
@@ -89,7 +89,7 @@ func TestUpdate_overwrites(t *testing.T) {
 	cache := map[string]Entry{
 		"id1": {Name: "Old", Genres: []string{"old-genre"}, LastUpdated: "2025-01-01"},
 	}
-	Update(cache, "id1", "New", []string{"new-genre"})
+	Update(cache, "id1", "New", []string{"new-genre"}, nil)
 
 	if cache["id1"].Name != "New" {
 		t.Errorf("name = %q, want New", cache["id1"].Name)

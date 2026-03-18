@@ -11,9 +11,10 @@ import (
 
 // Entry represents a cached genre mapping for an artist.
 type Entry struct {
-	Name        string   `json:"name"`
-	Genres      []string `json:"genres"`
-	LastUpdated string   `json:"last_updated"`
+	Name        string               `json:"name"`
+	Genres      []string             `json:"genres"`
+	Images      []models.ArtistImage `json:"images,omitempty"`
+	LastUpdated string               `json:"last_updated"`
 }
 
 // Load reads the genre cache from path, returning an empty map if the file doesn't exist.
@@ -42,12 +43,34 @@ func Save(path string, cache map[string]Entry) error {
 }
 
 // Update sets or replaces the cache entry for the given artist ID.
-func Update(cache map[string]Entry, id, name string, genres []string) {
+func Update(cache map[string]Entry, id, name string, genres []string, images []models.ArtistImage) {
 	cache[id] = Entry{
 		Name:        name,
 		Genres:      genres,
+		Images:      images,
 		LastUpdated: time.Now().Format("2006-01-02"),
 	}
+}
+
+// UpdateImages updates only the images of an existing entry, leaving genres unchanged.
+func UpdateImages(cache map[string]Entry, id string, images []models.ArtistImage) {
+	if entry, ok := cache[id]; ok {
+		entry.Images = images
+		entry.LastUpdated = time.Now().Format("2006-01-02")
+		cache[id] = entry
+	}
+}
+
+// MissingImagesArtistIDs returns IDs of cached entries that have no images.
+func MissingImagesArtistIDs(cache map[string]Entry) []string {
+	var ids []string
+	for id, entry := range cache {
+		if len(entry.Images) == 0 {
+			ids = append(ids, id)
+		}
+	}
+	sort.Strings(ids)
+	return ids
 }
 
 // GenresForPlays returns a map of artist name to genres for all artists in plays

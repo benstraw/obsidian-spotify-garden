@@ -67,6 +67,8 @@ func main() {
 		runPersona(paths)
 	case "genre-backfill":
 		runGenreBackfill(paths)
+	case "image-backfill":
+		runImageBackfill(paths)
 	case "setlist":
 		runSetlist(args)
 	case "doctor":
@@ -94,6 +96,7 @@ Usage:
   spotify-garden catch-up [--weeks N]           Generate missing weekly + daily notes (default: 8 weeks back)
   spotify-garden persona                        Regenerate Music Taste context pack
   spotify-garden genre-backfill                 Fetch genres for all artists in plays.json
+  spotify-garden image-backfill                 Fetch images for all artists in genres.json that have none
   spotify-garden setlist <artist> [--date DATE] Look up setlist on setlist.fm (default: today)
   spotify-garden doctor                         Print effective runtime config and diagnostics
   spotify-garden version                        Print version
@@ -190,7 +193,7 @@ func emitFallbackWarnings(paths runtimePaths, cmd string) {
 		fmt.Fprintf(os.Stderr, "warning: SPOTIFY_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, ".env"), paths.dotEnvPath)
 	}
 
-	tokensUsed := cmd == "auth" || cmd == "collect" || cmd == "persona" || cmd == "genre-backfill" || cmd == "doctor"
+	tokensUsed := cmd == "auth" || cmd == "collect" || cmd == "persona" || cmd == "genre-backfill" || cmd == "image-backfill" || cmd == "doctor"
 	if tokensUsed && paths.tokensFallback {
 		fmt.Fprintf(os.Stderr, "warning: SPOTIFY_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, "tokens.json"), paths.tokensPath)
 	}
@@ -200,7 +203,7 @@ func emitFallbackWarnings(paths runtimePaths, cmd string) {
 		fmt.Fprintf(os.Stderr, "warning: SPOTIFY_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, "data", "plays"), paths.playsDir)
 	}
 
-	genresUsed := cmd == "collect" || cmd == "weekly" || cmd == "daily" || cmd == "catch-up" || cmd == "persona" || cmd == "genre-backfill"
+	genresUsed := cmd == "collect" || cmd == "weekly" || cmd == "daily" || cmd == "catch-up" || cmd == "persona" || cmd == "genre-backfill" || cmd == "image-backfill"
 	if genresUsed && paths.genresFallback {
 		fmt.Fprintf(os.Stderr, "warning: SPOTIFY_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, "data", "genres.json"), paths.genresPath)
 	}
@@ -356,7 +359,7 @@ func runCollect(paths runtimePaths) {
 			fmt.Fprintf(os.Stderr, "warning: fetch artist genres: %v\n", err)
 		} else {
 			for _, a := range artists {
-				genres.Update(genreCache, a.ID, a.Name, a.Genres)
+				genres.Update(genreCache, a.ID, a.Name, a.Genres, a.Images)
 			}
 			if err := genres.Save(paths.genresPath, genreCache); err != nil {
 				fmt.Fprintf(os.Stderr, "warning: save genre cache: %v\n", err)
@@ -651,7 +654,7 @@ func runGenreBackfill(paths runtimePaths) {
 			os.Exit(1)
 		}
 		for _, a := range artists {
-			genres.Update(genreCache, a.ID, a.Name, a.Genres)
+			genres.Update(genreCache, a.ID, a.Name, a.Genres, a.Images)
 		}
 		if err := genres.Save(paths.genresPath, genreCache); err != nil {
 			fmt.Fprintln(os.Stderr, "save genre cache error:", err)
@@ -673,6 +676,43 @@ func runGenreBackfill(paths runtimePaths) {
 		}
 	}
 	fmt.Printf("Updated %d artist stub(s).\n", updated)
+}
+
+func runImageBackfill(paths runtimePaths) {
+	c, err := getClient(paths)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
+	genreCache, err := genres.Load(paths.genresPath)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "load genre cache error:", err)
+		os.Exit(1)
+	}
+
+	missing := genres.MissingImagesArtistIDs(genreCache)
+	fmt.Printf("Artists missing images: %d\n", len(missing))
+	if len(missing) == 0 {
+		fmt.Println("All artists already have images.")
+		return
+	}
+
+	artists, err := fetch.GetArtistsBatch(c, missing)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "fetch error:", err)
+		os.Exit(1)
+	}
+
+	for _, a := range artists {
+		genres.UpdateImages(genreCache, a.ID, a.Images)
+	}
+
+	if err := genres.Save(paths.genresPath, genreCache); err != nil {
+		fmt.Fprintln(os.Stderr, "save genre cache error:", err)
+		os.Exit(1)
+	}
+	fmt.Printf("Updated images for %d artist(s).\n", len(artists))
 }
 
 func runSetlist(args []string) {
@@ -760,7 +800,7 @@ func runPersona(paths runtimePaths) {
 	allTopArtists := append(append(topArtistsShort, topArtistsMedium...), topArtistsLong...)
 	for _, a := range allTopArtists {
 		if a.ID != "" {
-			genres.Update(genreCache, a.ID, a.Name, a.Genres)
+			genres.Update(genreCache, a.ID, a.Name, a.Genres, a.Images)
 		}
 	}
 	if err := ensurePlaysDir(paths.genresPath); err != nil {

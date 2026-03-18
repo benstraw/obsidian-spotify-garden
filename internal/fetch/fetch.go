@@ -59,11 +59,30 @@ type topArtistsResponse struct {
 	Items []topArtistItem `json:"items"`
 }
 
+type spotifyImage struct {
+	URL    string `json:"url"`
+	Height int    `json:"height"`
+	Width  int    `json:"width"`
+}
+
 type topArtistItem struct {
 	ID           string            `json:"id"`
 	Name         string            `json:"name"`
 	Genres       []string          `json:"genres"`
 	ExternalURLs map[string]string `json:"external_urls"`
+	Images       []spotifyImage    `json:"images"`
+}
+
+func toModelImages(imgs []spotifyImage) []models.ArtistImage {
+	result := make([]models.ArtistImage, 0, len(imgs))
+	for _, img := range imgs {
+		result = append(result, models.ArtistImage{
+			URL:    img.URL,
+			Height: img.Height,
+			Width:  img.Width,
+		})
+	}
+	return result
 }
 
 // GetRecentlyPlayed fetches up to 50 recently played tracks.
@@ -185,6 +204,7 @@ func GetArtists(c *client.Client, ids []string) ([]models.TopArtist, error) {
 			Name:       item.Name,
 			Genres:     item.Genres,
 			SpotifyURL: item.ExternalURLs["spotify"],
+			Images:     toModelImages(item.Images),
 		})
 	}
 	return artists, nil
@@ -378,6 +398,7 @@ func GetTopArtists(c *client.Client, timeRange string) ([]models.TopArtist, erro
 			Name:       item.Name,
 			Genres:     item.Genres,
 			SpotifyURL: item.ExternalURLs["spotify"],
+			Images:     toModelImages(item.Images),
 		})
 	}
 	return artists, nil
