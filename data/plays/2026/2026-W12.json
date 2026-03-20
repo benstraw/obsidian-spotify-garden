@@ -1,5 +1,115 @@
 [
   {
+    "played_at": "2026-03-20T01:13:42.919Z",
+    "track_id": "6Dj9AtyawJc4YS3xjFnv5b",
+    "track_name": "the devil",
+    "artist_id": "4DSDa4HvAWqvb3dMHUOAfd",
+    "artist_name": "Stephen Wilson Jr.",
+    "artist_spotify_url": "https://open.spotify.com/artist/4DSDa4HvAWqvb3dMHUOAfd",
+    "album_name": "søn of dad (deluxe)",
+    "duration_ms": 235196,
+    "track_spotify_url": "https://open.spotify.com/track/6Dj9AtyawJc4YS3xjFnv5b"
+  },
+  {
+    "played_at": "2026-03-20T01:10:12.708Z",
+    "track_id": "2XF3uEiaS8SpI5NzNZEHVr",
+    "track_name": "Clark Gable",
+    "artist_id": "4DSDa4HvAWqvb3dMHUOAfd",
+    "artist_name": "Stephen Wilson Jr.",
+    "artist_spotify_url": "https://open.spotify.com/artist/4DSDa4HvAWqvb3dMHUOAfd",
+    "album_name": "Blankets",
+    "duration_ms": 311136,
+    "track_spotify_url": "https://open.spotify.com/track/2XF3uEiaS8SpI5NzNZEHVr"
+  },
+  {
+    "played_at": "2026-03-20T01:04:42.744Z",
+    "track_id": "6BqroNusompVGz4QVjj2SZ",
+    "track_name": "Father's Søn",
+    "artist_id": "4DSDa4HvAWqvb3dMHUOAfd",
+    "artist_name": "Stephen Wilson Jr.",
+    "artist_spotify_url": "https://open.spotify.com/artist/4DSDa4HvAWqvb3dMHUOAfd",
+    "album_name": "søn of dad (deluxe)",
+    "duration_ms": 261293,
+    "track_spotify_url": "https://open.spotify.com/track/6BqroNusompVGz4QVjj2SZ"
+  },
+  {
+    "played_at": "2026-03-20T01:00:12.742Z",
+    "track_id": "6SARKgR2JIcVu7XcM1JIOT",
+    "track_name": "patches",
+    "artist_id": "4DSDa4HvAWqvb3dMHUOAfd",
+    "artist_name": "Stephen Wilson Jr.",
+    "artist_spotify_url": "https://open.spotify.com/artist/4DSDa4HvAWqvb3dMHUOAfd",
+    "album_name": "søn of dad (deluxe)",
+    "duration_ms": 203637,
+    "track_spotify_url": "https://open.spotify.com/track/6SARKgR2JIcVu7XcM1JIOT"
+  },
+  {
+    "played_at": "2026-03-20T00:57:12.898Z",
+    "track_id": "1KX8lvTaPh4dHmJzqmaYmD",
+    "track_name": "Hunger Strike",
+    "artist_id": "4DSDa4HvAWqvb3dMHUOAfd",
+    "artist_name": "Stephen Wilson Jr.",
+    "artist_spotify_url": "https://open.spotify.com/artist/4DSDa4HvAWqvb3dMHUOAfd",
+    "album_name": "Blankets",
+    "duration_ms": 278638,
+    "track_spotify_url": "https://open.spotify.com/track/1KX8lvTaPh4dHmJzqmaYmD"
+  },
+  {
+    "played_at": "2026-03-20T00:52:13.101Z",
+    "track_id": "40fxiROJfKORzhgp7MM9KN",
+    "track_name": "I Destroyed Disco",
+    "artist_id": "2mqiqsaX4LzFnUP7PmHGAb",
+    "artist_name": "The Dare",
+    "artist_spotify_url": "https://open.spotify.com/artist/2mqiqsaX4LzFnUP7PmHGAb",
+    "album_name": "What's Wrong With New York? (Deluxe)",
+    "duration_ms": 141631,
+    "track_spotify_url": "https://open.spotify.com/track/40fxiROJfKORzhgp7MM9KN"
+  },
+  {
+    "played_at": "2026-03-20T00:50:12.949Z",
+    "track_id": "3JfWcbNBzgAKg0YwLRAjX5",
+    "track_name": "Good Time",
+    "artist_id": "2mqiqsaX4LzFnUP7PmHGAb",
+    "artist_name": "The Dare",
+    "artist_spotify_url": "https://open.spotify.com/artist/2mqiqsaX4LzFnUP7PmHGAb",
+    "album_name": "What's Wrong With New York? (Deluxe)",
+    "duration_ms": 133037,
+    "track_spotify_url": "https://open.spotify.com/track/3JfWcbNBzgAKg0YwLRAjX5"
+  },
+  {
+    "played_at": "2026-03-20T00:47:43.095Z",
+    "track_id": "1IkSG0zP2JfECRpgPcr9Uq",
+    "track_name": "mangetout - The Dare remix",
+    "artist_id": "2TwOrUcYnAlIiKmVQkkoSZ",
+    "artist_name": "Wet Leg",
+    "artist_spotify_url": "https://open.spotify.com/artist/2TwOrUcYnAlIiKmVQkkoSZ",
+    "album_name": "mangetout (The Dare remix)",
+    "duration_ms": 200192,
+    "track_spotify_url": "https://open.spotify.com/track/1IkSG0zP2JfECRpgPcr9Uq"
+  },
+  {
+    "played_at": "2026-03-20T00:44:42.842Z",
+    "track_id": "2qbkDNJy6yzAcwdM63yPVu",
+    "track_name": "Girls",
+    "artist_id": "2mqiqsaX4LzFnUP7PmHGAb",
+    "artist_name": "The Dare",
+    "artist_spotify_url": "https://open.spotify.com/artist/2mqiqsaX4LzFnUP7PmHGAb",
+    "album_name": "What's Wrong With New York? (Deluxe)",
+    "duration_ms": 119558,
+    "track_spotify_url": "https://open.spotify.com/track/2qbkDNJy6yzAcwdM63yPVu"
+  },
+  {
+    "played_at": "2026-03-20T00:40:44.807Z",
+    "track_id": "7AalBKBoLDR4UmRYRJpdbj",
+    "track_name": "Fearless",
+    "artist_id": "0k17h0D3J5VfsdmQ1iZtE9",
+    "artist_name": "Pink Floyd",
+    "artist_spotify_url": "https://open.spotify.com/artist/0k17h0D3J5VfsdmQ1iZtE9",
+    "album_name": "Meddle",
+    "duration_ms": 367880,
+    "track_spotify_url": "https://open.spotify.com/track/7AalBKBoLDR4UmRYRJpdbj"
+  },
+  {
     "played_at": "2026-03-19T02:39:24.051Z",
     "track_id": "2qbkDNJy6yzAcwdM63yPVu",
     "track_name": "Girls",
