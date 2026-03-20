@@ -2,8 +2,8 @@ name: Collect
 
 on:
   schedule:
-    # 5x/day at 7, 11, 15, 19, 23 CST (UTC-6) → 13, 17, 21, 01, 05 UTC
-    - cron: '0 13,17,21,1,5,9 * * *'
+    # 3x/day at 7, 15, 23 CST (UTC-6) → 13, 21, 05 UTC
+    - cron: '0 13,21,5 * * *'
   workflow_dispatch:
 
 jobs:
