@@ -9,15 +9,15 @@ Go CLI that collects Spotify listening history and generates Obsidian markdown n
 ## Build & Test
 
 ```sh
-go build -o spotify-garden .           # build binary
+go build -o music-garden .           # build binary
 go vet ./...                           # static checks (used in CI)
 go test ./...                          # all tests
 go test ./internal/render/ -run TestWeekStr  # single test
 ```
 
-Pre-commit gate (CI mirrors this): `go vet ./... && go test ./... && go build -o spotify-garden .`
+Pre-commit gate (CI mirrors this): `go vet ./... && go test ./... && go build -o music-garden .`
 
-Version injection on release: `go build -ldflags "-X main.version=vX.Y.Z" -o spotify-garden .`
+Version injection on release: `go build -ldflags "-X main.version=vX.Y.Z" -o music-garden .`
 
 ## Architecture
 
@@ -31,11 +31,11 @@ Version injection on release: `go build -ldflags "-X main.version=vX.Y.Z" -o spo
 - `plays` — `plays.json` load/save/merge. Deduplicates by `played_at` key, sorts descending.
 - `render` — Weekly/daily note generation, artist stub creation (never overwrites existing), persona template rendering. ISO week math lives here (`WeekBounds`, `WeekStr`).
 
-**templates/** — Go `text/template` files for persona and weekly reference. Template dir resolved: `SPOTIFY_TEMPLATES_DIR` env → `./templates` → relative to executable.
+**templates/** — Go `text/template` files for persona and weekly reference. Template dir resolved: `MUSIC_TEMPLATES_DIR` env → `./templates` → relative to executable.
 
 ## Runtime Path Resolution
 
-Precedence: CLI flags → env vars → `SPOTIFY_STATE_DIR` subdirectories → CWD fallback (with warning). This applies to `.env`, `tokens.json`, and `data/plays.json`. See `resolveRuntimePaths()` in main.go.
+Precedence: CLI flags → env vars → `MUSIC_STATE_DIR` subdirectories → CWD fallback (with warning). This applies to `.env`, `tokens.json`, and `data/plays.json`. See `resolveRuntimePaths()` in main.go.
 
 ## Testing Patterns
 
@@ -57,7 +57,7 @@ Precedence: CLI flags → env vars → `SPOTIFY_STATE_DIR` subdirectories → CW
 Defined in `.env` (git-ignored); see `.env.example` for required keys:
 - `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REDIRECT_URI`
 - `OBSIDIAN_VAULT_PATH` — target vault root
-- `SPOTIFY_TEMPLATES_DIR` — override template location
-- `SPOTIFY_STATE_DIR` — preferred location for tokens/data
-- `SPOTIFY_AUTO_DAILY_ON_COLLECT` — when truthy, `collect` also regenerates today's daily note
+- `MUSIC_TEMPLATES_DIR` — override template location
+- `MUSIC_STATE_DIR` — preferred location for tokens/data
+- `MUSIC_AUTO_DAILY_ON_COLLECT_SPOTIFY` — when truthy, `collect` also regenerates today's daily note
 - `SETLISTFM_API_KEY` — for `setlist` command

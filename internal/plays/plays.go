@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/benstraw/spotify-garden/internal/models"
+	"github.com/benstraw/music-garden/internal/models"
 )
 
 // Load reads plays.json and returns the plays, or an empty slice if the file doesn't exist.

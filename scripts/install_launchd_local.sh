@@ -1,23 +1,23 @@
 #!/bin/zsh
 set -euo pipefail
 
-# Installs/updates spotify-garden in stable user-local paths for launchd.
+# Installs/updates music-garden in stable user-local paths for launchd.
 # Safe to re-run after pulling new changes; this is the upgrade path.
 
 REPO_DIR="$(cd "$(dirname "$0")/.." && pwd -P)"
 BIN_DIR="${HOME}/.local/bin"
-APP_DIR="${HOME}/Library/Application Support/spotify-garden"
+APP_DIR="${HOME}/Library/Application Support/music-garden"
 STATE_DIR="${APP_DIR}/state"
 TEMPLATES_DIR="${APP_DIR}/templates"
 LOG_DIR="${APP_DIR}/logs"
 LAUNCH_DIR="${HOME}/Library/LaunchAgents"
 
-COLLECT_LABEL="${SPOTIFY_COLLECT_LABEL:-com.${USER}.spotify-collect}"
-WEEKLY_LABEL="${SPOTIFY_WEEKLY_LABEL:-com.${USER}.spotify-weekly}"
+COLLECT_LABEL="${MUSIC_COLLECT_SPOTIFY_LABEL:-com.${USER}.music-collect-spotify}"
+WEEKLY_LABEL="${MUSIC_WEEKLY_SPOTIFY_LABEL:-com.${USER}.music-weekly-spotify}"
 
-COLLECT_WRAPPER="${BIN_DIR}/spotify-garden-collect.sh"
-WEEKLY_WRAPPER="${BIN_DIR}/spotify-garden-weekly.sh"
-BIN_PATH="${BIN_DIR}/spotify-garden"
+COLLECT_WRAPPER="${BIN_DIR}/music-garden-collect-spotify.sh"
+WEEKLY_WRAPPER="${BIN_DIR}/music-garden-weekly-spotify.sh"
+BIN_PATH="${BIN_DIR}/music-garden"
 
 COLLECT_PLIST="${LAUNCH_DIR}/${COLLECT_LABEL}.plist"
 WEEKLY_PLIST="${LAUNCH_DIR}/${WEEKLY_LABEL}.plist"
@@ -50,8 +50,8 @@ cat > "${COLLECT_WRAPPER}" <<EOF
 #!/bin/zsh
 set -euo pipefail
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
-export SPOTIFY_TEMPLATES_DIR="${TEMPLATES_DIR}"
-export SPOTIFY_AUTO_DAILY_ON_COLLECT=1
+export MUSIC_TEMPLATES_DIR="${TEMPLATES_DIR}"
+export MUSIC_AUTO_DAILY_ON_COLLECT_SPOTIFY=1
 cd "${STATE_DIR}"
 exec "${BIN_PATH}" collect
 EOF
@@ -61,7 +61,7 @@ cat > "${WEEKLY_WRAPPER}" <<EOF
 #!/bin/zsh
 set -euo pipefail
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
-export SPOTIFY_TEMPLATES_DIR="${TEMPLATES_DIR}"
+export MUSIC_TEMPLATES_DIR="${TEMPLATES_DIR}"
 cd "${STATE_DIR}"
 "${BIN_PATH}" catch-up --weeks 8
 "${BIN_PATH}" weekly

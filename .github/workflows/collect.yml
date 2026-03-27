@@ -1,4 +1,4 @@
-name: Collect
+name: Collect Spotify
 
 on:
   schedule:
@@ -21,7 +21,7 @@ jobs:
           cache: false
 
       - name: Build
-        run: go build -o spotify-garden .
+        run: go build -o music-garden .
 
       - name: Restore tokens from cache
         id: cache-tokens
@@ -37,8 +37,8 @@ jobs:
         env:
           SPOTIFY_TOKENS_JSON: ${{ secrets.SPOTIFY_TOKENS_JSON }}
 
-      - name: Collect
-        run: ./spotify-garden collect
+      - name: Collect Spotify
+        run: ./music-garden collect
         env:
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}

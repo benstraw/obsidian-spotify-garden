@@ -27,4 +27,4 @@ jobs:
         run: go test ./...
 
       - name: Build
-        run: go build -o spotify-garden .
+        run: go build -o music-garden .

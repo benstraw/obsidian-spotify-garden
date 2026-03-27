@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.example.spotify-collect</string>
+    <string>com.example.music-collect-spotify</string>
     <key>ProgramArguments</key>
     <array>
         <string>/bin/zsh</string>
-        <string>/path/to/obsidian-spotify-garden/run_collect_spotify.sh</string>
+        <string>/path/to/obsidian-music-garden/run_music_collect_spotify.sh</string>
     </array>
     <key>StartCalendarInterval</key>
     <array>
@@ -18,8 +18,8 @@
         <dict><key>Hour</key><integer>23</integer><key>Minute</key><integer>0</integer></dict>
     </array>
     <key>StandardOutPath</key>
-    <string>/tmp/spotify-collect.log</string>
+    <string>~/Library/Application Support/music-garden/logs/collect.log</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/spotify-collect.log</string>
+    <string>~/Library/Application Support/music-garden/logs/collect.log</string>
 </dict>
 </plist>

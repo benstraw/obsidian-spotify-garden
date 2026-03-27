@@ -5,7 +5,7 @@
 Implement four coordinated improvements:
 
 1. Add `doctor` command for runtime diagnostics.
-2. Introduce `SPOTIFY_STATE_DIR` as unified state root for `.env`, `tokens.json`, and `data/plays.json`.
+2. Introduce `MUSIC_STATE_DIR` as unified state root for `.env`, `tokens.json`, and `data/plays.json`.
 3. Refactor duplicated orchestration loops in `main.go`.
 4. Add process policy to persist major-feature plans in `docs/plans/` and require a minor version bump when major features are completed.
 
@@ -15,13 +15,13 @@ Apply this precedence for `auth`, `collect`, `weekly`, `daily`, `catch-up`, `per
 
 1. CLI flags (where applicable)
 2. Environment variables
-3. `SPOTIFY_STATE_DIR` files
+3. `MUSIC_STATE_DIR` files
 4. CWD fallback with warning
 
 ## Public Interface Changes
 
-1. New command: `spotify-garden doctor`
-2. New env var: `SPOTIFY_STATE_DIR`
+1. New command: `music-garden doctor`
+2. New env var: `MUSIC_STATE_DIR`
 3. Governance: major-feature plans saved to `docs/plans/`, completed major features require minor version bump
 
 ## Implementation Detail
@@ -34,7 +34,7 @@ Apply this precedence for `auth`, `collect`, `weekly`, `daily`, `catch-up`, `per
   - tokens path
   - plays path
 - Use fallback-to-CWD behavior only when state-dir file is missing.
-- Emit warnings when fallback is used while `SPOTIFY_STATE_DIR` is set.
+- Emit warnings when fallback is used while `MUSIC_STATE_DIR` is set.
 
 ### Auth token path parameterization
 
@@ -73,11 +73,11 @@ Extract helpers in `main.go` for:
 - Run:
   - `go test ./...`
   - `go vet ./...`
-  - `go build -o spotify-garden .`
+  - `go build -o music-garden .`
 
 ## Defaults and Assumptions
 
-- `SPOTIFY_STATE_DIR` is canonical runtime root when configured.
+- `MUSIC_STATE_DIR` is canonical runtime root when configured.
 - CWD fallback is temporary compatibility behavior and always warns.
 - `doctor` output is human-readable.
 - No `claude.md` currently exists; policy is recorded in `AGENTS.md` with future mirroring instruction.

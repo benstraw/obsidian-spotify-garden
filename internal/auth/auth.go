@@ -328,7 +328,7 @@ func SaveTokens(tokensPath string, tokens TokenResponse) error {
 func LoadTokens(tokensPath string) (TokenResponse, error) {
 	data, err := os.ReadFile(tokensPath)
 	if err != nil {
-		return TokenResponse{}, fmt.Errorf("tokens not found (run 'spotify-garden auth' first): %w", err)
+		return TokenResponse{}, fmt.Errorf("tokens not found (run 'music-garden auth' first): %w", err)
 	}
 	var tokens TokenResponse
 	if err := json.Unmarshal(data, &tokens); err != nil {

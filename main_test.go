@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/benstraw/spotify-garden/internal/models"
+	"github.com/benstraw/music-garden/internal/models"
 )
 
 func mustWriteFile(t *testing.T, path, content string) {
@@ -145,7 +145,7 @@ func TestResolveRuntimePaths_StateDirPreferred(t *testing.T) {
 	}
 	t.Cleanup(func() { _ = os.Chdir(origWD) })
 
-	t.Setenv("SPOTIFY_STATE_DIR", stateDir)
+	t.Setenv("MUSIC_STATE_DIR", stateDir)
 
 	paths := resolveRuntimePaths()
 
@@ -193,7 +193,7 @@ func TestResolveRuntimePaths_StateDirFallbackToCWD(t *testing.T) {
 	}
 	t.Cleanup(func() { _ = os.Chdir(origWD) })
 
-	t.Setenv("SPOTIFY_STATE_DIR", stateDir)
+	t.Setenv("MUSIC_STATE_DIR", stateDir)
 
 	paths := resolveRuntimePaths()
 
@@ -239,9 +239,9 @@ func TestResolveRuntimePaths_DataOverridesBeatStateDir(t *testing.T) {
 	}
 	t.Cleanup(func() { _ = os.Chdir(origWD) })
 
-	t.Setenv("SPOTIFY_STATE_DIR", stateDir)
-	t.Setenv("SPOTIFY_PLAYS_DIR", playsDir)
-	t.Setenv("SPOTIFY_GENRES_PATH", genresPath)
+	t.Setenv("MUSIC_STATE_DIR", stateDir)
+	t.Setenv("MUSIC_PLAYS_DIR", playsDir)
+	t.Setenv("MUSIC_GENRES_PATH", genresPath)
 
 	paths := resolveRuntimePaths()
 

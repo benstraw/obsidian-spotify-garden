@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/benstraw/spotify-garden/internal/models"
+	"github.com/benstraw/music-garden/internal/models"
 )
 
 func TestLoad_missingFile(t *testing.T) {

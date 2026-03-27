@@ -1,4 +1,4 @@
-# spotify-garden
+# music-garden
 
 Pulls listening data from the [Spotify Web API](https://developer.spotify.com/documentation/web-api)
 and renders structured Obsidian markdown notes — weekly summaries, daily play logs, artist stubs, and a
@@ -30,7 +30,7 @@ SPOTIFY_CLIENT_ID=your_client_id
 SPOTIFY_CLIENT_SECRET=your_client_secret
 SPOTIFY_REDIRECT_URI=http://localhost:8888/callback
 OBSIDIAN_VAULT_PATH=/path/to/your/vault
-SPOTIFY_TEMPLATES_DIR=/absolute/path/to/templates
+MUSIC_TEMPLATES_DIR=/absolute/path/to/templates
 SETLISTFM_API_KEY=your_setlistfm_api_key    # optional — only needed for setlist command
 ```
 
@@ -39,13 +39,13 @@ Get a setlist.fm API key at [setlist.fm/settings/apps](https://www.setlist.fm/se
 ### 3. Build
 
 ```bash
-go build -o spotify-garden .
+go build -o music-garden .
 ```
 
 ### 4. Authenticate
 
 ```bash
-./spotify-garden auth
+./music-garden auth
 ```
 
 Opens a browser to Spotify's OAuth page. Tokens are saved to the effective
@@ -55,18 +55,18 @@ auto-refresh — you should only need to do this once.
 ### 5. Collect and generate
 
 ```bash
-./spotify-garden collect                                   # fetch last 50 recently-played
-./spotify-garden weekly                                    # this week's note
-./spotify-garden weekly --date 2026-02-10                  # specific week
-./spotify-garden daily                                     # today's daily note
-./spotify-garden daily --date 2026-02-21                   # specific day
-./spotify-garden catch-up --weeks 8                        # backfill missing notes
-./spotify-garden persona                                   # regenerate Music Taste context pack
-./spotify-garden genre-backfill                            # fill genres.json from historical plays
-./spotify-garden image-backfill                            # fetch artist images for cached artists missing them
-./spotify-garden setlist "Jason Isbell"                    # look up today's setlist
-./spotify-garden setlist "Jason Isbell" --date 2026-02-21  # specific date
-./spotify-garden doctor                                    # print runtime config + diagnostics
+./music-garden collect                                   # fetch last 50 recently-played
+./music-garden weekly                                    # this week's note
+./music-garden weekly --date 2026-02-10                  # specific week
+./music-garden daily                                     # today's daily note
+./music-garden daily --date 2026-02-21                   # specific day
+./music-garden catch-up --weeks 8                        # backfill missing notes
+./music-garden persona                                   # regenerate Music Taste context pack
+./music-garden genre-backfill                            # fill genres.json from historical plays
+./music-garden image-backfill                            # fetch artist images for cached artists missing them
+./music-garden setlist "Jason Isbell"                    # look up today's setlist
+./music-garden setlist "Jason Isbell" --date 2026-02-21  # specific date
+./music-garden doctor                                    # print runtime config + diagnostics
 ```
 
 ---
@@ -74,7 +74,7 @@ auto-refresh — you should only need to do this once.
 ## Build
 
 ```bash
-go build -o spotify-garden .    # compile binary
+go build -o music-garden .    # compile binary
 go vet ./...                    # static analysis
 ```
 
@@ -82,13 +82,13 @@ go vet ./...                    # static analysis
 
 ## Output
 
-Runtime paths resolve with precedence: flags > env vars > `SPOTIFY_STATE_DIR` > CWD fallback.
+Runtime paths resolve with precedence: flags > env vars > `MUSIC_STATE_DIR` > CWD fallback.
 Files are written to `$OBSIDIAN_VAULT_PATH/music/` when the vault path is set.
 
 For split setups, use:
-- `SPOTIFY_STATE_DIR` for `.env` and `tokens.json`
-- `SPOTIFY_PLAYS_DIR` to point commands at a specific `data/plays/` directory
-- `SPOTIFY_GENRES_PATH` to point commands at a specific `data/genres.json`
+- `MUSIC_STATE_DIR` for `.env` and `tokens.json`
+- `MUSIC_PLAYS_DIR` to point commands at a specific `data/plays/` directory
+- `MUSIC_GENRES_PATH` to point commands at a specific `data/genres.json`
 
 | Command | Output path |
 |---|---|
@@ -110,12 +110,12 @@ Recommended (stable local install, avoids symlinked/external-drive path issues):
 ```
 
 This installs/updates:
-- binary: `~/.local/bin/spotify-garden`
-- state: `~/Library/Application Support/spotify-garden/state` (`.env`, `tokens.json`, `data/plays/`, `data/genres.json`)
-- templates: `~/Library/Application Support/spotify-garden/templates`
-- logs: `~/Library/Application Support/spotify-garden/logs`
-- launch agents: `~/Library/LaunchAgents/com.$USER.spotify-collect.plist` and `...spotify-weekly.plist`
-- collect wrapper exports `SPOTIFY_AUTO_DAILY_ON_COLLECT=1` so today's daily note auto-refreshes on each collect run
+- binary: `~/.local/bin/music-garden`
+- state: `~/Library/Application Support/music-garden/state` (`.env`, `tokens.json`, `data/plays/`, `data/genres.json`)
+- templates: `~/Library/Application Support/music-garden/templates`
+- logs: `~/Library/Application Support/music-garden/logs`
+- launch agents: `~/Library/LaunchAgents/com.$USER.music-collect-spotify.plist` and `...music-weekly-spotify.plist`
+- collect wrapper exports `MUSIC_AUTO_DAILY_ON_COLLECT_SPOTIFY=1` so today's daily note auto-refreshes on each collect run
 
 Upgrade path (after code changes or `git pull`): re-run:
 
@@ -129,28 +129,42 @@ Copy the example plists, edit the path and label, then install:
 
 ```bash
 # 1. Copy examples
-cp spotify-collect.plist.example com.yourname.spotify-collect.plist
-cp spotify-weekly.plist.example com.yourname.spotify-weekly.plist
+cp music-collect-spotify.plist.example com.yourname.music-collect-spotify.plist
+cp music-weekly-spotify.plist.example com.yourname.music-weekly-spotify.plist
 
 # 2. Edit each plist: set Label and the path to the shell script
-#    Label:            com.yourname.spotify-collect
-#    ProgramArguments: /absolute/path/to/obsidian-spotify-garden/run_collect_spotify.sh
+#    Label:            com.yourname.music-collect-spotify
+#    ProgramArguments: /absolute/path/to/obsidian-music-garden/run_music_collect_spotify.sh
 
 # 3. Install and load
-cp com.yourname.spotify-collect.plist ~/Library/LaunchAgents/
-cp com.yourname.spotify-weekly.plist ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/com.yourname.spotify-collect.plist
-launchctl load ~/Library/LaunchAgents/com.yourname.spotify-weekly.plist
+cp com.yourname.music-collect-spotify.plist ~/Library/LaunchAgents/
+cp com.yourname.music-weekly-spotify.plist ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/com.yourname.music-collect-spotify.plist
+launchctl load ~/Library/LaunchAgents/com.yourname.music-weekly-spotify.plist
 ```
 
 | Job | Schedule |
 |---|---|
-| `spotify-collect` | 5× daily at 7, 11, 15, 19, 23h |
-| `spotify-weekly` | Sundays at 23:00 (catch-up + weekly + persona) |
+| `music-collect-spotify` | 5× daily at 7, 11, 15, 19, 23h |
+| `music-weekly-spotify` | Sundays at 23:00 (catch-up + weekly + persona) |
 
-Logs go to `/tmp/spotify-collect.log` and `/tmp/spotify-weekly.log`.
+Logs go to `~/Library/Application Support/music-garden/logs/collect.log` and `~/Library/Application Support/music-garden/logs/weekly.log`.
 
-Run `./spotify-garden doctor` to confirm effective paths, launchd labels, and log locations.
+Run `./music-garden doctor` to confirm effective paths, launchd labels, and log locations.
+
+## Rename Migration Notes
+
+This project has been renamed from `obsidian-spotify-garden` / `spotify-garden`
+to `obsidian-music-garden` / `music-garden`.
+
+Must update after pulling this rename:
+- local shell aliases/scripts that still invoke `spotify-garden`
+- local launchd installs by re-running `./scripts/install_launchd_local.sh`
+- runtime env vars moved to `MUSIC_*` for local state/templates/data paths
+- any downstream automation that reaches into this repo, including the `benstrawbridge.com` workflow
+
+Spotify upstream credentials remain `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`,
+and `SPOTIFY_REDIRECT_URI`.
 
 ---
 
@@ -177,11 +191,11 @@ servers, so collection keeps working even when the Mac is off.
 
 - On the first run, `tokens.json` is decoded from the `SPOTIFY_TOKENS_JSON` secret.
 - Subsequent runs restore `tokens.json` from the GitHub Actions cache (the token refreshes automatically).
-- If the Spotify refresh token expires (rare), re-run `./spotify-garden auth` locally and update the `SPOTIFY_TOKENS_JSON` secret with a fresh `base64 < tokens.json`.
+- If the Spotify refresh token expires (rare), re-run `./music-garden auth` locally and update the `SPOTIFY_TOKENS_JSON` secret with a fresh `base64 < tokens.json`.
 
 > **TODO — plays sync strategy.**
 > Cloud collect commits `data/plays/` to the repo; local launchd writes to
-> `~/Library/Application Support/spotify-garden/state/data/plays/`. These two
+> `~/Library/Application Support/music-garden/state/data/plays/`. These two
 > directories will diverge. Options under consideration:
 > 1. **Cloud only** — disable launchd collect, single source of truth in the repo.
 > 2. **Add a `sync` command** — merge repo and local `data/plays/` on demand.
@@ -207,11 +221,11 @@ Go to **Actions → Collect → Run workflow** in the GitHub UI.
 
 - `tokens.json` and `.env` are gitignored — never commit them
 - `data/plays/` (sharded weekly files) is committed to the repo by the GitHub Actions workflow; `data/plays.json.bak` is created locally on first collect after upgrade (safe to delete)
-- if `SPOTIFY_STATE_DIR` is set and files are missing there, the CLI falls back to CWD and prints warnings
-- `SPOTIFY_PLAYS_DIR` and `SPOTIFY_GENRES_PATH` override the data paths without changing where `.env` and `tokens.json` are loaded from
+- if `MUSIC_STATE_DIR` is set and files are missing there, the CLI falls back to CWD and prints warnings
+- `MUSIC_PLAYS_DIR` and `MUSIC_GENRES_PATH` override the data paths without changing where `.env` and `tokens.json` are loaded from
 - `catch-up` only writes missing notes (weekly + daily); `weekly` always writes (overwrites if exists)
 - `daily` only writes when that date has play data and never overwrites an existing daily note
-- when `SPOTIFY_AUTO_DAILY_ON_COLLECT=1`, each `collect` run updates today's daily note
+- when `MUSIC_AUTO_DAILY_ON_COLLECT_SPOTIFY=1`, each `collect` run updates today's daily note
 - `genre-backfill` populates `data/genres.json` for artists already present in play history and refreshes artist stub genres
 - `image-backfill` fills missing Spotify artist profile images in `data/genres.json`; it only updates cache metadata and does not change rendered notes yet
 - Artist stubs are never overwritten once created; stubs can be created by daily or weekly generation and include a Concerts Dataview section

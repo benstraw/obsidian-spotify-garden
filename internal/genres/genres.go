@@ -6,7 +6,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/benstraw/spotify-garden/internal/models"
+	"github.com/benstraw/music-garden/internal/models"
 )
 
 // Entry represents a cached genre mapping for an artist.

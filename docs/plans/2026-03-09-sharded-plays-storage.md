@@ -61,7 +61,7 @@ The `.bak` file is kept as a safety net. Users can delete it once they are satis
 
 ## `runtimePaths` Change
 
-`playsDir` is derived from `filepath.Dir(playsPath) + "/plays"`. It inherits the same `SPOTIFY_STATE_DIR` override logic as `playsPath` — no new env var needed.
+`playsDir` is derived from `filepath.Dir(playsPath) + "/plays"`. It inherits the same `MUSIC_STATE_DIR` override logic as `playsPath` — no new env var needed.
 
 ## Tests Added
 

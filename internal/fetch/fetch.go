@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/benstraw/spotify-garden/internal/client"
-	"github.com/benstraw/spotify-garden/internal/models"
+	"github.com/benstraw/music-garden/internal/client"
+	"github.com/benstraw/music-garden/internal/models"
 )
 
 // --- Spotify API response types ---
@@ -249,14 +249,14 @@ type setlistfmArtist struct {
 }
 
 type setlistfmVenue struct {
-	Name string          `json:"name"`
-	City setlistfmCity   `json:"city"`
+	Name string        `json:"name"`
+	City setlistfmCity `json:"city"`
 }
 
 type setlistfmCity struct {
-	Name        string            `json:"name"`
-	StateCode   string            `json:"stateCode"`
-	Country     setlistfmCountry  `json:"country"`
+	Name      string           `json:"name"`
+	StateCode string           `json:"stateCode"`
+	Country   setlistfmCountry `json:"country"`
 }
 
 type setlistfmCountry struct {

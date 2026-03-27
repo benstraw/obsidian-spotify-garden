@@ -6,14 +6,14 @@
 - `templates/`: markdown templates used for note generation.
 - `data/`: local runtime data (for example `data/plays.json`, git-ignored).
 - `docs/`: command, architecture, and auth-flow reference docs.
-- Root scripts (`run_collect_spotify.sh`, `run_weekly_spotify.sh`) support launchd automation.
+- Root scripts (`run_music_collect_spotify.sh`, `run_music_weekly_spotify.sh`) support launchd automation.
 
 ## Build, Test, and Development Commands
-- `go build -o spotify-garden .`: build local CLI binary.
+- `go build -o music-garden .`: build local CLI binary.
 - `go vet ./...`: run static checks used by CI.
 - `go test ./...`: run all unit tests.
-- `./spotify-garden auth`: complete OAuth flow and write `tokens.json`.
-- `./spotify-garden collect` / `weekly` / `catch-up --weeks 8` / `persona`: core runtime workflows.
+- `./music-garden auth`: complete OAuth flow and write `tokens.json`.
+- `./music-garden collect` / `weekly` / `catch-up --weeks 8` / `persona`: core runtime workflows.
 
 ## Coding Style & Naming Conventions
 - Follow standard Go formatting: run `gofmt` on changed files before committing.
@@ -25,7 +25,7 @@
 - Framework: Go `testing` package (no external test deps).
 - Naming: `Test<Function>_<scenario>` (examples in `internal/render/render_test.go`).
 - Add/extend tests for any behavior change, especially date boundaries, dedup logic, and rendering output.
-- Minimum pre-PR check: `go vet ./... && go test ./... && go build -o spotify-garden .`.
+- Minimum pre-PR check: `go vet ./... && go test ./... && go build -o music-garden .`.
 
 ## Commit & Pull Request Guidelines
 - Commit style in history is concise, imperative, and scoped (e.g., `Add unit tests, CI workflow...`, `v0.2.0: add setlist command...`).

@@ -9,7 +9,7 @@ The current Go CLI collects Spotify listening data and generates Obsidian markdo
 ## Architecture
 
 ```
-obsidian-spotify-garden/          (new repo)
+obsidian-music-garden/          (new repo)
 ├── manifest.json
 ├── package.json
 ├── esbuild.config.mjs
@@ -27,10 +27,10 @@ obsidian-spotify-garden/          (new repo)
 
 ## Data Storage
 
-All data lives in the vault at `{vault}/.spotify-garden/`:
+All data lives in the vault at `{vault}/.music-garden/`:
 
 ```
-.spotify-garden/
+.music-garden/
 ├── plays.json          — listening history (same format as Go CLI)
 ├── genres.json         — artist→genres cache (same format)
 └── tokens.json         — OAuth tokens (PKCE, no client secret)
@@ -43,9 +43,9 @@ Using a dotfolder keeps it out of the way but visible and syncable. Tokens in th
 1. User enters their Spotify Client ID in plugin settings (they create a free Spotify app at developer.spotify.com)
 2. User clicks "Connect Spotify" → opens browser to Spotify auth URL with PKCE challenge
 3. Spotify redirects to a static callback page hosted on GitHub Pages (free, we control it)
-4. Callback page extracts the auth code and redirects to `obsidian://spotify-garden?code=...`
+4. Callback page extracts the auth code and redirects to `obsidian://music-garden?code=...`
 5. Plugin receives the code via `registerObsidianProtocolHandler`, exchanges it for tokens
-6. Tokens saved to `.spotify-garden/tokens.json`, auto-refreshed on expiry
+6. Tokens saved to `.music-garden/tokens.json`, auto-refreshed on expiry
 
 Works on both desktop and mobile Obsidian.
 
@@ -97,7 +97,7 @@ Note paths configurable in settings. Markdown format identical to current Go out
 
 ## Migration from Go CLI
 
-The JSON formats (plays.json, genres.json) are identical. Users can copy their existing data files into `{vault}/.spotify-garden/` and the plugin picks them up immediately.
+The JSON formats (plays.json, genres.json) are identical. Users can copy their existing data files into `{vault}/.music-garden/` and the plugin picks them up immediately.
 
 ## Implementation Order
 
@@ -114,7 +114,7 @@ The JSON formats (plays.json, genres.json) are identical. Users can copy their e
 
 1. Install plugin in dev mode (`ln -s` into vault's `.obsidian/plugins/`)
 2. Configure Spotify Client ID, run OAuth flow
-3. Trigger manual collect — verify plays.json appears in `.spotify-garden/`
+3. Trigger manual collect — verify plays.json appears in `.music-garden/`
 4. Let auto-collect run — verify new plays merge correctly
 5. Generate daily/weekly notes — verify markdown matches Go CLI output
 6. Copy existing plays.json from Go CLI — verify plugin reads it correctly

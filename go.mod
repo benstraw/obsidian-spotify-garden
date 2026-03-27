@@ -1,3 +1,3 @@
-module github.com/benstraw/spotify-garden
+module github.com/benstraw/music-garden
 
 go 1.23

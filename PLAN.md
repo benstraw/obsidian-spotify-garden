@@ -1,20 +1,20 @@
-# Plan: Build obsidian-spotify-garden Go CLI
+# Plan: Build obsidian-music-garden Go CLI
 
 ## Context
 
 The existing Spotify integration is a loose Python project with two scripts (`collect_music.py`, `weekly_music_note.py`), no proper CLI structure, no catch-up logic, and a once-daily collection schedule that can miss plays when the 50-track API cap is hit or the laptop is asleep.
 
-The goal is to build a proper Go CLI — `obsidian-spotify-garden` — that mirrors the architecture of the WHOOP CLI (`obsidian-whoop-garden`). It replaces the Python scripts entirely, gains real auth management, catch-up logic, and gets put on a 5x-daily collection schedule.
+The goal is to build a proper Go CLI — `obsidian-music-garden` — that mirrors the architecture of the WHOOP CLI (`obsidian-whoop-garden`). It replaces the Python scripts entirely, gains real auth management, catch-up logic, and gets put on a 5x-daily collection schedule.
 
 ## Project Location
 
-`/path/to/obsidian-spotify-garden/`
+`/path/to/obsidian-music-garden/`
 
 ## Architecture (mirrors obsidian-whoop-garden)
 
 ```
-obsidian-spotify-garden/
-├── go.mod                                  # module github.com/yourname/spotify-garden
+obsidian-music-garden/
+├── go.mod                                  # module github.com/yourname/music-garden
 ├── main.go                                 # command dispatch
 ├── internal/
 │   ├── auth/auth.go                        # OAuth2 flow + token refresh
@@ -32,19 +32,19 @@ obsidian-spotify-garden/
 ├── .env                                    # git-ignored (CLIENT_ID, CLIENT_SECRET, VAULT_PATH)
 ├── .env.example
 ├── .gitignore
-├── run_collect_spotify.sh                  # launchd wrapper
-└── run_weekly_spotify.sh                   # launchd wrapper
+├── run_music_collect_spotify.sh                  # launchd wrapper
+└── run_music_weekly_spotify.sh                   # launchd wrapper
 ```
 
 ## Commands
 
 | Command | What it does |
 |---|---|
-| `spotify-garden auth` | Full OAuth2 browser flow → saves tokens.json |
-| `spotify-garden collect` | Fetch last 50 recently-played, dedup, append to plays.json |
-| `spotify-garden weekly [--date YYYY-MM-DD]` | Generate weekly note for date's ISO week (default: current) |
-| `spotify-garden catch-up [--weeks N]` | Scan music/listening/ for missing weekly notes, generate each (default: 8 weeks) |
-| `spotify-garden persona` | Regenerate Music Taste context pack in 01-ai-brain/context-packs/ |
+| `music-garden auth` | Full OAuth2 browser flow → saves tokens.json |
+| `music-garden collect` | Fetch last 50 recently-played, dedup, append to plays.json |
+| `music-garden weekly [--date YYYY-MM-DD]` | Generate weekly note for date's ISO week (default: current) |
+| `music-garden catch-up [--weeks N]` | Scan music/listening/ for missing weekly notes, generate each (default: 8 weeks) |
+| `music-garden persona` | Regenerate Music Taste context pack in 01-ai-brain/context-packs/ |
 
 ## Implementation Detail
 
@@ -159,33 +159,33 @@ Same dispatch pattern as whoop-garden:
 
 ### Shell wrappers
 
-**run_collect_spotify.sh:**
+**run_music_collect_spotify.sh:**
 ```bash
 #!/bin/zsh
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 source "$HOME/.zprofile" 2>/dev/null || true
 source "$HOME/.zshrc" 2>/dev/null || true
 cd "$SCRIPT_DIR"
-exec ./spotify-garden collect
+exec ./music-garden collect
 ```
 
-**run_weekly_spotify.sh:**
+**run_music_weekly_spotify.sh:**
 ```bash
 #!/bin/zsh
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 source "$HOME/.zprofile" 2>/dev/null || true
 source "$HOME/.zshrc" 2>/dev/null || true
 cd "$SCRIPT_DIR"
-./spotify-garden catch-up --weeks 8
-./spotify-garden weekly
-./spotify-garden persona
+./music-garden catch-up --weeks 8
+./music-garden weekly
+./music-garden persona
 ```
 
 ### launchd plists
 
 Distribute as `*.plist.example`. Users copy, rename, edit the path and label:
 
-**spotify-collect.plist.example** — 5x daily (7, 11, 15, 19, 23):
+**music-collect-spotify.plist.example** — 5x daily (7, 11, 15, 19, 23):
 ```xml
 <key>StartCalendarInterval</key>
 <array>
@@ -197,21 +197,21 @@ Distribute as `*.plist.example`. Users copy, rename, edit the path and label:
 </array>
 ```
 
-**spotify-weekly.plist.example** — Sunday at 11 PM.
+**music-weekly-spotify.plist.example** — Sunday at 11 PM.
 
 ## Data Migration
 
 If migrating from an existing plays.json:
 
 ```bash
-cp /path/to/old/plays.json /path/to/obsidian-spotify-garden/data/plays.json
+cp /path/to/old/plays.json /path/to/obsidian-music-garden/data/plays.json
 ```
 
 First `collect` run will merge + deduplicate with any new plays.
 
 ## One Setup Requirement
 
-The Spotify developer dashboard app needs `http://localhost:8888/callback` added as a valid redirect URI. After updating, run `spotify-garden auth` for initial token exchange.
+The Spotify developer dashboard app needs `http://localhost:8888/callback` added as a valid redirect URI. After updating, run `music-garden auth` for initial token exchange.
 
 ## Build Order
 
@@ -230,10 +230,10 @@ The Spotify developer dashboard app needs `http://localhost:8888/callback` added
 
 ## Verification Checklist
 
-- [ ] `go build -o spotify-garden .` — builds clean
-- [ ] `./spotify-garden auth` — browser opens, tokens.json written
-- [ ] `./spotify-garden collect` — plays.json grows, no duplicates on re-run
-- [ ] `./spotify-garden weekly` — `music/listening/spotify-YYYY-Www.md` written, artist stubs created
-- [ ] Delete a weekly note, run `./spotify-garden catch-up --weeks 4` — regenerates missing note
-- [ ] `./spotify-garden persona` — `01-ai-brain/context-packs/Music Taste.md` overwritten
+- [ ] `go build -o music-garden .` — builds clean
+- [ ] `./music-garden auth` — browser opens, tokens.json written
+- [ ] `./music-garden collect` — plays.json grows, no duplicates on re-run
+- [ ] `./music-garden weekly` — `music/listening/spotify-YYYY-Www.md` written, artist stubs created
+- [ ] Delete a weekly note, run `./music-garden catch-up --weeks 4` — regenerates missing note
+- [ ] `./music-garden persona` — `01-ai-brain/context-packs/Music Taste.md` overwritten
 - [ ] Load plists, `launchctl list | grep spotify` — both jobs visible

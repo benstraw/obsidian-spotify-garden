@@ -3,7 +3,7 @@
 All commands use this runtime path precedence:
 1. CLI flags (where applicable)
 2. Environment variables
-3. `SPOTIFY_STATE_DIR` files (`.env`, `tokens.json`) unless `SPOTIFY_PLAYS_DIR` and/or `SPOTIFY_GENRES_PATH` override the data paths
+3. `MUSIC_STATE_DIR` files (`.env`, `tokens.json`) unless `MUSIC_PLAYS_DIR` and/or `MUSIC_GENRES_PATH` override the data paths
 4. Current working directory fallback (with warning)
 
 OAuth tokens auto-refresh if they are expiring within 5 minutes.
@@ -13,7 +13,7 @@ OAuth tokens auto-refresh if they are expiring within 5 minutes.
 ## auth
 
 ```bash
-./spotify-garden auth
+./music-garden auth
 ```
 
 Runs the full OAuth 2.0 authorization code flow:
@@ -40,7 +40,7 @@ once, unless `tokens.json` is deleted or the refresh token expires.
 ## collect
 
 ```bash
-./spotify-garden collect
+./music-garden collect
 ```
 
 Fetches the last 50 recently-played tracks from the Spotify API and merges
@@ -53,7 +53,7 @@ plays directory.
 3. On first run after upgrade: migrates `data/plays.json` → sharded layout and renames the legacy file to `data/plays.json.bak`
 4. Routes each new play to its ISO week file (`data/plays/YYYY/YYYY-WNN.json`), merging with the existing file
 5. Deduplicates by `played_at` — existing plays are never duplicated
-6. If `SPOTIFY_AUTO_DAILY_ON_COLLECT=1`, regenerates today's daily note
+6. If `MUSIC_AUTO_DAILY_ON_COLLECT_SPOTIFY=1`, regenerates today's daily note
    (`spotify-YYYY-MM-DD.md`) so it stays up to date as new plays arrive
 
 **Output:** `{playsDir}/YYYY/YYYY-WNN.json` (e.g. `data/plays/2026/2026-W11.json`)
@@ -66,7 +66,7 @@ ensures no plays are lost to the 50-track API cap.
 ## weekly
 
 ```bash
-./spotify-garden weekly [--date YYYY-MM-DD]
+./music-garden weekly [--date YYYY-MM-DD]
 ```
 
 Generates a weekly markdown note for the ISO week (Mon–Sun) containing the
@@ -105,7 +105,7 @@ includes frontmatter (`type: resource`, `tags: [music/artist]`, `spotify_url`,
 ## daily
 
 ```bash
-./spotify-garden daily [--date YYYY-MM-DD]
+./music-garden daily [--date YYYY-MM-DD]
 ```
 
 Generates a daily markdown note for the given calendar date (default: today).
@@ -143,7 +143,7 @@ Generates a daily markdown note for the given calendar date (default: today).
 ## catch-up
 
 ```bash
-./spotify-garden catch-up [--weeks N]
+./music-garden catch-up [--weeks N]
 ```
 
 Scans the vault's listening directory for missing weekly and daily notes and
@@ -172,7 +172,7 @@ edited.
 ## persona
 
 ```bash
-./spotify-garden persona
+./music-garden persona
 ```
 
 Regenerates the Music Taste context pack at
@@ -198,7 +198,7 @@ music, or discussing musical taste.
 ## genre-backfill
 
 ```bash
-./spotify-garden genre-backfill
+./music-garden genre-backfill
 ```
 
 Backfills `data/genres.json` from existing play history.
@@ -218,7 +218,7 @@ Use this after importing historical plays or if `collect` ran before the genre c
 ## image-backfill
 
 ```bash
-./spotify-garden image-backfill
+./music-garden image-backfill
 ```
 
 Fetches Spotify artist profile images for cached artists that currently have no
@@ -238,7 +238,7 @@ weekly notes, daily notes, or artist stubs.
 ## setlist
 
 ```bash
-./spotify-garden setlist <artist> [--date YYYY-MM-DD]
+./music-garden setlist <artist> [--date YYYY-MM-DD]
 ```
 
 Looks up a setlist on setlist.fm and prints it to stdout. No vault files are written.
@@ -271,7 +271,7 @@ Setlist.fm: https://www.setlist.fm/setlist/...
 
 **Concert note workflow:**
 1. During or after a show, open the Templater template `Concert Note` in Obsidian — it prompts for artist and venue, then renames the file to `YYYY-MM-DD - Artist - Venue.md` and places it in `music/concerts/`
-2. Run `spotify-garden setlist "<Artist>" --date YYYY-MM-DD`, copy the output, and paste it into the Set List section of the note
+2. Run `music-garden setlist "<Artist>" --date YYYY-MM-DD`, copy the output, and paste it into the Set List section of the note
 3. The artist stub's Concerts Dataview block will automatically pick up the new note via the `music/live-artist/<Artist Name>` tag
 
 ---
@@ -279,7 +279,7 @@ Setlist.fm: https://www.setlist.fm/setlist/...
 ## doctor
 
 ```bash
-./spotify-garden doctor
+./music-garden doctor
 ```
 
 Prints effective runtime configuration and diagnostics in one place:

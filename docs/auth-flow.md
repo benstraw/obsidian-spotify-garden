@@ -1,6 +1,6 @@
 # OAuth 2.0 Auth Flow
 
-spotify-garden uses the Spotify OAuth 2.0 Authorization Code flow to obtain
+music-garden uses the Spotify OAuth 2.0 Authorization Code flow to obtain
 access and refresh tokens.
 
 ## Flow Overview — localhost redirect (default)
@@ -8,7 +8,7 @@ access and refresh tokens.
 ```
 User                  CLI                   Spotify API          Browser
  |                     |                        |                   |
- |  spotify-garden auth|                        |                   |
+ |  music-garden auth|                        |                   |
  |-------------------->|                        |                   |
  |                     | build auth URL         |                   |
  |                     |--------------------------------- open ----->|
@@ -34,7 +34,7 @@ Instead, the CLI prompts you to paste the redirect URL from your browser:
 ```
 User                  CLI                   Spotify API          Browser
  |                     |                        |                   |
- |  spotify-garden auth|                        |                   |
+ |  music-garden auth|                        |                   |
  |-------------------->|                        |                   |
  |                     | build auth URL         |                   |
  |                     |--------------------------------- open ----->|
@@ -77,7 +77,7 @@ not as form fields. This differs from some other OAuth providers.
 
 Tokens are written to the effective tokens path with `0600` permissions
 (owner read/write only). Resolution order:
-1. `{SPOTIFY_STATE_DIR}/tokens.json` when present
+1. `{MUSIC_STATE_DIR}/tokens.json` when present
 2. `./tokens.json` fallback when state file is missing
 
 The file is git-ignored.
@@ -103,7 +103,7 @@ Every command calls `auth.RefreshIfNeeded(tokensPath)` before making API calls:
 4. Save new tokens back to effective `tokens.json`
 5. Return the valid access token
 
-You should only need to run `spotify-garden auth` once. The refresh token is
+You should only need to run `music-garden auth` once. The refresh token is
 long-lived — Spotify does not expire it as long as it is used periodically.
 
 ## Troubleshooting
@@ -113,7 +113,7 @@ does not match any URI registered in the Spotify Developer Dashboard. Add the
 exact URI in the app's Edit Settings → Redirect URIs and save.
 
 **"SPOTIFY_CLIENT_ID not set"** — The `.env` file was not found or is missing
-the variable. Ensure it exists in `SPOTIFY_STATE_DIR` (if set) or current working directory.
+the variable. Ensure it exists in `MUSIC_STATE_DIR` (if set) or current working directory.
 
 **"no code found in pasted URL"** — When using an external redirect URI, the
 pasted URL must include `?code=...`. If Spotify showed an error page, check
@@ -121,7 +121,7 @@ for `?error=` in the URL and address the cause.
 
 **"state mismatch"** — The pasted URL doesn't match the current auth session.
 This can happen if you paste a URL from a previous auth attempt. Run
-`spotify-garden auth` again and paste the URL from the new browser session.
+`music-garden auth` again and paste the URL from the new browser session.
 
 **"token endpoint returned 401"** — Client ID or secret is wrong, or the
 authorization code has already been used. Authorization codes are single-use
@@ -134,5 +134,5 @@ is consistent.
 **Port 8888 already in use** — Stop whatever is using port 8888 and retry, or
 switch to an external redirect URI.
 
-**tokens.json not found** — Run `./spotify-garden auth` first. The file must
-exist in `SPOTIFY_STATE_DIR` (preferred) or in the current working directory fallback path.
+**tokens.json not found** — Run `./music-garden auth` first. The file must
+exist in `MUSIC_STATE_DIR` (preferred) or in the current working directory fallback path.

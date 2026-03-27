@@ -11,13 +11,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/benstraw/spotify-garden/internal/auth"
-	"github.com/benstraw/spotify-garden/internal/client"
-	"github.com/benstraw/spotify-garden/internal/fetch"
-	"github.com/benstraw/spotify-garden/internal/genres"
-	"github.com/benstraw/spotify-garden/internal/models"
-	"github.com/benstraw/spotify-garden/internal/plays"
-	"github.com/benstraw/spotify-garden/internal/render"
+	"github.com/benstraw/music-garden/internal/auth"
+	"github.com/benstraw/music-garden/internal/client"
+	"github.com/benstraw/music-garden/internal/fetch"
+	"github.com/benstraw/music-garden/internal/genres"
+	"github.com/benstraw/music-garden/internal/models"
+	"github.com/benstraw/music-garden/internal/plays"
+	"github.com/benstraw/music-garden/internal/render"
 )
 
 // version is set at build time via -ldflags "-X main.version=vX.Y.Z"
@@ -76,7 +76,7 @@ func main() {
 	case "doctor":
 		os.Exit(runDoctor(paths))
 	case "version", "--version":
-		fmt.Println("spotify-garden", version)
+		fmt.Println("music-garden", version)
 	case "help", "--help", "-h":
 		printUsage()
 		os.Exit(0)
@@ -88,20 +88,20 @@ func main() {
 }
 
 func printUsage() {
-	fmt.Printf(`spotify-garden %s — Spotify listening data → Obsidian markdown
+	fmt.Printf(`music-garden %s — Spotify listening data → Obsidian markdown
 
 Usage:
-  spotify-garden auth                           Authenticate with Spotify via OAuth
-  spotify-garden collect                        Fetch last 50 recently-played, dedup, append to plays.json
-  spotify-garden weekly [--date YYYY-MM-DD]     Generate weekly note for date's ISO week (default: current)
-  spotify-garden daily [--date YYYY-MM-DD]      Generate daily note for date (default: today)
-  spotify-garden catch-up [--weeks N]           Generate missing weekly + daily notes (default: 8 weeks back)
-  spotify-garden persona                        Regenerate Music Taste context pack
-  spotify-garden genre-backfill                 Fetch genres for all artists in plays.json
-  spotify-garden image-backfill                 Fetch images for all artists in genres.json that have none
-  spotify-garden setlist <artist> [--date DATE] Look up setlist on setlist.fm (default: today)
-  spotify-garden doctor                         Print effective runtime config and diagnostics
-  spotify-garden version                        Print version
+  music-garden auth                           Authenticate with Spotify via OAuth
+  music-garden collect                        Fetch last 50 recently-played, dedup, append to plays.json
+  music-garden weekly [--date YYYY-MM-DD]     Generate weekly note for date's ISO week (default: current)
+  music-garden daily [--date YYYY-MM-DD]      Generate daily note for date (default: today)
+  music-garden catch-up [--weeks N]           Generate missing weekly + daily notes (default: 8 weeks back)
+  music-garden persona                        Regenerate Music Taste context pack
+  music-garden genre-backfill                 Fetch genres for all artists in plays.json
+  music-garden image-backfill                 Fetch images for all artists in genres.json that have none
+  music-garden setlist <artist> [--date DATE] Look up setlist on setlist.fm (default: today)
+  music-garden doctor                         Print effective runtime config and diagnostics
+  music-garden version                        Print version
 
 Flags:
   --date   Date in YYYY-MM-DD format (default: today)
@@ -128,19 +128,19 @@ func resolveRuntimePaths() runtimePaths {
 		genresPath: filepath.Join(cwd, "data", "genres.json"),
 	}
 
-	stateDir := strings.TrimSpace(os.Getenv("SPOTIFY_STATE_DIR"))
+	stateDir := strings.TrimSpace(os.Getenv("MUSIC_STATE_DIR"))
 	if stateDir == "" {
 		// Auto-discover the well-known installed state dir if it exists.
 		home, err := os.UserHomeDir()
 		if err == nil {
-			candidate := filepath.Join(home, "Library", "Application Support", "spotify-garden", "state")
+			candidate := filepath.Join(home, "Library", "Application Support", "music-garden", "state")
 			if info, err := os.Stat(candidate); err == nil && info.IsDir() {
 				stateDir = candidate
 			}
 		}
 	}
 	if stateDir == "" {
-		if playsDir := strings.TrimSpace(os.Getenv("SPOTIFY_PLAYS_DIR")); playsDir != "" {
+		if playsDir := strings.TrimSpace(os.Getenv("MUSIC_PLAYS_DIR")); playsDir != "" {
 			absPlaysDir, err := filepath.Abs(playsDir)
 			if err != nil {
 				absPlaysDir = playsDir
@@ -149,7 +149,7 @@ func resolveRuntimePaths() runtimePaths {
 			p.playsPath = filepath.Join(filepath.Dir(absPlaysDir), "plays.json")
 			p.playsOverride = true
 		}
-		if genresPath := strings.TrimSpace(os.Getenv("SPOTIFY_GENRES_PATH")); genresPath != "" {
+		if genresPath := strings.TrimSpace(os.Getenv("MUSIC_GENRES_PATH")); genresPath != "" {
 			absGenresPath, err := filepath.Abs(genresPath)
 			if err != nil {
 				absGenresPath = genresPath
@@ -168,7 +168,7 @@ func resolveRuntimePaths() runtimePaths {
 
 	p.dotEnvPath, p.dotEnvFallback = chooseStatePath(absState, ".env", p.dotEnvPath)
 	p.tokensPath, p.tokensFallback = chooseStatePath(absState, "tokens.json", p.tokensPath)
-	if playsDir := strings.TrimSpace(os.Getenv("SPOTIFY_PLAYS_DIR")); playsDir != "" {
+	if playsDir := strings.TrimSpace(os.Getenv("MUSIC_PLAYS_DIR")); playsDir != "" {
 		absPlaysDir, err := filepath.Abs(playsDir)
 		if err != nil {
 			absPlaysDir = playsDir
@@ -194,7 +194,7 @@ func resolveRuntimePaths() runtimePaths {
 			}
 		}
 	}
-	if genresPath := strings.TrimSpace(os.Getenv("SPOTIFY_GENRES_PATH")); genresPath != "" {
+	if genresPath := strings.TrimSpace(os.Getenv("MUSIC_GENRES_PATH")); genresPath != "" {
 		absGenresPath, err := filepath.Abs(genresPath)
 		if err != nil {
 			absGenresPath = genresPath
@@ -230,22 +230,22 @@ func emitFallbackWarnings(paths runtimePaths, cmd string) {
 	}
 
 	if paths.dotEnvFallback {
-		fmt.Fprintf(os.Stderr, "warning: SPOTIFY_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, ".env"), paths.dotEnvPath)
+		fmt.Fprintf(os.Stderr, "warning: MUSIC_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, ".env"), paths.dotEnvPath)
 	}
 
 	tokensUsed := cmd == "auth" || cmd == "collect" || cmd == "persona" || cmd == "genre-backfill" || cmd == "image-backfill" || cmd == "doctor"
 	if tokensUsed && paths.tokensFallback {
-		fmt.Fprintf(os.Stderr, "warning: SPOTIFY_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, "tokens.json"), paths.tokensPath)
+		fmt.Fprintf(os.Stderr, "warning: MUSIC_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, "tokens.json"), paths.tokensPath)
 	}
 
 	playsUsed := cmd == "collect" || cmd == "weekly" || cmd == "daily" || cmd == "catch-up" || cmd == "persona" || cmd == "genre-backfill" || cmd == "doctor"
 	if playsUsed && paths.playsFallback {
-		fmt.Fprintf(os.Stderr, "warning: SPOTIFY_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, "data", "plays"), paths.playsDir)
+		fmt.Fprintf(os.Stderr, "warning: MUSIC_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, "data", "plays"), paths.playsDir)
 	}
 
 	genresUsed := cmd == "collect" || cmd == "weekly" || cmd == "daily" || cmd == "catch-up" || cmd == "persona" || cmd == "genre-backfill" || cmd == "image-backfill"
 	if genresUsed && paths.genresFallback {
-		fmt.Fprintf(os.Stderr, "warning: SPOTIFY_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, "data", "genres.json"), paths.genresPath)
+		fmt.Fprintf(os.Stderr, "warning: MUSIC_STATE_DIR is set but %s was not found; falling back to %s\n", filepath.Join(paths.stateDir, "data", "genres.json"), paths.genresPath)
 	}
 }
 
@@ -295,7 +295,7 @@ func vaultPath() string {
 
 // templatesDir returns the path to the templates directory.
 func templatesDir() string {
-	if td := os.Getenv("SPOTIFY_TEMPLATES_DIR"); td != "" {
+	if td := os.Getenv("MUSIC_TEMPLATES_DIR"); td != "" {
 		return td
 	}
 	if _, err := os.Stat("templates"); err == nil {
@@ -309,7 +309,7 @@ func templatesDir() string {
 func getClient(paths runtimePaths) (*client.Client, error) {
 	token, err := auth.RefreshIfNeeded(paths.tokensPath)
 	if err != nil {
-		return nil, fmt.Errorf("authentication error: %w\nRun 'spotify-garden auth' to authenticate.", err)
+		return nil, fmt.Errorf("authentication error: %w\nRun 'music-garden auth' to authenticate.", err)
 	}
 	return client.NewClient(token), nil
 }
@@ -407,9 +407,9 @@ func runCollect(paths runtimePaths) {
 		}
 	}
 
-	if envTrue("SPOTIFY_AUTO_DAILY_ON_COLLECT") {
+	if envTrue("MUSIC_AUTO_DAILY_ON_COLLECT_SPOTIFY") {
 		if os.Getenv("OBSIDIAN_VAULT_PATH") == "" {
-			fmt.Fprintln(os.Stderr, "warning: SPOTIFY_AUTO_DAILY_ON_COLLECT is enabled but OBSIDIAN_VAULT_PATH is not set")
+			fmt.Fprintln(os.Stderr, "warning: MUSIC_AUTO_DAILY_ON_COLLECT_SPOTIFY is enabled but OBSIDIAN_VAULT_PATH is not set")
 			return
 		}
 		ag := genres.GenresForPlays(genreCache, allPlays)
@@ -774,7 +774,7 @@ func runSetlist(args []string) {
 	_ = fs.Parse(args)
 
 	if fs.NArg() < 1 {
-		fmt.Fprintln(os.Stderr, "usage: spotify-garden setlist <artist> [--date YYYY-MM-DD]")
+		fmt.Fprintln(os.Stderr, "usage: music-garden setlist <artist> [--date YYYY-MM-DD]")
 		os.Exit(1)
 	}
 	artist := fs.Arg(0)
@@ -898,9 +898,9 @@ func runDoctor(paths runtimePaths) int {
 	fmt.Println("Working directory:", paths.cwd)
 	fmt.Println("Executable:", executablePath())
 	if paths.stateDir == "" {
-		fmt.Println("SPOTIFY_STATE_DIR: (not set)")
+		fmt.Println("MUSIC_STATE_DIR: (not set)")
 	} else {
-		fmt.Println("SPOTIFY_STATE_DIR:", paths.stateDir)
+		fmt.Println("MUSIC_STATE_DIR:", paths.stateDir)
 	}
 
 	printPathStatus("Dotenv path", paths.dotEnvPath, true)
@@ -910,10 +910,10 @@ func runDoctor(paths runtimePaths) int {
 	printPathStatus("Genres path", paths.genresPath, false)
 
 	if paths.playsOverride {
-		fmt.Println("SPOTIFY_PLAYS_DIR override:", paths.playsDir)
+		fmt.Println("MUSIC_PLAYS_DIR override:", paths.playsDir)
 	}
 	if paths.genresOverride {
-		fmt.Println("SPOTIFY_GENRES_PATH override:", paths.genresPath)
+		fmt.Println("MUSIC_GENRES_PATH override:", paths.genresPath)
 	}
 
 	templates := templatesDir()
@@ -1010,17 +1010,17 @@ func launchdDefaults() (collectLabel, weeklyLabel, collectLog, weeklyLog string)
 		user = "unknown"
 	}
 
-	collectLabel = os.Getenv("SPOTIFY_COLLECT_LABEL")
+	collectLabel = os.Getenv("MUSIC_COLLECT_SPOTIFY_LABEL")
 	if collectLabel == "" {
-		collectLabel = fmt.Sprintf("com.%s.spotify-collect", user)
+		collectLabel = fmt.Sprintf("com.%s.music-collect-spotify", user)
 	}
-	weeklyLabel = os.Getenv("SPOTIFY_WEEKLY_LABEL")
+	weeklyLabel = os.Getenv("MUSIC_WEEKLY_SPOTIFY_LABEL")
 	if weeklyLabel == "" {
-		weeklyLabel = fmt.Sprintf("com.%s.spotify-weekly", user)
+		weeklyLabel = fmt.Sprintf("com.%s.music-weekly-spotify", user)
 	}
 
 	home, _ := os.UserHomeDir()
-	logDir := filepath.Join(home, "Library", "Application Support", "spotify-garden", "logs")
+	logDir := filepath.Join(home, "Library", "Application Support", "music-garden", "logs")
 	collectLog = filepath.Join(logDir, "collect.log")
 	weeklyLog = filepath.Join(logDir, "weekly.log")
 

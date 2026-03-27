@@ -9,7 +9,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/benstraw/spotify-garden/internal/models"
+	"github.com/benstraw/music-garden/internal/models"
 )
 
 // --- Weekly note ---

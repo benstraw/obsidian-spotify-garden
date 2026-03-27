@@ -1,6 +1,6 @@
 # Architecture
 
-spotify-garden is a thin pipeline: **fetch → model → render → write**. Each
+music-garden is a thin pipeline: **fetch → model → render → write**. Each
 stage is a separate package with no circular dependencies.
 
 ## Package Map
@@ -51,7 +51,7 @@ main.runCollect()
   ├─ fetch.GetArtistsBatch(c, uncachedArtistIDs)
   │    └─ stores genres and Spotify profile images for newly seen artists
   │
-  └─ if SPOTIFY_AUTO_DAILY_ON_COLLECT=1:
+  └─ if MUSIC_AUTO_DAILY_ON_COLLECT_SPOTIFY=1:
        generateDailyNote(allPlays, now, overwrite=true)
 ```
 
@@ -208,23 +208,23 @@ log displays in the user's timezone.
 Runtime file locations are resolved with this precedence:
 1. CLI flags (where applicable)
 2. Environment variables
-3. `SPOTIFY_STATE_DIR` files (`.env`, `tokens.json`) unless `SPOTIFY_PLAYS_DIR` and/or `SPOTIFY_GENRES_PATH` override the data paths
+3. `MUSIC_STATE_DIR` files (`.env`, `tokens.json`) unless `MUSIC_PLAYS_DIR` and/or `MUSIC_GENRES_PATH` override the data paths
 4. CWD fallback with warning
 
-`SPOTIFY_PLAYS_DIR` lets you point play storage at a specific sharded `data/plays/`
-directory while still loading `.env` and `tokens.json` from `SPOTIFY_STATE_DIR`.
+`MUSIC_PLAYS_DIR` lets you point play storage at a specific sharded `data/plays/`
+directory while still loading `.env` and `tokens.json` from `MUSIC_STATE_DIR`.
 `playsPath` (legacy migration source) is derived as `filepath.Dir(playsDir) + "/plays.json"`.
 
-`SPOTIFY_GENRES_PATH` lets you point genre/image cache writes at a specific `data/genres.json`
+`MUSIC_GENRES_PATH` lets you point genre/image cache writes at a specific `data/genres.json`
 file independently of the state dir.
 
-`spotify-garden doctor` prints all effective runtime paths and launchd-derived diagnostics.
+`music-garden doctor` prints all effective runtime paths and launchd-derived diagnostics.
 
 ## Template Resolution
 
 At startup, `templatesDir()` resolves in order:
 
-1. `$SPOTIFY_TEMPLATES_DIR` env var
+1. `$MUSIC_TEMPLATES_DIR` env var
 2. `./templates/` relative to cwd (development)
 3. `<binary_dir>/templates/` next to the compiled binary
 

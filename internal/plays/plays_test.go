@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/benstraw/spotify-garden/internal/models"
+	"github.com/benstraw/music-garden/internal/models"
 )
 
 func TestMerge_dedup(t *testing.T) {
@@ -266,9 +266,9 @@ func TestLoadShardedRange(t *testing.T) {
 	baseDir := t.TempDir()
 
 	ps := []models.Play{
-		{PlayedAt: "2026-03-02T10:00:00Z", TrackName: "W10 Track"},  // 2026-W10
-		{PlayedAt: "2026-03-09T10:00:00Z", TrackName: "W11 Track"},  // 2026-W11
-		{PlayedAt: "2026-03-16T10:00:00Z", TrackName: "W12 Track"},  // 2026-W12
+		{PlayedAt: "2026-03-02T10:00:00Z", TrackName: "W10 Track"}, // 2026-W10
+		{PlayedAt: "2026-03-09T10:00:00Z", TrackName: "W11 Track"}, // 2026-W11
+		{PlayedAt: "2026-03-16T10:00:00Z", TrackName: "W12 Track"}, // 2026-W12
 	}
 
 	if _, err := SaveSharded(baseDir, ps); err != nil {

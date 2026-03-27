@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/benstraw/spotify-garden/internal/models"
+	"github.com/benstraw/music-garden/internal/models"
 )
 
 // --- WeekStr ---
@@ -432,8 +432,8 @@ func TestRenderDaily_withGenres(t *testing.T) {
 	date := time.Date(2026, 2, 22, 12, 0, 0, 0, loc)
 	plays := []models.Play{
 		{
-			PlayedAt:   time.Date(2026, 2, 22, 9, 0, 0, 0, loc).UTC().Format(time.RFC3339),
-			TrackName:  "Song", ArtistName: "Art", AlbumName: "Alb", DurationMS: 200000,
+			PlayedAt:  time.Date(2026, 2, 22, 9, 0, 0, 0, loc).UTC().Format(time.RFC3339),
+			TrackName: "Song", ArtistName: "Art", AlbumName: "Alb", DurationMS: 200000,
 		},
 	}
 	genres := map[string][]string{
@@ -458,8 +458,8 @@ func TestRenderDaily_nilGenres_noSection(t *testing.T) {
 	date := time.Date(2026, 2, 22, 12, 0, 0, 0, loc)
 	plays := []models.Play{
 		{
-			PlayedAt:   time.Date(2026, 2, 22, 9, 0, 0, 0, loc).UTC().Format(time.RFC3339),
-			TrackName:  "Song", ArtistName: "Art", AlbumName: "Alb", DurationMS: 200000,
+			PlayedAt:  time.Date(2026, 2, 22, 9, 0, 0, 0, loc).UTC().Format(time.RFC3339),
+			TrackName: "Song", ArtistName: "Art", AlbumName: "Alb", DurationMS: 200000,
 		},
 	}
 	content, err := RenderDaily(plays, date, dir, nil)

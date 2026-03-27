@@ -3,7 +3,7 @@ package fetch
 import (
 	"testing"
 
-	"github.com/benstraw/spotify-garden/internal/models"
+	"github.com/benstraw/music-garden/internal/models"
 )
 
 func TestItemToPlay_primaryArtist(t *testing.T) {

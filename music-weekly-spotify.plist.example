@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.example.spotify-weekly</string>
+    <string>com.example.music-weekly-spotify</string>
     <key>ProgramArguments</key>
     <array>
         <string>/bin/zsh</string>
-        <string>/path/to/obsidian-spotify-garden/run_weekly_spotify.sh</string>
+        <string>/path/to/obsidian-music-garden/run_music_weekly_spotify.sh</string>
     </array>
     <key>StartCalendarInterval</key>
     <array>
@@ -18,8 +18,8 @@
         </dict>
     </array>
     <key>StandardOutPath</key>
-    <string>/tmp/spotify-weekly.log</string>
+    <string>~/Library/Application Support/music-garden/logs/weekly.log</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/spotify-weekly.log</string>
+    <string>~/Library/Application Support/music-garden/logs/weekly.log</string>
 </dict>
 </plist>
