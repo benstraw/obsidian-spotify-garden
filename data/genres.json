@@ -675,7 +675,24 @@
       "americana",
       "alt country"
     ],
-    "last_updated": "2026-03-20"
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb84e4f84f23c7e087cf67422a",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000517484e4f84f23c7e087cf67422a",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f17884e4f84f23c7e087cf67422a",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-26"
   },
   "1ThoqLcyIYvZn7iWbj8fsj": {
     "name": "Bill Withers",
@@ -825,7 +842,7 @@
         "width": 64
       }
     ],
-    "last_updated": "2026-03-18"
+    "last_updated": "2026-03-26"
   },
   "1yAwtBaoHLEDWAnWR87hBT": {
     "name": "Modest Mouse",
@@ -853,18 +870,27 @@
     ],
     "last_updated": "2026-03-18"
   },
-  "1eEfMU2AhEo7XnKgL7c304": {
-    "name": "Carpenters",
-    "genres": [
-      "christmas",
-      "adult standards"
-    ],
-    "last_updated": "2026-03-26"
-  },
   "1zf7vVM2XaoaTD3hXWR1If": {
     "name": "Verdèzul",
     "genres": [],
-    "last_updated": "2026-03-21"
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebde992585da11c3567cabaa5a",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174de992585da11c3567cabaa5a",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178de992585da11c3567cabaa5a",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-26"
   },
   "20qISvAhX20dpIbOOzGK3q": {
     "name": "Nas",
@@ -1063,7 +1089,24 @@
       "indie rock",
       "indie"
     ],
-    "last_updated": "2026-03-20"
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eba4e6cf8b3d6ea5a6b4b5fb8f",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174a4e6cf8b3d6ea5a6b4b5fb8f",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178a4e6cf8b3d6ea5a6b4b5fb8f",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-26"
   },
   "2VSHKHBTiXWplO8lxcnUC9": {
     "name": "GAYLE",
@@ -1307,6 +1350,30 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "2mqiqsaX4LzFnUP7PmHGAb": {
+    "name": "The Dare",
+    "genres": [
+      "electroclash"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb625f4eebd07e07e68e87b4f1",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174625f4eebd07e07e68e87b4f1",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178625f4eebd07e07e68e87b4f1",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-26"
+  },
   "2nG2U57GA2wEds6bfqQMQd": {
     "name": "Darpan",
     "genres": [],
@@ -1353,13 +1420,6 @@
       }
     ],
     "last_updated": "2026-03-18"
-  },
-  "2mqiqsaX4LzFnUP7PmHGAb": {
-    "name": "The Dare",
-    "genres": [
-      "electroclash"
-    ],
-    "last_updated": "2026-03-19"
   },
   "2yQf6b8hxahZaT5dHlWaB1": {
     "name": "Raekwon",
@@ -1465,7 +1525,7 @@
         "width": 160
       }
     ],
-    "last_updated": "2026-03-18"
+    "last_updated": "2026-03-26"
   },
   "35GnZFTAWk2RLgqLWlpPbE": {
     "name": "DJ King Assassin",
@@ -1515,11 +1575,6 @@
       }
     ],
     "last_updated": "2026-03-18"
-  },
-  "34Y0ldeyUv7jBvukWOGASO": {
-    "name": "Bobby Shmurda",
-    "genres": [],
-    "last_updated": "2026-03-19"
   },
   "3C8RpaI3Go0yFF9whvKoED": {
     "name": "The Avalanches",
@@ -1775,6 +1830,31 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "3k3RY7kR8f0vp8Cq27P141": {
+    "name": "berlioz",
+    "genres": [
+      "jazz house",
+      "jazz"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb3a9ab7733c4e6f95251a806b",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051743a9ab7733c4e6f95251a806b",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1783a9ab7733c4e6f95251a806b",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-26"
+  },
   "3mXvO1rdMCgdOYNiWeduWG": {
     "name": "Christian Borle",
     "genres": [
@@ -1819,14 +1899,6 @@
       }
     ],
     "last_updated": "2026-03-18"
-  },
-  "3k3RY7kR8f0vp8Cq27P141": {
-    "name": "berlioz",
-    "genres": [
-      "jazz house",
-      "jazz"
-    ],
-    "last_updated": "2026-03-19"
   },
   "3nFkdlSjzX9mRTtwJOzDYB": {
     "name": "JAŸ-Z",
@@ -2232,7 +2304,24 @@
   "4DSDa4HvAWqvb3dMHUOAfd": {
     "name": "Stephen Wilson Jr.",
     "genres": [],
-    "last_updated": "2026-03-20"
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb2e25871e208b1befa79b4c44",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051742e25871e208b1befa79b4c44",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1782e25871e208b1befa79b4c44",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-26"
   },
   "4F7Q5NV6h5TSwCainz8S5A": {
     "name": "Duke Ellington",
@@ -2484,7 +2573,7 @@
         "width": 160
       }
     ],
-    "last_updated": "2026-03-18"
+    "last_updated": "2026-03-26"
   },
   "4iRZAbYvBqnxrbs6K25aJ7": {
     "name": "The Dave Brubeck Quartet",
@@ -2548,13 +2637,6 @@
       }
     ],
     "last_updated": "2026-03-18"
-  },
-  "4eK7eYjD5DyOb7BqV3jBdA": {
-    "name": "Gaiea Sanskrit",
-    "genres": [
-      "devotional"
-    ],
-    "last_updated": "2026-03-19"
   },
   "4l8xPGtl6DHR2uvunqrl8r": {
     "name": "CAN",
@@ -2728,7 +2810,24 @@
       "country",
       "country rock"
     ],
-    "last_updated": "2026-03-20"
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebaed339624606affc06966a92",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174aed339624606affc06966a92",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178aed339624606affc06966a92",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-26"
   },
   "5SbkVQYYzlw1kte75QIabH": {
     "name": "Gnarls Barkley",
@@ -2978,7 +3077,31 @@
     "genres": [
       "musicals"
     ],
-    "last_updated": "2026-03-18"
+    "last_updated": "2026-03-26"
+  },
+  "5pvsRwXcUfr3oUVVbgrv5P": {
+    "name": "Tonez",
+    "genres": [
+      "uk garage"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb044eee276fc09690484789e8",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174044eee276fc09690484789e8",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178044eee276fc09690484789e8",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-26"
   },
   "5s6TJEuHTr9GR894wc6VfP": {
     "name": "Emmylou Harris",
@@ -3036,13 +3159,6 @@
       }
     ],
     "last_updated": "2026-03-18"
-  },
-  "5pvsRwXcUfr3oUVVbgrv5P": {
-    "name": "Tonez",
-    "genres": [
-      "uk garage"
-    ],
-    "last_updated": "2026-03-21"
   },
   "60df5JBRRPcnSpsIMxxwQm": {
     "name": "Otis Redding",
@@ -3849,24 +3965,31 @@
         "width": 160
       }
     ],
-    "last_updated": "2026-03-18"
-  },
-  "776Uo845nYHJpNaStv1Ds4": {
-    "name": "Jimi Hendrix",
-    "genres": [
-      "psychedelic rock",
-      "classic rock",
-      "acid rock",
-      "blues rock"
-    ],
-    "last_updated": "2026-03-19"
+    "last_updated": "2026-03-26"
   },
   "7HGFXtBhRq3g1Ma3nH4Rgv": {
     "name": "Mulatu Astatke",
     "genres": [
       "ethiopian jazz"
     ],
-    "last_updated": "2026-03-19"
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebdc685b05724610239ffde90c",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174dc685b05724610239ffde90c",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178dc685b05724610239ffde90c",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-26"
   },
   "7anzpNKL4YlUHekGf10IVg": {
     "name": "Harnam",

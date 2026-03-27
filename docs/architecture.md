@@ -20,7 +20,7 @@ templates/
 data/
   plays/                        Sharded play history — YYYY/YYYY-WNN.json (git-committed via Actions)
   plays.json.bak                Legacy file renamed on first post-upgrade collect (can be deleted)
-  genres.json                   Artist genre cache
+  genres.json                   Artist metadata cache (genres + Spotify images)
 ```
 
 ## Data Flow
@@ -46,6 +46,10 @@ main.runCollect()
   │
   ├─ plays.SaveSharded(playsDir, incoming)
   │    └─ routes each play to its ISO week file, merge+dedup per file
+  │
+  ├─ genres.Load(genresPath)
+  ├─ fetch.GetArtistsBatch(c, uncachedArtistIDs)
+  │    └─ stores genres and Spotify profile images for newly seen artists
   │
   └─ if SPOTIFY_AUTO_DAILY_ON_COLLECT=1:
        generateDailyNote(allPlays, now, overwrite=true)
@@ -204,11 +208,15 @@ log displays in the user's timezone.
 Runtime file locations are resolved with this precedence:
 1. CLI flags (where applicable)
 2. Environment variables
-3. `SPOTIFY_STATE_DIR` files (`.env`, `tokens.json`, `data/plays/`, `data/genres.json`)
+3. `SPOTIFY_STATE_DIR` files (`.env`, `tokens.json`) unless `SPOTIFY_PLAYS_DIR` and/or `SPOTIFY_GENRES_PATH` override the data paths
 4. CWD fallback with warning
 
-`playsDir` (`data/plays/`) is derived from `filepath.Dir(playsPath)` — it inherits
-the same `SPOTIFY_STATE_DIR` override logic automatically without a separate env var.
+`SPOTIFY_PLAYS_DIR` lets you point play storage at a specific sharded `data/plays/`
+directory while still loading `.env` and `tokens.json` from `SPOTIFY_STATE_DIR`.
+`playsPath` (legacy migration source) is derived as `filepath.Dir(playsDir) + "/plays.json"`.
+
+`SPOTIFY_GENRES_PATH` lets you point genre/image cache writes at a specific `data/genres.json`
+file independently of the state dir.
 
 `spotify-garden doctor` prints all effective runtime paths and launchd-derived diagnostics.
 

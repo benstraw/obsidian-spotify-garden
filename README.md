@@ -62,6 +62,8 @@ auto-refresh — you should only need to do this once.
 ./spotify-garden daily --date 2026-02-21                   # specific day
 ./spotify-garden catch-up --weeks 8                        # backfill missing notes
 ./spotify-garden persona                                   # regenerate Music Taste context pack
+./spotify-garden genre-backfill                            # fill genres.json from historical plays
+./spotify-garden image-backfill                            # fetch artist images for cached artists missing them
 ./spotify-garden setlist "Jason Isbell"                    # look up today's setlist
 ./spotify-garden setlist "Jason Isbell" --date 2026-02-21  # specific date
 ./spotify-garden doctor                                    # print runtime config + diagnostics
@@ -83,9 +85,14 @@ go vet ./...                    # static analysis
 Runtime paths resolve with precedence: flags > env vars > `SPOTIFY_STATE_DIR` > CWD fallback.
 Files are written to `$OBSIDIAN_VAULT_PATH/music/` when the vault path is set.
 
+For split setups, use:
+- `SPOTIFY_STATE_DIR` for `.env` and `tokens.json`
+- `SPOTIFY_PLAYS_DIR` to point commands at a specific `data/plays/` directory
+- `SPOTIFY_GENRES_PATH` to point commands at a specific `data/genres.json`
+
 | Command | Output path |
 |---|---|
-| `collect` | `{state}/data/plays/YYYY/YYYY-WNN.json` (sharded weekly files) |
+| `collect` | `{playsDir}/YYYY/YYYY-WNN.json` (sharded weekly files) |
 | `weekly` | `{vault}/music/listening/spotify-YYYY-Www.md` |
 | `daily` | `{vault}/music/listening/spotify-YYYY-MM-DD.md` |
 | `daily`/`weekly` (artist stubs) | `{vault}/music/artists/{Artist Name}.md` |
@@ -201,9 +208,12 @@ Go to **Actions → Collect → Run workflow** in the GitHub UI.
 - `tokens.json` and `.env` are gitignored — never commit them
 - `data/plays/` (sharded weekly files) is committed to the repo by the GitHub Actions workflow; `data/plays.json.bak` is created locally on first collect after upgrade (safe to delete)
 - if `SPOTIFY_STATE_DIR` is set and files are missing there, the CLI falls back to CWD and prints warnings
+- `SPOTIFY_PLAYS_DIR` and `SPOTIFY_GENRES_PATH` override the data paths without changing where `.env` and `tokens.json` are loaded from
 - `catch-up` only writes missing notes (weekly + daily); `weekly` always writes (overwrites if exists)
 - `daily` only writes when that date has play data and never overwrites an existing daily note
 - when `SPOTIFY_AUTO_DAILY_ON_COLLECT=1`, each `collect` run updates today's daily note
+- `genre-backfill` populates `data/genres.json` for artists already present in play history and refreshes artist stub genres
+- `image-backfill` fills missing Spotify artist profile images in `data/genres.json`; it only updates cache metadata and does not change rendered notes yet
 - Artist stubs are never overwritten once created; stubs can be created by daily or weekly generation and include a Concerts Dataview section
 - Port `8888` must be free when running `auth` with a localhost redirect URI
 - `setlist` requires `SETLISTFM_API_KEY` — prints to stdout only, no vault writes

@@ -3,7 +3,7 @@
 All commands use this runtime path precedence:
 1. CLI flags (where applicable)
 2. Environment variables
-3. `SPOTIFY_STATE_DIR` files (`.env`, `tokens.json`, `data/plays/`, `data/genres.json`)
+3. `SPOTIFY_STATE_DIR` files (`.env`, `tokens.json`) unless `SPOTIFY_PLAYS_DIR` and/or `SPOTIFY_GENRES_PATH` override the data paths
 4. Current working directory fallback (with warning)
 
 OAuth tokens auto-refresh if they are expiring within 5 minutes.
@@ -45,7 +45,7 @@ once, unless `tokens.json` is deleted or the refresh token expires.
 
 Fetches the last 50 recently-played tracks from the Spotify API and merges
 them into the weekly shard file for the current ISO week under the effective
-plays directory (`SPOTIFY_STATE_DIR/data/plays/` when configured).
+plays directory.
 
 **Behaviour:**
 1. Calls `GET /me/player/recently-played?limit=50`
@@ -195,6 +195,46 @@ music, or discussing musical taste.
 
 ---
 
+## genre-backfill
+
+```bash
+./spotify-garden genre-backfill
+```
+
+Backfills `data/genres.json` from existing play history.
+
+**Behaviour:**
+1. Loads all effective play shards
+2. Loads the effective genre cache
+3. Finds artist IDs present in play history but missing from the cache
+4. Fetches artist details from Spotify in batches of 50
+5. Writes genres and artist images into `data/genres.json`
+6. Updates existing artist stubs in the vault with any newly cached genres
+
+Use this after importing historical plays or if `collect` ran before the genre cache existed.
+
+---
+
+## image-backfill
+
+```bash
+./spotify-garden image-backfill
+```
+
+Fetches Spotify artist profile images for cached artists that currently have no
+`images` entry in `data/genres.json`.
+
+**Behaviour:**
+1. Loads the effective genre cache
+2. Finds cached artist IDs whose `images` array is missing or empty
+3. Fetches artist details from Spotify in batches of 50
+4. Updates only the `images` field for those cache entries
+
+This command is metadata-only: it updates `data/genres.json` but does not modify
+weekly notes, daily notes, or artist stubs.
+
+---
+
 ## setlist
 
 ```bash
@@ -246,8 +286,9 @@ Prints effective runtime configuration and diagnostics in one place:
 
 1. Working directory and executable path
 2. Effective `.env`, `tokens.json`, `data/plays/` (plays dir), `data/plays.json` (legacy, if present), templates, vault/listening paths
-3. State-dir fallback warnings
-4. Launchd labels and expected log paths
-5. Best-effort loaded/not-loaded launchd job status
+3. Effective `data/genres.json` path and any data-path overrides
+4. State-dir fallback warnings
+5. Launchd labels and expected log paths
+6. Best-effort loaded/not-loaded launchd job status
 
 Exit code is `0` when no issues are found and nonzero when warnings/errors are detected.

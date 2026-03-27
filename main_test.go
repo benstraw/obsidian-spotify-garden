@@ -168,6 +168,9 @@ func TestResolveRuntimePaths_StateDirPreferred(t *testing.T) {
 	if paths.dotEnvFallback || paths.tokensFallback || paths.playsFallback || paths.genresFallback {
 		t.Fatalf("unexpected fallback flags: %+v", paths)
 	}
+	if paths.playsOverride || paths.genresOverride {
+		t.Fatalf("unexpected override flags: %+v", paths)
+	}
 }
 
 func TestResolveRuntimePaths_StateDirFallbackToCWD(t *testing.T) {
@@ -209,6 +212,59 @@ func TestResolveRuntimePaths_StateDirFallbackToCWD(t *testing.T) {
 	}
 	if !paths.dotEnvFallback || !paths.tokensFallback || !paths.playsFallback {
 		t.Fatalf("expected fallback flags to be true: %+v", paths)
+	}
+}
+
+func TestResolveRuntimePaths_DataOverridesBeatStateDir(t *testing.T) {
+	cwd := t.TempDir()
+	stateDir := t.TempDir()
+	playsDir := filepath.Join(t.TempDir(), "repo-data", "plays")
+	genresPath := filepath.Join(t.TempDir(), "repo-data", "genres.json")
+
+	mustWriteFile(t, filepath.Join(stateDir, ".env"), "SPOTIFY_CLIENT_ID=state\n")
+	mustWriteFile(t, filepath.Join(stateDir, "tokens.json"), `{"access_token":"state","refresh_token":"state","expires_at":"2026-01-01T00:00:00Z"}`)
+	mustWriteFile(t, filepath.Join(stateDir, "data", "plays.json"), "[]")
+	mustWriteFile(t, filepath.Join(stateDir, "data", "genres.json"), "{}")
+	if err := os.MkdirAll(playsDir, 0755); err != nil {
+		t.Fatalf("mkdir plays dir: %v", err)
+	}
+	mustWriteFile(t, genresPath, "{}")
+
+	origWD, err := os.Getwd()
+	if err != nil {
+		t.Fatalf("getwd: %v", err)
+	}
+	if err := os.Chdir(cwd); err != nil {
+		t.Fatalf("chdir cwd: %v", err)
+	}
+	t.Cleanup(func() { _ = os.Chdir(origWD) })
+
+	t.Setenv("SPOTIFY_STATE_DIR", stateDir)
+	t.Setenv("SPOTIFY_PLAYS_DIR", playsDir)
+	t.Setenv("SPOTIFY_GENRES_PATH", genresPath)
+
+	paths := resolveRuntimePaths()
+
+	if canonicalPath(t, paths.dotEnvPath) != canonicalPath(t, filepath.Join(stateDir, ".env")) {
+		t.Fatalf("dotEnvPath = %s, want %s", paths.dotEnvPath, filepath.Join(stateDir, ".env"))
+	}
+	if canonicalPath(t, paths.tokensPath) != canonicalPath(t, filepath.Join(stateDir, "tokens.json")) {
+		t.Fatalf("tokensPath = %s, want %s", paths.tokensPath, filepath.Join(stateDir, "tokens.json"))
+	}
+	if canonicalPath(t, paths.playsDir) != canonicalPath(t, playsDir) {
+		t.Fatalf("playsDir = %s, want %s", paths.playsDir, playsDir)
+	}
+	if canonicalPath(t, paths.playsPath) != canonicalPath(t, filepath.Join(filepath.Dir(playsDir), "plays.json")) {
+		t.Fatalf("playsPath = %s, want %s", paths.playsPath, filepath.Join(filepath.Dir(playsDir), "plays.json"))
+	}
+	if canonicalPath(t, paths.genresPath) != canonicalPath(t, genresPath) {
+		t.Fatalf("genresPath = %s, want %s", paths.genresPath, genresPath)
+	}
+	if !paths.playsOverride || !paths.genresOverride {
+		t.Fatalf("expected override flags to be true: %+v", paths)
+	}
+	if paths.playsFallback || paths.genresFallback {
+		t.Fatalf("did not expect fallback flags: %+v", paths)
 	}
 }
 

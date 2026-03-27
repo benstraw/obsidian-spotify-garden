@@ -24,17 +24,19 @@ import (
 var version = "dev"
 
 type runtimePaths struct {
-	cwd             string
-	stateDir        string
-	dotEnvPath      string
-	tokensPath      string
-	playsPath       string
-	playsDir        string
-	genresPath      string
-	dotEnvFallback  bool
-	tokensFallback  bool
-	playsFallback   bool
-	genresFallback  bool
+	cwd            string
+	stateDir       string
+	dotEnvPath     string
+	tokensPath     string
+	playsPath      string
+	playsDir       string
+	genresPath     string
+	playsOverride  bool
+	genresOverride bool
+	dotEnvFallback bool
+	tokensFallback bool
+	playsFallback  bool
+	genresFallback bool
 }
 
 func main() {
@@ -138,6 +140,23 @@ func resolveRuntimePaths() runtimePaths {
 		}
 	}
 	if stateDir == "" {
+		if playsDir := strings.TrimSpace(os.Getenv("SPOTIFY_PLAYS_DIR")); playsDir != "" {
+			absPlaysDir, err := filepath.Abs(playsDir)
+			if err != nil {
+				absPlaysDir = playsDir
+			}
+			p.playsDir = absPlaysDir
+			p.playsPath = filepath.Join(filepath.Dir(absPlaysDir), "plays.json")
+			p.playsOverride = true
+		}
+		if genresPath := strings.TrimSpace(os.Getenv("SPOTIFY_GENRES_PATH")); genresPath != "" {
+			absGenresPath, err := filepath.Abs(genresPath)
+			if err != nil {
+				absGenresPath = genresPath
+			}
+			p.genresPath = absGenresPath
+			p.genresOverride = true
+		}
 		return p
 	}
 
@@ -149,21 +168,42 @@ func resolveRuntimePaths() runtimePaths {
 
 	p.dotEnvPath, p.dotEnvFallback = chooseStatePath(absState, ".env", p.dotEnvPath)
 	p.tokensPath, p.tokensFallback = chooseStatePath(absState, "tokens.json", p.tokensPath)
-	p.playsPath, p.playsFallback = chooseStatePath(absState, filepath.Join("data", "plays.json"), p.playsPath)
-	p.genresPath, p.genresFallback = chooseStatePath(absState, filepath.Join("data", "genres.json"), p.genresPath)
-	// Resolve playsDir with its own fallback: prefer state dir, fall back to CWD.
-	statePlayDir := filepath.Join(absState, "data", "plays")
-	if info, err := os.Stat(statePlayDir); err == nil && info.IsDir() {
-		p.playsDir = statePlayDir
-	} else {
-		cwdPlayDir := filepath.Join(cwd, "data", "plays")
-		if info, err := os.Stat(cwdPlayDir); err == nil && info.IsDir() {
-			p.playsDir = cwdPlayDir
-			p.playsFallback = true
-		} else {
-			// Default to state dir so collect can create it there.
-			p.playsDir = statePlayDir
+	if playsDir := strings.TrimSpace(os.Getenv("SPOTIFY_PLAYS_DIR")); playsDir != "" {
+		absPlaysDir, err := filepath.Abs(playsDir)
+		if err != nil {
+			absPlaysDir = playsDir
 		}
+		p.playsDir = absPlaysDir
+		p.playsPath = filepath.Join(filepath.Dir(absPlaysDir), "plays.json")
+		p.playsOverride = true
+		p.playsFallback = false
+	} else {
+		p.playsPath, p.playsFallback = chooseStatePath(absState, filepath.Join("data", "plays.json"), p.playsPath)
+		// Resolve playsDir with its own fallback: prefer state dir, fall back to CWD.
+		statePlayDir := filepath.Join(absState, "data", "plays")
+		if info, err := os.Stat(statePlayDir); err == nil && info.IsDir() {
+			p.playsDir = statePlayDir
+		} else {
+			cwdPlayDir := filepath.Join(cwd, "data", "plays")
+			if info, err := os.Stat(cwdPlayDir); err == nil && info.IsDir() {
+				p.playsDir = cwdPlayDir
+				p.playsFallback = true
+			} else {
+				// Default to state dir so collect can create it there.
+				p.playsDir = statePlayDir
+			}
+		}
+	}
+	if genresPath := strings.TrimSpace(os.Getenv("SPOTIFY_GENRES_PATH")); genresPath != "" {
+		absGenresPath, err := filepath.Abs(genresPath)
+		if err != nil {
+			absGenresPath = genresPath
+		}
+		p.genresPath = absGenresPath
+		p.genresOverride = true
+		p.genresFallback = false
+	} else {
+		p.genresPath, p.genresFallback = chooseStatePath(absState, filepath.Join("data", "genres.json"), p.genresPath)
 	}
 
 	return p
@@ -685,6 +725,8 @@ func runImageBackfill(paths runtimePaths) {
 		os.Exit(1)
 	}
 
+	fmt.Printf("Using genre cache: %s\n", paths.genresPath)
+
 	genreCache, err := genres.Load(paths.genresPath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "load genre cache error:", err)
@@ -704,15 +746,26 @@ func runImageBackfill(paths runtimePaths) {
 		os.Exit(1)
 	}
 
+	updatedNames := make([]string, 0, len(artists))
 	for _, a := range artists {
+		cachedName := genreCache[a.ID].Name
 		genres.UpdateImages(genreCache, a.ID, a.Images)
+		if cachedName != "" && cachedName != a.Name {
+			updatedNames = append(updatedNames, fmt.Sprintf("%s [id=%s, cached as %q]", a.Name, a.ID, cachedName))
+		} else {
+			updatedNames = append(updatedNames, fmt.Sprintf("%s [id=%s]", a.Name, a.ID))
+		}
 	}
+	sort.Strings(updatedNames)
 
 	if err := genres.Save(paths.genresPath, genreCache); err != nil {
 		fmt.Fprintln(os.Stderr, "save genre cache error:", err)
 		os.Exit(1)
 	}
 	fmt.Printf("Updated images for %d artist(s).\n", len(artists))
+	for _, name := range updatedNames {
+		fmt.Printf("  - %s\n", name)
+	}
 }
 
 func runSetlist(args []string) {
@@ -854,6 +907,14 @@ func runDoctor(paths runtimePaths) int {
 	printPathStatus("Tokens path", paths.tokensPath, false)
 	printPathStatus("Plays dir", paths.playsDir, false)
 	printPathStatus("Plays legacy", paths.playsPath, true)
+	printPathStatus("Genres path", paths.genresPath, false)
+
+	if paths.playsOverride {
+		fmt.Println("SPOTIFY_PLAYS_DIR override:", paths.playsDir)
+	}
+	if paths.genresOverride {
+		fmt.Println("SPOTIFY_GENRES_PATH override:", paths.genresPath)
+	}
 
 	templates := templatesDir()
 	printPathStatus("Templates dir", templates, false)

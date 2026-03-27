@@ -2,6 +2,8 @@ package fetch
 
 import (
 	"testing"
+
+	"github.com/benstraw/spotify-garden/internal/models"
 )
 
 func TestItemToPlay_primaryArtist(t *testing.T) {
@@ -86,5 +88,27 @@ func TestItemToPlay_noExternalURLs(t *testing.T) {
 	}
 	if p.ArtistSpotifyURL != "" {
 		t.Errorf("expected empty ArtistSpotifyURL, got %q", p.ArtistSpotifyURL)
+	}
+}
+
+func TestToModelImages(t *testing.T) {
+	imgs := []spotifyImage{
+		{URL: "https://img-640", Height: 640, Width: 640},
+		{URL: "https://img-320", Height: 320, Width: 320},
+	}
+
+	got := toModelImages(imgs)
+	want := []models.ArtistImage{
+		{URL: "https://img-640", Height: 640, Width: 640},
+		{URL: "https://img-320", Height: 320, Width: 320},
+	}
+
+	if len(got) != len(want) {
+		t.Fatalf("len(got) = %d, want %d", len(got), len(want))
+	}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Fatalf("got[%d] = %+v, want %+v", i, got[i], want[i])
+		}
 	}
 }

@@ -99,6 +99,49 @@ func TestUpdate_overwrites(t *testing.T) {
 	}
 }
 
+func TestUpdateImages_preservesGenresAndReplacesImages(t *testing.T) {
+	cache := map[string]Entry{
+		"id1": {
+			Name:   "Artist One",
+			Genres: []string{"ambient", "electronic"},
+			Images: []models.ArtistImage{{URL: "https://old", Height: 64, Width: 64}},
+		},
+	}
+
+	newImages := []models.ArtistImage{
+		{URL: "https://img-1", Height: 640, Width: 640},
+		{URL: "https://img-2", Height: 320, Width: 320},
+	}
+	UpdateImages(cache, "id1", newImages)
+
+	entry := cache["id1"]
+	if len(entry.Genres) != 2 || entry.Genres[0] != "ambient" {
+		t.Fatalf("genres changed unexpectedly: %v", entry.Genres)
+	}
+	if len(entry.Images) != 2 || entry.Images[0].URL != "https://img-1" {
+		t.Fatalf("images = %+v, want replacement images", entry.Images)
+	}
+	if entry.LastUpdated == "" {
+		t.Fatal("LastUpdated should be set")
+	}
+}
+
+func TestMissingImagesArtistIDs(t *testing.T) {
+	cache := map[string]Entry{
+		"b": {Name: "Has images", Images: []models.ArtistImage{{URL: "https://img"}}},
+		"a": {Name: "Missing images"},
+		"c": {Name: "Also missing images", Images: []models.ArtistImage{}},
+	}
+
+	got := MissingImagesArtistIDs(cache)
+	if len(got) != 2 {
+		t.Fatalf("expected 2 ids, got %d: %v", len(got), got)
+	}
+	if got[0] != "a" || got[1] != "c" {
+		t.Fatalf("ids = %v, want [a c]", got)
+	}
+}
+
 func TestGenresForPlays(t *testing.T) {
 	cache := map[string]Entry{
 		"a1": {Name: "Artist A", Genres: []string{"rock", "indie"}},
@@ -156,7 +199,7 @@ func TestUncachedArtistIDs(t *testing.T) {
 		{ArtistID: "a2", ArtistName: "New1"},
 		{ArtistID: "a3", ArtistName: "New2"},
 		{ArtistID: "a2", ArtistName: "New1"}, // duplicate
-		{ArtistID: "", ArtistName: "Empty"},   // empty ID
+		{ArtistID: "", ArtistName: "Empty"},  // empty ID
 	}
 
 	ids := UncachedArtistIDs(cache, plays)
