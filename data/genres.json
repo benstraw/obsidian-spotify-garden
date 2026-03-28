@@ -263,6 +263,30 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "0WwSkZ7LtFUFjGjMZBMt6T": {
+    "name": "Dire Straits",
+    "genres": [
+      "classic rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb4bdaa8c5e65b64f50549c393",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051744bdaa8c5e65b64f50549c393",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1784bdaa8c5e65b64f50549c393",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "0YC192cP3KPCRWx8zr8MfZ": {
     "name": "Hans Zimmer",
     "genres": [
@@ -694,6 +718,36 @@
     ],
     "last_updated": "2026-03-26"
   },
+  "1R6Hx1tJ2VOUyodEpC12xM": {
+    "name": "Jim Croce",
+    "genres": [
+      "folk rock",
+      "singer-songwriter"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/9f9b40704e3361c93ea8a8b7a86a5d9ee755466e",
+        "height": 990,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/a231c19bbf27417afaf99cad6ef372054b38da28",
+        "height": 634,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/f2374db73b0a0722f78b84ff88d26ab32472938b",
+        "height": 198,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/ac6acaf00e9a2201a9a9785a1bd83d1419545f1f",
+        "height": 63,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "1ThoqLcyIYvZn7iWbj8fsj": {
     "name": "Bill Withers",
     "genres": [
@@ -971,6 +1025,31 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "22bE4uQ6baNwSHPVcDxLCe": {
+    "name": "The Rolling Stones",
+    "genres": [
+      "classic rock",
+      "rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebe4cea917b68726aadb4854b8",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174e4cea917b68726aadb4854b8",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178e4cea917b68726aadb4854b8",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "26C2AjqgMr5aDzj6Yp2ORz": {
     "name": "Brent Cobb",
     "genres": [
@@ -1025,6 +1104,30 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "2CvCyf1gEVhI0mX6aFXmVI": {
+    "name": "Paul Simon",
+    "genres": [
+      "singer-songwriter"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebddc148cfa465c2065846c636",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174ddc148cfa465c2065846c636",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178ddc148cfa465c2065846c636",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
   },
   "2GHclqNVjqGuiE5mA7BEoc": {
     "name": "Common",
@@ -1504,6 +1607,31 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "320TrJub4arztwXRm7kqVO": {
+    "name": "Dr. John",
+    "genres": [
+      "cajun",
+      "zydeco"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebfed5626c008ba961a81dd218",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174fed5626c008ba961a81dd218",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178fed5626c008ba961a81dd218",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "34EP7KEpOjXcM2TCat1ISk": {
     "name": "Wu-Tang Clan",
     "genres": [
@@ -1749,6 +1877,28 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "3ZBIKwEmexGQHro1PDM75t": {
+    "name": "The Stills-Young Band",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab67616d0000b2736b89a9aebac2ee596a1edb89",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00001e026b89a9aebac2ee596a1edb89",
+        "height": 300,
+        "width": 300
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00004851d35554f26fcceb646d6317ec",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-28"
   },
   "3ZWab2LEVkNKiBPIClTwof": {
     "name": "Townes Van Zandt",
@@ -2006,6 +2156,35 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "3v4feUQnU3VEUqFrjmtekL": {
+    "name": "Faces",
+    "genres": [
+      "glam rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/228b37f3fd1bb220f6d1922ca179bc1d933adc37",
+        "height": 1000,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/d63030262e9b5452cedecd885c55d4162b839f46",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/3912a6e66a69441e993c2073e22faaa7ceccae0e",
+        "height": 200,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/e348cb3082d6c559a1715d392d8ab2b2e6fb31c7",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-28"
   },
   "3vAPM1qiCuClMH5DNbAgtC": {
     "name": "Jule Styne",
@@ -2724,6 +2903,33 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "4vpDg7Y7fU982Ds30zawDA": {
+    "name": "The Band",
+    "genres": [
+      "folk rock",
+      "roots rock",
+      "southern rock",
+      "americana"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebf4f262f1f5d28fcdc4c4226f",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174f4f262f1f5d28fcdc4c4226f",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178f4f262f1f5d28fcdc4c4226f",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
   },
   "55Aa2cqylxrFIXC767Z865": {
     "name": "Lil Wayne",
@@ -4024,6 +4230,28 @@
     ],
     "last_updated": "2026-03-26"
   },
+  "7FIoB5PHdrMZVC3q2HE5MS": {
+    "name": "George Harrison",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb56358cb4880bab6bb730f9b5",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000517456358cb4880bab6bb730f9b5",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f17856358cb4880bab6bb730f9b5",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "7HGFXtBhRq3g1Ma3nH4Rgv": {
     "name": "Mulatu Astatke",
     "genres": [
@@ -4238,6 +4466,30 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "7tjbDPvrdvDshcpEMXKRVb": {
+    "name": "Gerry Rafferty",
+    "genres": [
+      "yacht rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb458dd0cbffc2b84311f5aa7d",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174458dd0cbffc2b84311f5aa7d",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178458dd0cbffc2b84311f5aa7d",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
   },
   "7zLDabVhJXJvgPMaVIsW3G": {
     "name": "Christian Bollmann",
