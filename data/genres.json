@@ -506,6 +506,36 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "0nCiidE5GgDrc5kWN3NZgZ": {
+    "name": "Emerson, Lake \u0026 Palmer",
+    "genres": [
+      "progressive rock",
+      "art rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/492cf7afbe3a7be6d6d2bda5c71a52e3cc1c9d3d",
+        "height": 666,
+        "width": 999
+      },
+      {
+        "url": "https://i.scdn.co/image/b08d44bef3e4d8cb3589acc61389a9d62098be47",
+        "height": 427,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/0cbd0b45bdf8659a6d73304c0ae44d8b0dca221d",
+        "height": 133,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/c2f340972877f61ac57c32e6a059a513b4805761",
+        "height": 43,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "0nJUwPwC9Ti4vvuJ0q3MfT": {
     "name": "John Prine",
     "genres": [
@@ -1607,6 +1637,31 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "319yZVtYM9MBGqmSQnMyY6": {
+    "name": "Carole King",
+    "genres": [
+      "singer-songwriter",
+      "folk rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebea6c3263b9aeda33707faee5",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174ea6c3263b9aeda33707faee5",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178ea6c3263b9aeda33707faee5",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "320TrJub4arztwXRm7kqVO": {
     "name": "Dr. John",
     "genres": [
@@ -1730,6 +1785,33 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "39T6qqI0jDtSWWioX8eGJz": {
+    "name": "The Doobie Brothers",
+    "genres": [
+      "yacht rock",
+      "classic rock",
+      "soft rock",
+      "southern rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb28f5622994674caec36fd95c",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000517428f5622994674caec36fd95c",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f17828f5622994674caec36fd95c",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
   },
   "3C8RpaI3Go0yFF9whvKoED": {
     "name": "The Avalanches",
@@ -2678,6 +2760,28 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "4STHEaNw4mPZ2tzheohgXB": {
+    "name": "Paul McCartney",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb75f1804b28400539955f48f3",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000517475f1804b28400539955f48f3",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f17875f1804b28400539955f48f3",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "4SfGzWmeoNPKIOmiyc7Pav": {
     "name": "Flatland Cavalry",
     "genres": [
@@ -2931,6 +3035,39 @@
     ],
     "last_updated": "2026-03-28"
   },
+  "4wQ3PyMz3WwJGI5uEqHUVR": {
+    "name": "Allman Brothers Band",
+    "genres": [
+      "southern rock",
+      "jam band",
+      "classic rock",
+      "blues rock",
+      "country rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6772690000c46c08f5d15585b77b0cb059717b",
+        "height": 1000,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6772690000dd2208f5d15585b77b0cb059717b",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6772690000bac308f5d15585b77b0cb059717b",
+        "height": 200,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67726900008f7408f5d15585b77b0cb059717b",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "55Aa2cqylxrFIXC767Z865": {
     "name": "Lil Wayne",
     "genres": [
@@ -2982,6 +3119,28 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "5CzlICF8GCY0pRC82MKrhX": {
+    "name": "Labi Siffre",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebbac42447a71cc398fad2efac",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174bac42447a71cc398fad2efac",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178bac42447a71cc398fad2efac",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
   },
   "5EgMMveFcSL3rq87Wkyw4s": {
     "name": "Lafayette Afro Rock Band",
@@ -3192,6 +3351,37 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "5hW4L92KnC6dX9t7tYM4Ve": {
+    "name": "Joni Mitchell",
+    "genres": [
+      "folk",
+      "folk rock",
+      "singer-songwriter"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/68cfb061951dbd44c95422a54cb70baec0722ca3",
+        "height": 784,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/ebaff9c356b21f97cb877d8e4607568b3e0cae75",
+        "height": 502,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/bc9f1f21ffa483e952a6d012420644554f91f624",
+        "height": 157,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/938613e2fe5e0ca97a524675feabea263400222f",
+        "height": 50,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-28"
   },
   "5ihY290YPGc3aY2xTyx7Gy": {
     "name": "Edvard Grieg",
@@ -3506,6 +3696,36 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "67ea9eGLXYMsO2eYQRui3w": {
+    "name": "The Who",
+    "genres": [
+      "classic rock",
+      "rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6772690000c46c456d5397bdf11547ef38ca93",
+        "height": 1000,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6772690000dd22456d5397bdf11547ef38ca93",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6772690000bac3456d5397bdf11547ef38ca93",
+        "height": 200,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67726900008f74456d5397bdf11547ef38ca93",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "67ei8ib6PLT1w3OkhIb4fB": {
     "name": "Black Star",
     "genres": [
@@ -3776,6 +3996,31 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "6clbbhnIqpHnqxwtOWcilg": {
+    "name": "Little River Band",
+    "genres": [
+      "yacht rock",
+      "soft rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb9a44d8722feae811910ddba6",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051749a44d8722feae811910ddba6",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1789a44d8722feae811910ddba6",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "6eXZu6O7nAUA5z6vLV8NKI": {
     "name": "Little Simz",
     "genres": [],
@@ -3797,6 +4042,36 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "6jdObwsrIjSRnBbMw6lPBj": {
+    "name": "Seals and Crofts",
+    "genres": [
+      "yacht rock",
+      "soft rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/7e0eb81433b92ae11894a35a53aa870be824d772",
+        "height": 1000,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/76ccb803ba5113aa822077dd9f1c3187ca9d323d",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/b710389b2afcc6a256cd68d8409f9fdf481f78af",
+        "height": 200,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/d6c5db76d07d5fa0571e8353319da0c3ab2fdeaf",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-28"
   },
   "6kPXTIsluODISnUy2JBlI6": {
     "name": "Sheffy Oren Bach",
