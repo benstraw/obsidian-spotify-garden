@@ -797,6 +797,33 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "1ZN1c1qWEGZNX1pGeKCPpf": {
+    "name": "Billy Strings",
+    "genres": [
+      "bluegrass",
+      "newgrass",
+      "jam band",
+      "americana"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb532fd0e6740fd3db38933afb",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174532fd0e6740fd3db38933afb",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178532fd0e6740fd3db38933afb",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-28"
+  },
   "1bauOA5U5M3RwH2euX3Eq6": {
     "name": "Valentin Silvestrov",
     "genres": [],
@@ -3132,6 +3159,36 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "5tOrTQaBRD5yPHqbEwsRn7": {
+    "name": "Hot Tuna",
+    "genres": [
+      "jam band",
+      "blues rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/2dc42435d2d01d9754166420bf2056d4438a5397",
+        "height": 800,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/c86a807490659b969de683a1845453081c0014ec",
+        "height": 512,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/4038d20a2a9d371f733c2ed6aa070a8bbb0b3f0c",
+        "height": 160,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/fcdb3a9b0a0a3639c06b413710dc56f3c137af71",
+        "height": 51,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-28"
   },
   "5wTAi7QkpP6kp8a54lmTOq": {
     "name": "Johannes Brahms",
