@@ -1645,6 +1645,31 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "2ooIqOf4X2uz4mMptXCtie": {
+    "name": "Neutral Milk Hotel",
+    "genres": [
+      "anti-folk",
+      "folk punk"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb3c0a3cafde53be39a91f373e",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051743c0a3cafde53be39a91f373e",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1783c0a3cafde53be39a91f373e",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-03-29"
+  },
   "2pdvghEHZJtgSXZ7cvNLou": {
     "name": "Crosby, Stills \u0026 Nash",
     "genres": [
@@ -1905,6 +1930,33 @@
       }
     ],
     "last_updated": "2026-03-28"
+  },
+  "36QJpDe2go2KgaRleHCDTp": {
+    "name": "Led Zeppelin",
+    "genres": [
+      "classic rock",
+      "rock",
+      "hard rock",
+      "rock and roll"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/207803ce008388d3427a685254f9de6a8f61dc2e",
+        "height": 600,
+        "width": 600
+      },
+      {
+        "url": "https://i.scdn.co/image/b0248a44865493e6a03832aa89854ada16ff07a8",
+        "height": 200,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/16eb3cdae0d824b520ac17710e943a99d3ef6602",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-29"
   },
   "39NR3AUhpbbqKM33vWn2fp": {
     "name": "Brothers Osborne",
@@ -2659,6 +2711,36 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "42TFhl7WlMRXiNqzSrnzPL": {
+    "name": "Lou Reed",
+    "genres": [
+      "glam rock",
+      "proto-punk"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/2e1e9a6fe696b536a1f9e6a27fc1ed23d2c97099",
+        "height": 1006,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/49b8173759e47ed5e74d1c7c11a932e4dc6a91f9",
+        "height": 644,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/bb3e155f456d2f3533b753417cf586408c00fff0",
+        "height": 201,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/cf74e6ba4644f8f5a552060f40d3864aeb6a4311",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-29"
   },
   "450o9jw6AtiQlQkHCdH6Ru": {
     "name": "Funkadelic",
@@ -3590,6 +3672,36 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "5c3GLXai8YOMid29ZEuR9y": {
+    "name": "Nick Drake",
+    "genres": [
+      "folk",
+      "singer-songwriter"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/d364b498f85ae764cd278fbba9a8ed7f00c3e434",
+        "height": 1484,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/087fb05851e498c2791ca99000acf35b0fd49f19",
+        "height": 950,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/9a74a7d885abe5da94ac812546d0146cfe4a1ceb",
+        "height": 297,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/267080662cf3c019ea8020a4e0e8dd5a7be4d909",
+        "height": 95,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-29"
   },
   "5hW4L92KnC6dX9t7tYM4Ve": {
     "name": "Joni Mitchell",
