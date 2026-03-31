@@ -5111,6 +5111,37 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "7guDJrEfX3qb6FEbdPA5qi": {
+    "name": "Stevie Wonder",
+    "genres": [
+      "motown",
+      "classic soul",
+      "soul"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/c59faacbed7aa770266bad048660810eca204108",
+        "height": 1008,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/37c7875911b1d8195b05d40061a86bd01908a0d9",
+        "height": 645,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/3b24b51bf11404089c4d66acd0c612539c77e7e7",
+        "height": 202,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/05489744160e3f6f94f707fa1e2a6d4bbd14a298",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-03-31"
+  },
   "7hJcb9fa4alzcOq3EaNPoG": {
     "name": "Snoop Dogg",
     "genres": [
