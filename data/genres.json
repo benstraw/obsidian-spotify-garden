@@ -1428,6 +1428,34 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "2VZNmg4vCnew4Pavo8zDdW": {
+    "name": "Max Richter",
+    "genres": [
+      "neoclassical",
+      "contemporary classical",
+      "minimalism",
+      "classical",
+      "ambient"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb8dee498089aaed97d680c5b7",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051748dee498089aaed97d680c5b7",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1788dee498089aaed97d680c5b7",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-03"
+  },
   "2YZyLoL8N0Wb9xBt1NhZWg": {
     "name": "Kendrick Lamar",
     "genres": [
