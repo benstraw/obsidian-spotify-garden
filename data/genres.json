@@ -613,6 +613,37 @@
     ],
     "last_updated": "2026-04-05"
   },
+  "0f8MDDzIc6M4uH1xH0o0gy": {
+    "name": "Robert Johnson",
+    "genres": [
+      "blues",
+      "classic blues",
+      "country blues"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/b8acc51743ff21f1d32e3f99922ca8283d3af0ce",
+        "height": 1268,
+        "width": 968
+      },
+      {
+        "url": "https://i.scdn.co/image/e5e3a261affcf0d3e511f3c61c150340135f2bfd",
+        "height": 838,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/e507ddf397233df8b490ce8d7220df85f1a9bb02",
+        "height": 262,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/55770f73b852ea1d0c5189ce36d01ed5a1e0b8fa",
+        "height": 84,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-04-10"
+  },
   "0k17h0D3J5VfsdmQ1iZtE9": {
     "name": "Pink Floyd",
     "genres": [
@@ -913,6 +944,39 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "1FClsNYBUoNFtGgzeG74dW": {
+    "name": "Hank Williams",
+    "genres": [
+      "classic country",
+      "honky tonk",
+      "traditional country",
+      "outlaw country",
+      "country"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/5fc12e434b15c08796c7156b2f630df84345b9cd",
+        "height": 1330,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/4d78ff3bd821efd360841c5784d970a38a090c56",
+        "height": 851,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/6f065fd489269e0f8ebd8a7228dca74dc8869865",
+        "height": 266,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/8379d70351dae395bc7fe0cb535a213486e4961d",
+        "height": 85,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-04-10"
   },
   "1G9G7WwrXka3Z1r7aIDjI7": {
     "name": "Outkast",
@@ -4174,6 +4238,31 @@
       }
     ],
     "last_updated": "2026-03-28"
+  },
+  "5BO1F2wBHUCoX02ZdPP23o": {
+    "name": "Charlie Beale",
+    "genres": [
+      "electro swing",
+      "swing music"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb7672b59e1c0d8449d5f5427e",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051747672b59e1c0d8449d5f5427e",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1787672b59e1c0d8449d5f5427e",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-10"
   },
   "5CzlICF8GCY0pRC82MKrhX": {
     "name": "Labi Siffre",
