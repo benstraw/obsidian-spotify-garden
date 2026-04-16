@@ -364,6 +364,32 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "0Ti1YY2v4KtYkz7JemXJpE": {
+    "name": "Vandoliers",
+    "genres": [
+      "alt country",
+      "americana",
+      "red dirt"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebf4cb15323d678f12f2fa8276",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174f4cb15323d678f12f2fa8276",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178f4cb15323d678f12f2fa8276",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-16"
+  },
   "0UyhOIzQ8yAuLmVlEw1Lo5": {
     "name": "Okonski",
     "genres": [],
@@ -3703,6 +3729,28 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "4LLpKhyESsyAXpc4laK94U": {
+    "name": "Mac Miller",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebed3b89aa602145fde71a163a",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174ed3b89aa602145fde71a163a",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178ed3b89aa602145fde71a163a",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-16"
   },
   "4LeCDCroxBQ1c0vl4Nx3IK": {
     "name": "Baird Hersey \u0026 Prana",
