@@ -1,5 +1,38 @@
 [
   {
+    "played_at": "2026-04-17T00:43:22.828Z",
+    "track_id": "4dM6n7StQUjohoWk0JFLw4",
+    "track_name": "Goodbye Horses",
+    "artist_id": "5SlqleEyFgUYZEZCJ5juDr",
+    "artist_name": "Joshua Ray Walker",
+    "artist_spotify_url": "https://open.spotify.com/artist/5SlqleEyFgUYZEZCJ5juDr",
+    "album_name": "What Is It Even?",
+    "duration_ms": 221520,
+    "track_spotify_url": "https://open.spotify.com/track/4dM6n7StQUjohoWk0JFLw4"
+  },
+  {
+    "played_at": "2026-04-16T23:21:37.926Z",
+    "track_id": "6b4qppBpsHYW3bzva4FWWH",
+    "track_name": "Cuz I Love You",
+    "artist_id": "5SlqleEyFgUYZEZCJ5juDr",
+    "artist_name": "Joshua Ray Walker",
+    "artist_spotify_url": "https://open.spotify.com/artist/5SlqleEyFgUYZEZCJ5juDr",
+    "album_name": "What Is It Even?",
+    "duration_ms": 191746,
+    "track_spotify_url": "https://open.spotify.com/track/6b4qppBpsHYW3bzva4FWWH"
+  },
+  {
+    "played_at": "2026-04-16T23:15:50.131Z",
+    "track_id": "0aFPOI1JxeiB2BQB30RoFT",
+    "track_name": "I Don't Wanna Be Alone",
+    "artist_id": "5SlqleEyFgUYZEZCJ5juDr",
+    "artist_name": "Joshua Ray Walker",
+    "artist_spotify_url": "https://open.spotify.com/artist/5SlqleEyFgUYZEZCJ5juDr",
+    "album_name": "Tropicana",
+    "duration_ms": 177386,
+    "track_spotify_url": "https://open.spotify.com/track/0aFPOI1JxeiB2BQB30RoFT"
+  },
+  {
     "played_at": "2026-04-16T17:58:45.008Z",
     "track_id": "0aFPOI1JxeiB2BQB30RoFT",
     "track_name": "I Don't Wanna Be Alone",
