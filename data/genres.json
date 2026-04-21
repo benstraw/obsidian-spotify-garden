@@ -205,6 +205,32 @@
     ],
     "last_updated": "2026-04-05"
   },
+  "0BPT9SFoQzi6Pfk387jLE8": {
+    "name": "Daniel Donato",
+    "genres": [
+      "jam band",
+      "newgrass",
+      "americana"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebe49fc80131ed6485af7e4433",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174e49fc80131ed6485af7e4433",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178e49fc80131ed6485af7e4433",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-21"
+  },
   "0E2zPwLuNlSFdSI5wmqox7": {
     "name": "Eiko Ishibashi",
     "genres": [],
@@ -3818,6 +3844,33 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "45vs9Drn5QbWAQ4Kff6ofh": {
+    "name": "Old \u0026 In The Way",
+    "genres": [
+      "bluegrass",
+      "newgrass",
+      "jam band",
+      "americana"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab67616d0000b273d31b4cd0ed877d0d5f814af4",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00001e02d31b4cd0ed877d0d5f814af4",
+        "height": 300,
+        "width": 300
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00004851d31b4cd0ed877d0d5f814af4",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-04-21"
+  },
   "462T0buQ5ScBUQCRpodDRf": {
     "name": "Charles Bradley",
     "genres": [
@@ -5697,6 +5750,30 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "6YB0tbDGk01Q0P6wcHPjpC": {
+    "name": "Bob Weir",
+    "genres": [
+      "jam band"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb22ae1d6d22e4a98470a2246c",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000517422ae1d6d22e4a98470a2246c",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f17822ae1d6d22e4a98470a2246c",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-21"
   },
   "6clbbhnIqpHnqxwtOWcilg": {
     "name": "Little River Band",
