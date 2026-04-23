@@ -6557,6 +6557,30 @@
     ],
     "last_updated": "2026-04-04"
   },
+  "7DxIggqHiRieA96fb7A4RN": {
+    "name": "LITIGE",
+    "genres": [
+      "riot grrrl"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab67616d0000b273fd4a50be33f01564bdef55e7",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00001e02fd4a50be33f01564bdef55e7",
+        "height": 300,
+        "width": 300
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00004851fd4a50be33f01564bdef55e7",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-04-23"
+  },
   "7FIoB5PHdrMZVC3q2HE5MS": {
     "name": "George Harrison",
     "genres": [],
