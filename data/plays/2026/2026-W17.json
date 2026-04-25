@@ -1,5 +1,71 @@
 [
   {
+    "played_at": "2026-04-25T20:27:10.708Z",
+    "track_id": "5fyszjTrVCwTCtbr6LY0fh",
+    "track_name": "Life in Between",
+    "artist_id": "6OMYcSur3Y0DthpzbVkxAx",
+    "artist_name": "Joel Lyssarides",
+    "artist_spotify_url": "https://open.spotify.com/artist/6OMYcSur3Y0DthpzbVkxAx",
+    "album_name": "Life in Between",
+    "duration_ms": 292866,
+    "track_spotify_url": "https://open.spotify.com/track/5fyszjTrVCwTCtbr6LY0fh"
+  },
+  {
+    "played_at": "2026-04-25T17:43:56.168Z",
+    "track_id": "7ccEEiWbkZRgY0bSSmv7aC",
+    "track_name": "Mi Gente",
+    "artist_id": "6hvjxbUASJd6bHds2Teaul",
+    "artist_name": "Lakecia Benjamin",
+    "artist_spotify_url": "https://open.spotify.com/artist/6hvjxbUASJd6bHds2Teaul",
+    "album_name": "Mi Gente",
+    "duration_ms": 365600,
+    "track_spotify_url": "https://open.spotify.com/track/7ccEEiWbkZRgY0bSSmv7aC"
+  },
+  {
+    "played_at": "2026-04-25T17:37:56.031Z",
+    "track_id": "145xjoQehcY8YkCNtSwiJY",
+    "track_name": "Allan",
+    "artist_id": "7c9O0hfRy2u32JVcWhoope",
+    "artist_name": "Lars Danielsson",
+    "artist_spotify_url": "https://open.spotify.com/artist/7c9O0hfRy2u32JVcWhoope",
+    "album_name": "Liberetto V: Echomyr",
+    "duration_ms": 369600,
+    "track_spotify_url": "https://open.spotify.com/track/145xjoQehcY8YkCNtSwiJY"
+  },
+  {
+    "played_at": "2026-04-25T17:31:56.306Z",
+    "track_id": "3z8Moc7Lk63oKAMDYh0NYw",
+    "track_name": "Chillipso",
+    "artist_id": "3Bm6MhzPUczH3Pej2FNqGi",
+    "artist_name": "Peter Erskine",
+    "artist_spotify_url": "https://open.spotify.com/artist/3Bm6MhzPUczH3Pej2FNqGi",
+    "album_name": "Peregrine",
+    "duration_ms": 219533,
+    "track_spotify_url": "https://open.spotify.com/track/3z8Moc7Lk63oKAMDYh0NYw"
+  },
+  {
+    "played_at": "2026-04-25T17:28:25.909Z",
+    "track_id": "1DAfiruLpZ5EWyomG2Gp6q",
+    "track_name": "Fran-Dance (feat. Gerald Clayton, Joe Sanders)",
+    "artist_id": "4uFjFfYlOxBKvdHKuHqk2y",
+    "artist_name": "Gregory Hutchinson",
+    "artist_spotify_url": "https://open.spotify.com/artist/4uFjFfYlOxBKvdHKuHqk2y",
+    "album_name": "Kind of Now - The Pulse of Miles Davis",
+    "duration_ms": 410637,
+    "track_spotify_url": "https://open.spotify.com/track/1DAfiruLpZ5EWyomG2Gp6q"
+  },
+  {
+    "played_at": "2026-04-25T17:20:53.446Z",
+    "track_id": "7kR0AfPnsIeVB4O86UifdH",
+    "track_name": "CITRINE - Live",
+    "artist_id": "5szMuuBbDzULkagWIfI5LG",
+    "artist_name": "Immanuel Wilkins",
+    "artist_spotify_url": "https://open.spotify.com/artist/5szMuuBbDzULkagWIfI5LG",
+    "album_name": "Immanuel Wilkins Quartet: Live at the Village Vanguard Vol. 2",
+    "duration_ms": 426240,
+    "track_spotify_url": "https://open.spotify.com/track/7kR0AfPnsIeVB4O86UifdH"
+  },
+  {
     "played_at": "2026-04-25T17:13:52.935Z",
     "track_id": "460bPNCjbhmVxNHHacbWwD",
     "track_name": "Ask Me Now",
