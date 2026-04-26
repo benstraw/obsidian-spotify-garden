@@ -4376,6 +4376,28 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "4UvyLIGbapMSYE9CfWZVYU": {
+    "name": "Dāvids Eglītis",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb3325a879e1913ed689881ea8",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051743325a879e1913ed689881ea8",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1783325a879e1913ed689881ea8",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-26"
+  },
   "4YHtIE7FI8ITfekzzN5Jpl": {
     "name": "Shuggie Otis",
     "genres": [],
@@ -4483,6 +4505,32 @@
       }
     ],
     "last_updated": "2026-03-26"
+  },
+  "4hdVPbHhsWAn2XTXVRJoxB": {
+    "name": "Chris Potter",
+    "genres": [
+      "jazz",
+      "jazz fusion",
+      "free jazz"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb08ef52033b6b7bdf8eb2d8d1",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000517408ef52033b6b7bdf8eb2d8d1",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f17808ef52033b6b7bdf8eb2d8d1",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-26"
   },
   "4iRZAbYvBqnxrbs6K25aJ7": {
     "name": "The Dave Brubeck Quartet",
