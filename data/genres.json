@@ -1049,6 +1049,30 @@
     ],
     "last_updated": "2026-04-05"
   },
+  "16WgLtGDVL7lWQBo9esyKO": {
+    "name": "Lost Mary",
+    "genres": [
+      "indie folk"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb526caf0c515b0836ffa54e6e",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174526caf0c515b0836ffa54e6e",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178526caf0c515b0836ffa54e6e",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-27"
+  },
   "16eRpMNXSQ15wuJoeqguaB": {
     "name": "The Flaming Lips",
     "genres": [
@@ -7065,6 +7089,28 @@
     ],
     "last_updated": "2026-04-23"
   },
+  "7EGwUS3c5dXduO4sMyLWC5": {
+    "name": "Houndmouth",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb9d60565c6405a35d5854b70d",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051749d60565c6405a35d5854b70d",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1789d60565c6405a35d5854b70d",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-27"
+  },
   "7FIoB5PHdrMZVC3q2HE5MS": {
     "name": "George Harrison",
     "genres": [],
@@ -7379,6 +7425,28 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "7s51mLOf66bbhxCjDNrjfa": {
+    "name": "Hank Garrett",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb2f0ec66cfccd5d01ab566897",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051742f0ec66cfccd5d01ab566897",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1782f0ec66cfccd5d01ab566897",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-27"
   },
   "7tjbDPvrdvDshcpEMXKRVb": {
     "name": "Gerry Rafferty",
