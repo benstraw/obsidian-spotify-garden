@@ -991,6 +991,28 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "0rfAzeDV3F6jn9Hd0r6CrQ": {
+    "name": "Remy Sher",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebe37a225d047c2f2a31ced6ae",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174e37a225d047c2f2a31ced6ae",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178e37a225d047c2f2a31ced6ae",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-27"
+  },
   "0tIODqvzGUoEaK26rK4pvX": {
     "name": "Sun Ra",
     "genres": [
