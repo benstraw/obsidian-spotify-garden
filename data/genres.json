@@ -23,6 +23,31 @@
     ],
     "last_updated": "2026-04-05"
   },
+  "02NfyD6AlLA12crYzw5YcR": {
+    "name": "Jane's Addiction",
+    "genres": [
+      "funk rock",
+      "grunge"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb6181668c9b31f2505039ba33",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051746181668c9b31f2505039ba33",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1786181668c9b31f2505039ba33",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-29"
+  },
   "03r4iKL2g2442PT9n2UKsx": {
     "name": "Beastie Boys",
     "genres": [
@@ -391,6 +416,32 @@
       }
     ],
     "last_updated": "2026-03-28"
+  },
+  "0L8ExT028jH3ddEcZwqJJ5": {
+    "name": "Red Hot Chili Peppers",
+    "genres": [
+      "funk rock",
+      "alternative rock",
+      "rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebc33cc15260b767ddec982ce8",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174c33cc15260b767ddec982ce8",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178c33cc15260b767ddec982ce8",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-29"
   },
   "0SPbho0MYZZGtCWNLr4SPV": {
     "name": "Logan Richardson",
@@ -2266,6 +2317,33 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "2d0hyoQ5ynDBnkvAbJKORj": {
+    "name": "Rage Against The Machine",
+    "genres": [
+      "rap metal",
+      "rap rock",
+      "alternative metal",
+      "nu metal"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebda4bd2b213cae330e2a4a901",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174da4bd2b213cae330e2a4a901",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178da4bd2b213cae330e2a4a901",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-04-29"
   },
   "2dBj3prW7gP9bCCOIQeDUf": {
     "name": "Danger Mouse",
