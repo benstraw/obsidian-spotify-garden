@@ -2503,6 +2503,34 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "2drMeidRg4jc07neGOL0Ip": {
+    "name": "R.L. Burnside",
+    "genres": [
+      "blues",
+      "country blues",
+      "modern blues",
+      "blues rock",
+      "classic blues"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb1195e6c65d490b850eb827df",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051741195e6c65d490b850eb827df",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1781195e6c65d490b850eb827df",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-01"
+  },
   "2eam0iDomRHGBypaDQLwWI": {
     "name": "Bleachers",
     "genres": [],
@@ -4595,6 +4623,30 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "4NpFxQe2UvRCAjto3JqlSl": {
+    "name": "Greta Van Fleet",
+    "genres": [
+      "rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb301eb2b9d83cf86efa024ccb",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174301eb2b9d83cf86efa024ccb",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178301eb2b9d83cf86efa024ccb",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-01"
   },
   "4P0dddbxPil35MNN9G2MEX": {
     "name": "Cypress Hill",
@@ -7215,6 +7267,28 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "70kkdajctXSbqSMJbQO424": {
+    "name": "Kacey Musgraves",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb81a4837fda8c9e356bfb6252",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000517481a4837fda8c9e356bfb6252",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f17881a4837fda8c9e356bfb6252",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-01"
+  },
   "71Ur25Abq58vksqJINpGdx": {
     "name": "Miles Davis Quintet",
     "genres": [
@@ -7788,6 +7862,33 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "7mnBLXK823vNxN3UWB7Gfz": {
+    "name": "The Black Keys",
+    "genres": [
+      "blues rock",
+      "garage rock",
+      "modern blues",
+      "rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb68a2a81ddb9d084ed14bfa8d",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000517468a2a81ddb9d084ed14bfa8d",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f17868a2a81ddb9d084ed14bfa8d",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-01"
   },
   "7nW46aJfNHxK9Y3M5Dhadk": {
     "name": "Jack Van Cleaf",
