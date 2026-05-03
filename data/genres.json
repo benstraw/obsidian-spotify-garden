@@ -1859,6 +1859,35 @@
     ],
     "last_updated": "2026-04-05"
   },
+  "1rXr1ZnvbRoYBaedIl9v4v": {
+    "name": "Drive-By Truckers",
+    "genres": [
+      "alt country",
+      "southern rock",
+      "americana",
+      "roots rock",
+      "outlaw country",
+      "country rock"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebc81405127e5ca302f0e4d1d8",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174c81405127e5ca302f0e4d1d8",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178c81405127e5ca302f0e4d1d8",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-03"
+  },
   "1yAwtBaoHLEDWAnWR87hBT": {
     "name": "Modest Mouse",
     "genres": [
@@ -4152,6 +4181,36 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "3vDpQbGnzRbRVirXlfQagB": {
+    "name": "Sturgill Simpson",
+    "genres": [
+      "outlaw country",
+      "alt country",
+      "bluegrass",
+      "americana",
+      "red dirt",
+      "country",
+      "newgrass"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb1791f31121a24318e91cbda3",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051741791f31121a24318e91cbda3",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1781791f31121a24318e91cbda3",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-03"
+  },
   "3vbKDsSS70ZX9D2OcvbZmS": {
     "name": "Beck",
     "genres": [
@@ -5776,6 +5835,35 @@
     ],
     "last_updated": "2026-03-29"
   },
+  "5cudslRGWg0GsXaN79Wifs": {
+    "name": "Town Mountain",
+    "genres": [
+      "bluegrass",
+      "newgrass",
+      "americana",
+      "outlaw country",
+      "red dirt",
+      "alt country"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eba342392b1dbe9982dcacd902",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174a342392b1dbe9982dcacd902",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178a342392b1dbe9982dcacd902",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-03"
+  },
   "5ecWzOuAxzolo2su9AUvYz": {
     "name": "Blessure",
     "genres": [],
@@ -5941,6 +6029,31 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "5nlQijI9hZ50keRqmLVov1": {
+    "name": "The Deslondes",
+    "genres": [
+      "americana",
+      "alt country"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eba63bc87f09b4a3e2d031d5f3",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174a63bc87f09b4a3e2d031d5f3",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178a63bc87f09b4a3e2d031d5f3",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-03"
   },
   "5nriuBVz6NDh6k8gTU5WgP": {
     "name": "Trio Mocoto",
