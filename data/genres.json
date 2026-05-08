@@ -5691,6 +5691,28 @@
     ],
     "last_updated": "2026-03-28"
   },
+  "59aqTTQGnvttJ4BCThaABZ": {
+    "name": "Charlotte Cornfield",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb817dc9fa6edf0c870dbf5dbc",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174817dc9fa6edf0c870dbf5dbc",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178817dc9fa6edf0c870dbf5dbc",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-08"
+  },
   "5BO1F2wBHUCoX02ZdPP23o": {
     "name": "Charlie Beale",
     "genres": [
