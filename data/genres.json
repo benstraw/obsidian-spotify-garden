@@ -1619,6 +1619,33 @@
     ],
     "last_updated": "2026-03-18"
   },
+  "1YLrCQC8gRomtIs7kc9Eyk": {
+    "name": "Luther Dickinson",
+    "genres": [
+      "modern blues",
+      "americana",
+      "country blues",
+      "blues"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebf8ab9ca4caee03fd60cd0dbe",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174f8ab9ca4caee03fd60cd0dbe",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178f8ab9ca4caee03fd60cd0dbe",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-08"
+  },
   "1YTe4dNIoWX3iHX8H4xVeM": {
     "name": "Jerry Garcia Band",
     "genres": [
@@ -3626,6 +3653,31 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "3JBmecDGXTll46ygrnGTM6": {
+    "name": "Allison Russell",
+    "genres": [
+      "southern gothic",
+      "folk"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb3254fe3677c0d3a5491e3b98",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051743254fe3677c0d3a5491e3b98",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1783254fe3677c0d3a5491e3b98",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-08"
   },
   "3NcPjvA2rp9FPj1JBAXwOS": {
     "name": "Maxence Cyrin",
@@ -8513,6 +8565,28 @@
       }
     ],
     "last_updated": "2026-04-29"
+  },
+  "7rrTqtOUOwva4sgTx9C9F9": {
+    "name": "Joy Oladokun",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb551a2aa848eab89d62e1c7f4",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174551a2aa848eab89d62e1c7f4",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178551a2aa848eab89d62e1c7f4",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-08"
   },
   "7s51mLOf66bbhxCjDNrjfa": {
     "name": "Hank Garrett",
