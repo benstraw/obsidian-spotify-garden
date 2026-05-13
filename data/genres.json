@@ -2275,6 +2275,28 @@
     ],
     "last_updated": "2026-04-25"
   },
+  "2FXC3k01G6Gw61bmprjgqS": {
+    "name": "Hozier",
+    "genres": [],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebad85a585103dfc2f3439119a",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174ad85a585103dfc2f3439119a",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178ad85a585103dfc2f3439119a",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-13"
+  },
   "2GHclqNVjqGuiE5mA7BEoc": {
     "name": "Common",
     "genres": [
