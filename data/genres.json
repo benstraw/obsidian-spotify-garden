@@ -448,6 +448,37 @@
     ],
     "last_updated": "2026-03-28"
   },
+  "0Kekt6CKSo0m5mivKcoH51": {
+    "name": "Sergei Rachmaninoff",
+    "genres": [
+      "classical",
+      "classical piano",
+      "concerto"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/463e3c5c3e814761532f554913cf2af456bcba59",
+        "height": 1205,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/774dbc0919edd260d091aace2787caf4a8e59448",
+        "height": 771,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/fccf9d0d652d13bb34b1cd8a5f6aa37f839a2a27",
+        "height": 241,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/b8330117c874452738ae70abd12561af07c9867f",
+        "height": 77,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-05-14"
+  },
   "0L8ExT028jH3ddEcZwqJJ5": {
     "name": "Red Hot Chili Peppers",
     "genres": [
@@ -993,6 +1024,37 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "0mFblCBw0GcoY7zY1P8tzE": {
+    "name": "Domenico Scarlatti",
+    "genres": [
+      "baroque",
+      "classical piano",
+      "classical"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/02dc4bf883736095757701dfb28acc40f5df8216",
+        "height": 1263,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/4ab7244c869ea68adf7fc45d5c650eea4361afa3",
+        "height": 808,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/24555ded3f83f0a86ddae3c637ae256794e4d54a",
+        "height": 253,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/1236427a95ffd921ab90d155dc6b87171bb0edbc",
+        "height": 81,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-05-14"
   },
   "0nCiidE5GgDrc5kWN3NZgZ": {
     "name": "Emerson, Lake \u0026 Palmer",
@@ -7194,6 +7256,33 @@
       }
     ],
     "last_updated": "2026-05-06"
+  },
+  "6MF58APd3YV72Ln2eVg710": {
+    "name": "Felix Mendelssohn",
+    "genres": [
+      "chamber music",
+      "classical",
+      "classical piano",
+      "choral"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/32bf53aa73dbb81c615a91324efea0bcfff4b440",
+        "height": 508,
+        "width": 443
+      },
+      {
+        "url": "https://i.scdn.co/image/7f30d9306a73a4233125a3e6ef7680f18b7f6b15",
+        "height": 229,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/b7fd64d9cab12bfc120453780ee6bad0202fc05a",
+        "height": 73,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-05-14"
   },
   "6Mo9PoU6svvhgEum7wh2Nd": {
     "name": "Public Enemy",
