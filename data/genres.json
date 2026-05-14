@@ -1179,6 +1179,32 @@
     ],
     "last_updated": "2026-05-06"
   },
+  "13dkPjqmbcchm8cXjEJQeP": {
+    "name": "Glenn Gould",
+    "genres": [
+      "classical piano",
+      "classical",
+      "baroque"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5ebae1364cd7533a53776d8ae43",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174ae1364cd7533a53776d8ae43",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178ae1364cd7533a53776d8ae43",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-14"
+  },
   "14RXohtx6NiBGFTW8IdmAK": {
     "name": "John Scofield",
     "genres": [
@@ -2424,6 +2450,38 @@
     ],
     "last_updated": "2026-05-06"
   },
+  "2NkIVq5pAfIojxXjuaRVes": {
+    "name": "Orlando Gibbons",
+    "genres": [
+      "early music",
+      "renaissance",
+      "baroque",
+      "classical piano"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/1ad1bc8d345d112a1253fa17b0606ef14a8e5311",
+        "height": 1000,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/735370def81517a11cf5b3a16597720624b1d3bd",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/5bd93bbb478ee6a142f342e83f937afe2475a568",
+        "height": 200,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/380d2b2a57d2269c6a941b3dd096fc116d04b991",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-05-14"
+  },
   "2QsynagSdAqZj3U9HgDzjD": {
     "name": "Bob Marley \u0026 The Wailers",
     "genres": [
@@ -3105,6 +3163,32 @@
       }
     ],
     "last_updated": "2026-05-02"
+  },
+  "2wOqMjp9TyABvtHdOSOTUS": {
+    "name": "Ludwig van Beethoven",
+    "genres": [
+      "classical",
+      "classical piano",
+      "chamber music"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eba636b0b244253f602a629796",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616100005174a636b0b244253f602a629796",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f178a636b0b244253f602a629796",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-14"
   },
   "2x9SpqnPi8rlE9pjHBwmSC": {
     "name": "Talking Heads",
@@ -5093,6 +5177,34 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "4NJhFmfw43RLBLjQvxDuRS": {
+    "name": "Wolfgang Amadeus Mozart",
+    "genres": [
+      "classical",
+      "classical piano",
+      "opera",
+      "chamber music",
+      "concerto"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb7fa9108c6dadb8c3ec21da88",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051747fa9108c6dadb8c3ec21da88",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1787fa9108c6dadb8c3ec21da88",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-14"
   },
   "4NpFxQe2UvRCAjto3JqlSl": {
     "name": "Greta Van Fleet",
