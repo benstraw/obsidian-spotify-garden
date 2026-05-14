@@ -1815,6 +1815,33 @@
     ],
     "last_updated": "2026-03-26"
   },
+  "1f3ubTd6eyxuy30ddDJQQa": {
+    "name": "Aoife O'Donovan",
+    "genres": [
+      "newgrass",
+      "bluegrass",
+      "americana",
+      "folk"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb24181cbd20197d12f80993ad",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000517424181cbd20197d12f80993ad",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f17824181cbd20197d12f80993ad",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-14"
+  },
   "1fZpYWNWdL5Z3wrDtISFUH": {
     "name": "Shakey Graves",
     "genres": [
