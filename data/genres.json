@@ -2669,6 +2669,37 @@
     ],
     "last_updated": "2026-03-26"
   },
+  "2UqjDAXnDxejEyE0CzfUrZ": {
+    "name": "Robert Schumann",
+    "genres": [
+      "classical piano",
+      "classical",
+      "chamber music"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/795f15e4d860456a306055ccc995075c5dad9fa6",
+        "height": 1106,
+        "width": 1000
+      },
+      {
+        "url": "https://i.scdn.co/image/55c5a95549820a9d19f02c31e16e79fa9f2bc3dd",
+        "height": 708,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/f6e54b847e866ea410cfa19af2e270e6fe414df0",
+        "height": 221,
+        "width": 200
+      },
+      {
+        "url": "https://i.scdn.co/image/4ed99d3b6ed0913e5ef534e28d4363826bd85f38",
+        "height": 71,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-05-15"
+  },
   "2VSHKHBTiXWplO8lxcnUC9": {
     "name": "GAYLE",
     "genres": [],
