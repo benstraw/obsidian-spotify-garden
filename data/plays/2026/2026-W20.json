@@ -1,5 +1,82 @@
 [
   {
+    "played_at": "2026-05-16T17:26:27.324Z",
+    "track_id": "5JyG1qNpWmCKXiEqPUdOXK",
+    "track_name": "Blues In The Closet",
+    "artist_id": "570vCzcespB48HIQyTbDO6",
+    "artist_name": "Bud Powell",
+    "artist_spotify_url": "https://open.spotify.com/artist/570vCzcespB48HIQyTbDO6",
+    "album_name": "Blues In The Closet",
+    "duration_ms": 180533,
+    "track_spotify_url": "https://open.spotify.com/track/5JyG1qNpWmCKXiEqPUdOXK"
+  },
+  {
+    "played_at": "2026-05-16T17:22:47.324Z",
+    "track_id": "6GzIxYLosb0IlS1bNtu0lO",
+    "track_name": "Bouncin' With Bud",
+    "artist_id": "570vCzcespB48HIQyTbDO6",
+    "artist_name": "Bud Powell",
+    "artist_spotify_url": "https://open.spotify.com/artist/570vCzcespB48HIQyTbDO6",
+    "album_name": "The Amazing Bud Powell",
+    "duration_ms": 183148,
+    "track_spotify_url": "https://open.spotify.com/track/6GzIxYLosb0IlS1bNtu0lO"
+  },
+  {
+    "played_at": "2026-05-16T17:19:41.830Z",
+    "track_id": "7JWsnxzGX5kKOgSBkpNHcC",
+    "track_name": "Cheryl",
+    "artist_id": "570vCzcespB48HIQyTbDO6",
+    "artist_name": "Bud Powell",
+    "artist_spotify_url": "https://open.spotify.com/artist/570vCzcespB48HIQyTbDO6",
+    "album_name": "Mad Bebop",
+    "duration_ms": 179933,
+    "track_spotify_url": "https://open.spotify.com/track/7JWsnxzGX5kKOgSBkpNHcC"
+  },
+  {
+    "played_at": "2026-05-16T17:16:38.378Z",
+    "track_id": "7pNfEYVT7Sfs9PDPIuzusc",
+    "track_name": "Cleopatra's Dream - Remastered 2003/Rudy Van Gelder Edition",
+    "artist_id": "570vCzcespB48HIQyTbDO6",
+    "artist_name": "Bud Powell",
+    "artist_spotify_url": "https://open.spotify.com/artist/570vCzcespB48HIQyTbDO6",
+    "album_name": "The Very Best",
+    "duration_ms": 263426,
+    "track_spotify_url": "https://open.spotify.com/track/7pNfEYVT7Sfs9PDPIuzusc"
+  },
+  {
+    "played_at": "2026-05-16T17:12:08.340Z",
+    "track_id": "2uhe5PssRumOJN6jDz2MYJ",
+    "track_name": "Un Poco Loco",
+    "artist_id": "570vCzcespB48HIQyTbDO6",
+    "artist_name": "Bud Powell",
+    "artist_spotify_url": "https://open.spotify.com/artist/570vCzcespB48HIQyTbDO6",
+    "album_name": "The Amazing Bud Powell",
+    "duration_ms": 284815,
+    "track_spotify_url": "https://open.spotify.com/track/2uhe5PssRumOJN6jDz2MYJ"
+  },
+  {
+    "played_at": "2026-05-16T17:07:38.812Z",
+    "track_id": "5ik210SniDcr9HKBAf1MD8",
+    "track_name": "You Go To My Head",
+    "artist_id": "570vCzcespB48HIQyTbDO6",
+    "artist_name": "Bud Powell",
+    "artist_spotify_url": "https://open.spotify.com/artist/570vCzcespB48HIQyTbDO6",
+    "album_name": "The Amazing Bud Powell",
+    "duration_ms": 196353,
+    "track_spotify_url": "https://open.spotify.com/track/5ik210SniDcr9HKBAf1MD8"
+  },
+  {
+    "played_at": "2026-05-16T17:04:07.014Z",
+    "track_id": "5Q2PlU3jI4z7dYWJvpW4x9",
+    "track_name": "Polka Dots And Moonbeams",
+    "artist_id": "570vCzcespB48HIQyTbDO6",
+    "artist_name": "Bud Powell",
+    "artist_spotify_url": "https://open.spotify.com/artist/570vCzcespB48HIQyTbDO6",
+    "album_name": "The Amazing Bud Powell (Vol. 2)",
+    "duration_ms": 246000,
+    "track_spotify_url": "https://open.spotify.com/track/5Q2PlU3jI4z7dYWJvpW4x9"
+  },
+  {
     "played_at": "2026-05-14T23:52:48.427Z",
     "track_id": "4SbAXtlOJ0eCL0XwFVi0Ij",
     "track_name": "Kinderszenen, Op. 15: VII. Träumerei",
