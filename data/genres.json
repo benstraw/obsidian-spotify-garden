@@ -3905,6 +3905,34 @@
     ],
     "last_updated": "2026-05-08"
   },
+  "3NUsiT2JSyaWAnWaXxDzhQ": {
+    "name": "Dexter Gordon",
+    "genres": [
+      "hard bop",
+      "jazz",
+      "jazz ballads",
+      "bebop",
+      "cool jazz"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb7e357392ac4637109f24e459",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051747e357392ac4637109f24e459",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1787e357392ac4637109f24e459",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-16"
+  },
   "3NcPjvA2rp9FPj1JBAXwOS": {
     "name": "Maxence Cyrin",
     "genres": [],
@@ -5474,6 +5502,34 @@
       }
     ],
     "last_updated": "2026-04-26"
+  },
+  "4Ww5mwS7BWYjoZTUIrMHfC": {
+    "name": "Charlie Parker",
+    "genres": [
+      "bebop",
+      "jazz",
+      "hard bop",
+      "cool jazz",
+      "jazz ballads"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab6761610000e5eb5642427a0fb3988948c9bec4",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab676161000051745642427a0fb3988948c9bec4",
+        "height": 320,
+        "width": 320
+      },
+      {
+        "url": "https://i.scdn.co/image/ab6761610000f1785642427a0fb3988948c9bec4",
+        "height": 160,
+        "width": 160
+      }
+    ],
+    "last_updated": "2026-05-16"
   },
   "4YHtIE7FI8ITfekzzN5Jpl": {
     "name": "Shuggie Otis",
@@ -8791,6 +8847,32 @@
       }
     ],
     "last_updated": "2026-03-18"
+  },
+  "7il5MMdORy6JoYnqxFPKqE": {
+    "name": "Bud Powell Trio",
+    "genres": [
+      "bebop",
+      "jazz",
+      "hard bop"
+    ],
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab67616d0000b273054164b79c7beefebc2b360e",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00001e02054164b79c7beefebc2b360e",
+        "height": 300,
+        "width": 300
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00004851054164b79c7beefebc2b360e",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "last_updated": "2026-05-16"
   },
   "7jnWKcHAIv81blyiWv47Kp": {
     "name": "Roger Glenn",
