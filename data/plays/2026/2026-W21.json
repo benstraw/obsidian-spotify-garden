@@ -1,5 +1,148 @@
 [
   {
+    "played_at": "2026-05-18T20:33:05.963Z",
+    "track_id": "26NtL6qvVuRqFrpimqxSwx",
+    "track_name": "Rattlesnake (feat. Zach Bryan)",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "JVC",
+    "duration_ms": 293836,
+    "track_spotify_url": "https://open.spotify.com/track/26NtL6qvVuRqFrpimqxSwx"
+  },
+  {
+    "played_at": "2026-05-18T18:33:38.524Z",
+    "track_id": "4jQxkc63vUEP4kvj5UinDz",
+    "track_name": "Alaska",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "John IV",
+    "duration_ms": 173329,
+    "track_spotify_url": "https://open.spotify.com/track/4jQxkc63vUEP4kvj5UinDz"
+  },
+  {
+    "played_at": "2026-05-18T18:30:37.810Z",
+    "track_id": "0cbwAupvLOMDwegxEawLvy",
+    "track_name": "The Primrose Chopper",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "The Primrose Chopper",
+    "duration_ms": 298701,
+    "track_spotify_url": "https://open.spotify.com/track/0cbwAupvLOMDwegxEawLvy"
+  },
+  {
+    "played_at": "2026-05-18T18:25:37.772Z",
+    "track_id": "1cpxjiRwZVtE6tYgGkSDMa",
+    "track_name": "The Case of Bucky Briar",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "The Case of Bucky Briar",
+    "duration_ms": 267331,
+    "track_spotify_url": "https://open.spotify.com/track/1cpxjiRwZVtE6tYgGkSDMa"
+  },
+  {
+    "played_at": "2026-05-18T18:21:11.414Z",
+    "track_id": "0GNnYCTI0vb2tTNapS9kFn",
+    "track_name": "I Stole This Riff From a Punk Rock Band",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "Green 2",
+    "duration_ms": 168468,
+    "track_spotify_url": "https://open.spotify.com/track/0GNnYCTI0vb2tTNapS9kFn"
+  },
+  {
+    "played_at": "2026-05-18T18:18:37.741Z",
+    "track_id": "5N2dx0tlBYKDgOI41VrfsK",
+    "track_name": "She Keeps It Cool",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "Fruit from the Trees",
+    "duration_ms": 234165,
+    "track_spotify_url": "https://open.spotify.com/track/5N2dx0tlBYKDgOI41VrfsK"
+  },
+  {
+    "played_at": "2026-05-18T18:14:37.994Z",
+    "track_id": "0R6oMMnBstYZKlouxUfWaz",
+    "track_name": "Black \u0026 Blue",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "Fruit from the Trees",
+    "duration_ms": 180006,
+    "track_spotify_url": "https://open.spotify.com/track/0R6oMMnBstYZKlouxUfWaz"
+  },
+  {
+    "played_at": "2026-05-18T18:11:37.998Z",
+    "track_id": "3yoAsG9Ohx77vSlTvvrfyD",
+    "track_name": "For The Birds",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "For The Birds",
+    "duration_ms": 247671,
+    "track_spotify_url": "https://open.spotify.com/track/3yoAsG9Ohx77vSlTvvrfyD"
+  },
+  {
+    "played_at": "2026-05-18T18:07:07.834Z",
+    "track_id": "4tiPWx0s6uOuzs0FFcG4eV",
+    "track_name": "Remember Katrina?",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "JVC (Deluxe Edition)",
+    "duration_ms": 210480,
+    "track_spotify_url": "https://open.spotify.com/track/4tiPWx0s6uOuzs0FFcG4eV"
+  },
+  {
+    "played_at": "2026-05-18T18:03:37.729Z",
+    "track_id": "2W0SL0UPSRkSS9BckSiqgq",
+    "track_name": "Áine Greene",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "Green 2",
+    "duration_ms": 165095,
+    "track_spotify_url": "https://open.spotify.com/track/2W0SL0UPSRkSS9BckSiqgq"
+  },
+  {
+    "played_at": "2026-05-18T18:01:07.886Z",
+    "track_id": "3lvUE1Tx9kL37aGaF7FIKM",
+    "track_name": "Santa Anas",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "John IV",
+    "duration_ms": 182767,
+    "track_spotify_url": "https://open.spotify.com/track/3lvUE1Tx9kL37aGaF7FIKM"
+  },
+  {
+    "played_at": "2026-05-18T17:58:08.147Z",
+    "track_id": "0J62AmONB4uQuipWoyXvUA",
+    "track_name": "Victory's Brother",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "Music City Murder Ballad",
+    "duration_ms": 651568,
+    "track_spotify_url": "https://open.spotify.com/track/0J62AmONB4uQuipWoyXvUA"
+  },
+  {
+    "played_at": "2026-05-18T17:47:07.783Z",
+    "track_id": "1y0irYFXbGGPmAUjK8bFNA",
+    "track_name": "Green",
+    "artist_id": "7nW46aJfNHxK9Y3M5Dhadk",
+    "artist_name": "Jack Van Cleaf",
+    "artist_spotify_url": "https://open.spotify.com/artist/7nW46aJfNHxK9Y3M5Dhadk",
+    "album_name": "JVC",
+    "duration_ms": 195063,
+    "track_spotify_url": "https://open.spotify.com/track/1y0irYFXbGGPmAUjK8bFNA"
+  },
+  {
     "played_at": "2026-05-18T17:44:08.001Z",
     "track_id": "5oFO2CI2KtYMoeYN8jvcmK",
     "track_name": "Sunlight (Reimagined)",
